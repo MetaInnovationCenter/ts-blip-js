@@ -8,7 +8,7 @@ module.exports = {
 
     },
 
-    //MandaMensagem bunita (var client, var idUser, Mensagem, Tempo de Digitando em segundos (0 = sem digitando))
+    //MandaMensagem bunita (var idUser, Mensagem, Tempo de Digitando em segundos (0 = sem digitando))
     SendMessage: (user, msg, dg) => {
 
         if (dg > 0) { 
@@ -46,7 +46,7 @@ module.exports = {
         }
     },
 
-    //MandaMensagem com Opções (var client, var idUser, Mensagem, ["Opção1","Opção2","Opção3","Opção4"] (de 1 a 4 opções)) 
+    //MandaMensagem com Opções (var idUser, Mensagem, ["Opção1","Opção2","Opção3","Opção4"] (de 1 a 4 opções)) 
     SendOptions: (user, msg, ops) => {
 
         if (ops.length == 1) {
@@ -149,7 +149,7 @@ module.exports = {
 
     },
 
-    //MandaMensagem Multi (var client, var idUser, ["Men1","Men2","Men3","Men4"] (de 1 a 4 opções))
+    //MandaMensagem Multi (var idUser, ["Men1","Men2","Men3","Men4"] (de 1 a 4 opções))
     SendMul: (user, msgs) => {
 
         if (msgs.length == 2) {
@@ -203,6 +203,27 @@ module.exports = {
 
         }
 
+    },
+
+    //MandaMensagem com Imagem (var idUser, Mensagem da Imagem ("" = nada), Url da Imagem (com .jpg no final))
+    SendImg: (user, msg, img) => {
+
+        Client.sendMessage({
+
+            type: "application/vnd.lime.media-link+json",
+            to: user,
+            content: {
+
+                text: msg,
+                type: "image/jpeg",
+                uri: img
+                    
+            }
+
+        });
+
     }
+
+    
 
 }
