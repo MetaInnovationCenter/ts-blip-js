@@ -4,7 +4,6 @@ var chatModuleHana = require("./chatModuleHana")
 
 let IDENTIFIER = 'tssapsdk';
 let ACCESS_KEY = 'b3RPRjhGbDhxYUNQY0gzZGJ2cjY=';
-let idUser
 let status = "Boas Vindas"
 
 // Create a client instance passing the identifier and accessKey of your chatbot
@@ -24,11 +23,11 @@ client.connect() // This method return a 'promise'.
             //console.log(message.content)
             
             if(message.content.state == undefined) {
-                console.log('user type'message.content)
+                console.log(message.content)
                 switch (status) {
                     case "Boas Vindas":
                         idUser = message.from
-                        let msg = { type: "text/plain", content: "Olá!! Seja bem-vindo(a)! Deseja trocar a senha de qual sistema?", to: idUser }
+                        let msg = { type: "text/plain", content: "Olá!! Seja bem-vindo(a)! Deseja trocar a senha de qual sistema?", to: message.from }
                         client.sendMessage(msg)
                         console.log("case boas vindas")
                         status = "Qual sistema?"
