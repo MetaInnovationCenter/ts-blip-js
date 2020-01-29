@@ -1,11 +1,19 @@
+let Client
+
 module.exports = {
 
+    SetClient: (client) => {
+
+        Client = client
+
+    },
+
     //MandaMensagem bunita (var client, var idUser, Mensagem, Tempo de Digitando em segundos (0 = sem digitando))
-    SendMessage: (client, user, msg, dg) => {
+    SendMessage: (user, msg, dg) => {
 
         if (dg > 0) { 
 
-            client.sendMessage({ 
+            Client.sendMessage({ 
                 
                 type: "application/vnd.lime.chatstate+json",
                 to: user,
@@ -15,7 +23,7 @@ module.exports = {
 
             setTimeout(() => 
             
-                client.sendMessage({ 
+                Client.sendMessage({ 
                     
                     type: "text/plain", 
                     to: user,
@@ -28,7 +36,7 @@ module.exports = {
         }
         else {
 
-            client.sendMessage({ 
+            Client.sendMessage({ 
                 
                 type: "text/plain", 
                 to: user,
@@ -39,11 +47,11 @@ module.exports = {
     },
 
     //MandaMensagem com Opções (var client, var idUser, Mensagem, ["Opção1","Opção2","Opção3","Opção4"] (de 1 a 4 opções)) 
-    SendOptions: (client, user, msg, ops) => {
+    SendOptions: (user, msg, ops) => {
 
         if (ops.length == 1) {
 
-            client.sendMessage({
+            Client.sendMessage({
 
                 type: "application/vnd.lime.select+json",
                 to: user,
@@ -63,7 +71,7 @@ module.exports = {
 
         if (ops.length == 2) {
 
-            client.sendMessage({
+            Client.sendMessage({
 
                 type: "application/vnd.lime.select+json",
                 to: user,
@@ -86,7 +94,7 @@ module.exports = {
 
         if (ops.length == 3) {
 
-            client.sendMessage({
+            Client.sendMessage({
 
                 type: "application/vnd.lime.select+json",
                 to: user,
@@ -112,7 +120,7 @@ module.exports = {
 
         if (ops.length == 4) {
 
-            client.sendMessage({
+            Client.sendMessage({
 
                 type: "application/vnd.lime.select+json",
                 to: user,
@@ -139,5 +147,62 @@ module.exports = {
             })
         }
 
+    },
+
+    //MandaMensagem Multi (var client, var idUser, ["Men1","Men2","Men3","Men4"] (de 1 a 4 opções))
+    SendMul: (user, msgs) => {
+
+        if (msgs.length == 2) {
+
+            Client.sendMessage({
+                type: "application/vnd.lime.collection+json",
+                to: user,
+                content: {
+                    itemType: "text/plain",
+                    items: [
+                        msgs[0],
+                        msgs[1]
+                    ]
+                }
+            });
+
+        }
+
+        if (msgs.length == 3) {
+
+            Client.sendMessage({
+                type: "application/vnd.lime.collection+json",
+                to: user,
+                content: {
+                    itemType: "text/plain",
+                    items: [
+                        msgs[0],
+                        msgs[1],
+                        msgs[2]
+                    ]
+                }
+            });
+
+        }
+
+        if (msgs.length == 4) {
+
+            Client.sendMessage({
+                type: "application/vnd.lime.collection+json",
+                to: user,
+                content: {
+                    itemType: "text/plain",
+                    items: [
+                        msgs[0],
+                        msgs[1],
+                        msgs[2],
+                        msgs[3]
+                    ]
+                }
+            });
+
+        }
+
     }
+
 }
