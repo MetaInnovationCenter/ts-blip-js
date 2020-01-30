@@ -1,6 +1,7 @@
 var BlipSdk = require("blip-sdk")
 var WebSocketTransport = require("lime-transport-websocket")
 var chatModuleHana = require("./chatModuleHana")
+var emf = require("./emf.js")
 
 let IDENTIFIER = 'tssapsdk';
 let ACCESS_KEY = 'b3RPRjhGbDhxYUNQY0gzZGJ2cjY=';
@@ -26,17 +27,18 @@ client.connect() // This method return a 'promise'.
                 console.log(message.content)
                 switch (status) {
                     case "Boas Vindas":
-                        idUser = message.from
-                        let msg = { type: "text/plain", content: "Olá!! Seja bem-vindo(a)! Deseja trocar a senha de qual sistema?", to: message.from }
-                        client.sendMessage(msg)
+                        emf.SetClient(client)
+                        emf.SendMessage(message.from, "Olá!! Seja bem-vindo(a)! Deseja trocar a senha de qual sistema?", 1000)
                         console.log("case boas vindas")
                         status = "Qual sistema?"
                         break;
                     case "Qual sistema?":
                         console.log("qual sistema?")
-                        if(message.content == 'sap'){
-                            chatModuleHana.startHanaBot()
+                        if(message.content.toLowerCase() == 'sap'){
+                            chatModuleHana.startHanaBot(client, message.from)
                         } 
+                        break;
+                    case "Bot SAP":
                         break;  
                 }
             }
