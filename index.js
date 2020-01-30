@@ -24,7 +24,6 @@ client.connect() // This method return a 'promise'.
             //console.log(message.content)
             
             if(message.content.state == undefined) {
-                console.log("User Input:" + message.content)
                 switch (status) {
                     case "Boas Vindas":
                         emf.SetClient(client)
@@ -40,9 +39,10 @@ client.connect() // This method return a 'promise'.
                         }
                         break;
                     case "Bot SAP":
-                        console.log("Switch on case: Bot SAP")
+                        //console.log("Switch on case: Bot SAP")
                         break;
                 }
+                console.log("User Input:" + message.content)
             }
         });
     })
