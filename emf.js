@@ -12,7 +12,21 @@ let sleep = (milliseconds) => {
 
 }
 
- module.exports = {
+let SendDg = (dg, user) => {
+
+    Client.sendMessage({ 
+                
+        type: "application/vnd.lime.chatstate+json",
+        to: user,
+        content: {"state": "composing"},
+
+    })
+
+    sleep(dg)
+
+}
+
+module.exports = {
 
     /** 
      * Define o client para a lib (deve ser usado antes do uso dos outros metodos).
@@ -23,12 +37,12 @@ let sleep = (milliseconds) => {
         Client = client
 
     },
-    
+
     /** 
      * Manda uma mensagem.
      * Retorna true quando tudo certo, false quando não
      * @param {String} user - Id do Usuario
-     * @param {String} msg - Mensagen que fica acima das opções ("" -> sem mensagem, só aparece a foto do bot)
+     * @param {String} msg - Mensagen ("" -> sem mensagem, só aparece a foto do bot)
      * @param {Number} dg - Tempo de "Digitando" (dg <= 0 -> sem digitando) (em milisegundos)
     */
     SendMessage: (user, msg, dg) => {
@@ -39,15 +53,7 @@ let sleep = (milliseconds) => {
 
             if (dg > 0) { 
 
-                Client.sendMessage({ 
-                    
-                    type: "application/vnd.lime.chatstate+json",
-                    to: user,
-                    content: {"state": "composing"},
-
-                })
-
-                sleep(dg)
+                SendDg(dg, user)
                     
                 Client.sendMessage({ 
                             
@@ -73,7 +79,7 @@ let sleep = (milliseconds) => {
                 b = true
 
             }
-            
+
             return true
 
         }
@@ -99,17 +105,9 @@ let sleep = (milliseconds) => {
 
             if (dg > 0) {
 
-                Client.sendMessage({ 
-                        
-                    type: "application/vnd.lime.chatstate+json",
-                    to: user,
-                    content: {"state": "composing"},
-
-                })
+                SendDg(dg, user)
 
             }
-
-            sleep(dg)
 
             if (ops.length == 1) {
 
@@ -233,17 +231,9 @@ let sleep = (milliseconds) => {
 
             if (dg > 0) {
 
-                Client.sendMessage({ 
-                        
-                    type: "application/vnd.lime.chatstate+json",
-                    to: user,
-                    content: {"state": "composing"},
-
-                })
+                SendDg(dg, user)
 
             }
-
-            sleep(dg)
 
             if (msgs.length == 2) {
 
@@ -321,17 +311,9 @@ let sleep = (milliseconds) => {
 
             if (dg > 0) {
 
-                Client.sendMessage({ 
-                        
-                    type: "application/vnd.lime.chatstate+json",
-                    to: user,
-                    content: {"state": "composing"},
-
-                })
+                SendDg(dg, user)
 
             }
-
-            sleep(dg)
 
             Client.sendMessage({
 
@@ -345,6 +327,48 @@ let sleep = (milliseconds) => {
                         
                 }
 
+            });
+
+            return true
+
+        }
+        catch {
+
+            return false
+
+        }
+
+    },
+
+    /** 
+     * Manda uma mensagem com 1 video.
+     * Retorna true quando tudo certo, false quando não
+     * @param {String} user - Id do Usuario
+     * @param {String} img - Link do video (com .mp4)
+     * @param {Number} dg - Tempo de "Digitando" (dg <= 0 -> sem digitando) (em milisegundos)
+    */
+    SendVideo: (user, vdo, dg) => {
+
+        try {
+
+            if (dg > 0) {
+
+                SendDg(dg, user)
+
+            }
+
+            Client.sendMessage({
+
+                type: "application/vnd.lime.media-link+json",
+                to: user,
+                content: {
+
+                type: "video/mp4",
+
+                uri: vdo,
+                
+                }
+            
             });
 
             return true
