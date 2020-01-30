@@ -1,4 +1,5 @@
 var emf = require("./emf.js")
+const axios = require('axios');
 
 module.exports = {
     startHanaBot: (client, userId) => {
@@ -11,9 +12,10 @@ module.exports = {
                         status = "Processando"
                         break;
                     case "Processando":
-                        emf.SendMessage(userId, "Estou processando seu pedido, " + message.content)
+                        emf.SendMessage(userId, "Estou processando seu pedido, " + message.content, 1000)
 
-                        
+                        //
+
                         status = "Sucesso"
                         break;
                     case "Sucesso":

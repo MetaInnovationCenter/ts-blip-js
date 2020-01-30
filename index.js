@@ -24,22 +24,24 @@ client.connect() // This method return a 'promise'.
             //console.log(message.content)
             
             if(message.content.state == undefined) {
-                console.log(message.content)
+                console.log("User Input:" + message.content)
                 switch (status) {
                     case "Boas Vindas":
                         emf.SetClient(client)
                         emf.SendMessage(message.from, "Olá!! Seja bem-vindo(a)! Deseja trocar a senha de qual sistema?", 1000)
-                        console.log("case boas vindas")
+                        console.log("Switch on case: Boas Vindas")
                         status = "Qual sistema?"
                         break;
                     case "Qual sistema?":
-                        console.log("qual sistema?")
+                        console.log("Switch on case: Qual sistema?")
                         if(message.content.toLowerCase() == 'sap'){
                             chatModuleHana.startHanaBot(client, message.from)
-                        } 
+                            status = "Bot SAP"
+                        }
                         break;
                     case "Bot SAP":
-                        break;  
+                        console.log("Switch on case: Bot SAP")
+                        break;
                 }
             }
         });
