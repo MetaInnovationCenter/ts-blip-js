@@ -9,6 +9,7 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "axios": "^0.19.2",
     "blip-sdk": "^7.3.7",
     "lime-transport-websocket": "^2.0.3"
   }
