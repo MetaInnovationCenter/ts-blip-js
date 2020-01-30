@@ -73,9 +73,7 @@ let sleep = (milliseconds) => {
                 b = true
 
             }
-
-            while(!b) {console.log("esperando")}
-
+            
             return true
 
         }
