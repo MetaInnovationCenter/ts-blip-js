@@ -39,6 +39,22 @@ module.exports = {
     },
 
     /** 
+     * Dorme o codigo por algum tempo.
+     * @param {Number} milliseconds - Tempo de Dormida (em ms)
+    */
+    sleep: (milliseconds) => {
+
+        const date = Date.now();
+        let currentDate = null;
+    
+        do {
+          currentDate = Date.now();
+        } 
+        while (currentDate - date < milliseconds);
+    
+    },    
+
+    /** 
      * Manda uma mensagem.
      * Retorna true quando tudo certo, false quando não
      * @param {String} user - Id do Usuario
