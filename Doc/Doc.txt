@@ -1,0 +1,56 @@
+SetClient(client):
+    * Define o client para a lib (deve ser usado antes do uso dos outros metodos).
+
+    -> {String} client - Client (bot do blip)
+
+sleep(milliseconds):
+    * Dorme o codigo por algum tempo.
+
+    -> {Number} milliseconds - Tempo de Dormida (em ms)
+
+SendMessage(user, msg, dg):
+    * Manda uma mensagem.
+
+    x Retorna true quando tudo certo, false quando não
+
+    -> {String} user - Id do Usuario
+    -> {String} msg - Mensagen ("" -> sem mensagem, só aparece a foto do bot)
+    -> {Number} dg - Tempo de "Digitando" (dg <= 0 -> sem digitando) (em ms)
+
+SendOptions(user, msg, ops, dg):
+    * Manda uma mensagem com opções (quick reply) (min 1, max 4).
+
+    x Retorna true quando tudo certo, false quando não
+
+    -> {String} user - Id do Usuario
+    -> {String} msg - Mensagen que fica acima das opções ("" -> sem mensagem, mas fica horrível)
+    -> {Array<String>} ops - Opções ("" -> opção sem mensagem, fica horrível)
+    -> {Number} dg - Tempo de "Digitando" (dg <= 0 -> sem digitando) (em ms)
+
+SendMul(user, msgs, dg):
+    * Manda multiplas mensagens (min 1, max 4).
+
+    x Retorna true quando tudo certo, false quando não
+
+    -> {String} user - Id do Usuario
+    -> {Array<String>} msgs - Mensagens 
+    -> {Number} dg - Tempo de "Digitando" (dg <= 0 -> sem digitando) (em milisegundos)
+
+SendImg(user, msg, img, dg):
+    * Manda uma mensagem com 1 imagem.
+
+    x Retorna true quando tudo certo, false quando não
+
+    -> {String} user - Id do Usuario
+    -> {String} msg - Mensagen que fica embaixo da imagem ("" -> sem mensagem)
+    -> {String} img - Link da imagem (com .jpeg)
+    -> {Number} dg - Tempo de "Digitando" (dg <= 0 -> sem digitando) (em milisegundos)
+
+SendVideo(user, vdo, dg):
+    * Manda uma mensagem com 1 video.
+     
+    x Retorna true quando tudo certo, false quando não
+     
+    -> {String} user - Id do Usuario
+    -> {String} img - Link do video (com .mp4)
+    -> {Number} dg - Tempo de "Digitando" (dg <= 0 -> sem digitando) (em milisegundos)

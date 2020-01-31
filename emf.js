@@ -65,8 +65,6 @@ module.exports = {
     */
     SendMessage: (user, msg, dg) => {
 
-        let b = false
-
         try{
 
             if (dg > 0) { 
@@ -81,8 +79,6 @@ module.exports = {
                         
                 })
 
-                b = true
-
             }
             else {
 
@@ -93,8 +89,6 @@ module.exports = {
                     content: msg, 
                 
                 })
-
-                b = true
 
             }
 
@@ -118,26 +112,17 @@ module.exports = {
      * @param {Number} dg - Tempo de "Digitando" (dg <= 0 -> sem digitando) (em milisegundos)
     */
     SendOptions: (user, msg, ops, dg) => {
-
         try {
-
             if (dg > 0) {
-
                 SendDg(dg, user)
-
             }
-
             if (ops.length == 1) {
-
                 Client.sendMessage({
-
                     type: "application/vnd.lime.select+json",
                     to: user,
                     content: {
-        
                         scope:"immediate",
                         text: msg,
-                
                         options: [
                             {
                                 text: ops[0]
@@ -146,18 +131,13 @@ module.exports = {
                     }
                 })
             }
-
             if (ops.length == 2) {
-
                 Client.sendMessage({
-
                     type: "application/vnd.lime.select+json",
                     to: user,
                     content: {
-        
                         scope:"immediate",
                         text: msg,
-            
                         options: [
                             {
                                 text: ops[0]
@@ -169,15 +149,12 @@ module.exports = {
                     }
                 })
             }
-
             if (ops.length == 3) {
 
                 Client.sendMessage({
-
                     type: "application/vnd.lime.select+json",
                     to: user,
                     content: {
-        
                         scope:"immediate",
                         text: msg,
             
@@ -195,18 +172,13 @@ module.exports = {
                     }
                 })
             }
-
             if (ops.length == 4) {
-
                 Client.sendMessage({
-
                     type: "application/vnd.lime.select+json",
                     to: user,
                     content: {
-        
                         scope:"immediate",
                         text: msg,
-            
                         options: [
                             {
                                 text: ops[0]
@@ -224,16 +196,11 @@ module.exports = {
                     }
                 })
             }
-
             return true
-
         }
         catch {
-
             return false
-
         }
-
     },
 
     /** 
@@ -244,17 +211,11 @@ module.exports = {
      * @param {Number} dg - Tempo de "Digitando" (dg <= 0 -> sem digitando) (em milisegundos)
     */
     SendMul: (user, msgs, dg) => {
-
         try {
-
             if (dg > 0) {
-
                 SendDg(dg, user)
-
             }
-
             if (msgs.length == 2) {
-
                 Client.sendMessage({
                     type: "application/vnd.lime.collection+json",
                     to: user,
@@ -266,11 +227,8 @@ module.exports = {
                         ]
                     }
                 });
-
             }
-
             if (msgs.length == 3) {
-
                 Client.sendMessage({
                     type: "application/vnd.lime.collection+json",
                     to: user,
@@ -283,11 +241,8 @@ module.exports = {
                         ]
                     }
                 });
-
             }
-
             if (msgs.length == 4) {
-
                 Client.sendMessage({
                     type: "application/vnd.lime.collection+json",
                     to: user,
@@ -301,18 +256,12 @@ module.exports = {
                         ]
                     }
                 });
-
             }
-
             return true
-
         }
         catch {
-
             return false
-
         }
-
     },
 
     /** 
@@ -324,38 +273,24 @@ module.exports = {
      * @param {Number} dg - Tempo de "Digitando" (dg <= 0 -> sem digitando) (em milisegundos)
     */
     SendImg: (user, msg, img, dg) => {
-
         try {
-
             if (dg > 0) {
-
                 SendDg(dg, user)
-
             }
-
             Client.sendMessage({
-
                 type: "application/vnd.lime.media-link+json",
                 to: user,
                 content: {
-
                     text: msg,
                     type: "image/jpeg",
                     uri: img
-                        
                 }
-
             });
-
             return true
-
         }
         catch {
-
             return false
-
         }
-
     },
 
     /** 
@@ -366,38 +301,22 @@ module.exports = {
      * @param {Number} dg - Tempo de "Digitando" (dg <= 0 -> sem digitando) (em milisegundos)
     */
     SendVideo: (user, vdo, dg) => {
-
         try {
-
             if (dg > 0) {
-
                 SendDg(dg, user)
-
             }
-
             Client.sendMessage({
-
                 type: "application/vnd.lime.media-link+json",
                 to: user,
                 content: {
-
                 type: "video/mp4",
-
                 uri: vdo,
-                
                 }
-            
             });
-
             return true
-
         }
         catch {
-
             return false
-
         }
-
     }
-
 }
