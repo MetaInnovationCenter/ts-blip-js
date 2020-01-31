@@ -51,6 +51,8 @@ module.exports = {
           currentDate = Date.now();
         } 
         while (currentDate - date < milliseconds);
+
+        return true
     
     },    
 
