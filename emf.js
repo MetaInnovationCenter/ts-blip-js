@@ -123,7 +123,7 @@ module.exports = {
             if (dg == undefined) {dg = 0}
 
             console.log(Bright+FgGreen+"»»»»»»»»»»»»»»»»EMANUEL MASTER FUNCTIONS«««««««««««««««"+Reset)
-            console.log(FgYellow+"  Mengagem:"+Reset, Bright+msg+Reset)
+            console.log(FgYellow+"  Mensagem:"+Reset, Bright+msg+Reset)
             console.log(FgYellow+"  Enviada para:"+Reset, Bright+user+Reset)
             console.log(FgYellow+"  Digitando de:"+Reset, Bright+dg, "ms"+Reset)
             console.log(Bright+FgGreen+"»»»»»»»»»»»»»»»»EMANUEL MASTER FUNCTIONS«««««««««««««««"+Reset)
@@ -247,7 +247,7 @@ module.exports = {
             else {
 
                 console.log(Bright+FgGreen+"»»»»»»»»»»»»»»»»EMANUEL MASTER FUNCTIONS«««««««««««««««"+Reset)
-                console.log(FgYellow+"  Mengagem:"+Reset, Bright+msg+Reset)
+                console.log(FgYellow+"  Mensagens:"+Reset, Bright+msg+Reset)
                 console.log(FgYellow+"  Opções:"+Reset, Bright+ops+Reset)
                 console.log(FgYellow+"  Enviada para:"+Reset, Bright+user+Reset)
                 console.log(FgYellow+"  Digitando de:"+Reset, Bright+dg, "ms"+Reset)
@@ -330,7 +330,7 @@ module.exports = {
             else {
 
                 console.log(Bright+FgGreen+"»»»»»»»»»»»»»»»»EMANUEL MASTER FUNCTIONS«««««««««««««««"+Reset)
-                console.log(FgYellow+"  Mengagems:"+Reset, Bright+msgs+Reset)
+                console.log(FgYellow+"  Mensagens:"+Reset, Bright+msgs+Reset)
                 console.log(FgYellow+"  Enviadas para:"+Reset, Bright+user+Reset)
                 console.log(FgYellow+"  Digitando de:"+Reset, Bright+dg, "ms"+Reset)
                 console.log(Bright+FgGreen+"»»»»»»»»»»»»»»»»EMANUEL MASTER FUNCTIONS«««««««««««««««"+Reset)    
@@ -369,7 +369,7 @@ module.exports = {
 
             console.log(Bright+FgGreen+"»»»»»»»»»»»»»»»»EMANUEL MASTER FUNCTIONS«««««««««««««««"+Reset)
             console.log(FgYellow+"  Imagem:"+Reset, Bright+img+Reset)
-            console.log(FgYellow+"  Mengagem:"+Reset, Bright+msg+Reset)
+            console.log(FgYellow+"  Mensagem:"+Reset, Bright+msg+Reset)
             console.log(FgYellow+"  Enviada para:"+Reset, Bright+user+Reset)
             console.log(FgYellow+"  Digitando de:"+Reset, Bright+dg, "ms"+Reset)
             console.log(Bright+FgGreen+"»»»»»»»»»»»»»»»»EMANUEL MASTER FUNCTIONS«««««««««««««««"+Reset)    
