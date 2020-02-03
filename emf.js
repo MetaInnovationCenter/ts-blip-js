@@ -122,11 +122,11 @@ module.exports = {
 
             if (dg == undefined) {dg = 0}
 
-            console.log(Bright+FgGreen+"»»»»»»»»»»»»»»»»EMANUEL MASTER FUNCTIONS«««««««««««««««"+Reset)
+            console.log(FgBlue+"»»»»»»»»»»»»»»»»EMANUEL MASTER FUNCTIONS«««««««««««««««"+Reset)
             console.log(FgYellow+"  Mensagem:"+Reset, Bright+msg+Reset)
             console.log(FgYellow+"  Enviada para:"+Reset, Bright+user+Reset)
             console.log(FgYellow+"  Digitando de:"+Reset, Bright+dg, "ms"+Reset)
-            console.log(Bright+FgGreen+"»»»»»»»»»»»»»»»»EMANUEL MASTER FUNCTIONS«««««««««««««««"+Reset)
+            console.log(FgBlue+"»»»»»»»»»»»»»»»»EMANUEL MASTER FUNCTIONS«««««««««««««««"+Reset)
 
             return true
 
@@ -236,22 +236,22 @@ module.exports = {
 
             if (ops.length < 1 || ops.length > 4) {
 
-                console.log(Bright+FgGreen+"»»»»»»»»»»»»»»»»EMANUEL MASTER FUNCTIONS«««««««««««««««"+Reset)
+                console.log(FgBlue+"»»»»»»»»»»»»»»»»EMANUEL MASTER FUNCTIONS«««««««««««««««"+Reset)
                 console.log(FgRed+Bright+"  Onde:"+Reset, FgRed+"SendOptions("+user+","+msg+",["+ops+"],"+dg+")"+Reset)
                 console.log(FgRed+Bright+"  Erro:"+Reset, FgRed+"Numero de opções < 1 ou > 4"+Reset)
-                console.log(Bright+FgGreen+"»»»»»»»»»»»»»»»»EMANUEL MASTER FUNCTIONS«««««««««««««««"+Reset)    
+                console.log(FgBlue+"»»»»»»»»»»»»»»»»EMANUEL MASTER FUNCTIONS«««««««««««««««"+Reset)    
 
                 return false
 
             }
             else {
 
-                console.log(Bright+FgGreen+"»»»»»»»»»»»»»»»»EMANUEL MASTER FUNCTIONS«««««««««««««««"+Reset)
+                console.log(FgBlue+"»»»»»»»»»»»»»»»»EMANUEL MASTER FUNCTIONS«««««««««««««««"+Reset)
                 console.log(FgYellow+"  Mensagens:"+Reset, Bright+msg+Reset)
                 console.log(FgYellow+"  Opções:"+Reset, Bright+ops+Reset)
                 console.log(FgYellow+"  Enviada para:"+Reset, Bright+user+Reset)
                 console.log(FgYellow+"  Digitando de:"+Reset, Bright+dg, "ms"+Reset)
-                console.log(Bright+FgGreen+"»»»»»»»»»»»»»»»»EMANUEL MASTER FUNCTIONS«««««««««««««««"+Reset)    
+                console.log(FgBlue+"»»»»»»»»»»»»»»»»EMANUEL MASTER FUNCTIONS«««««««««««««««"+Reset)    
 
             }
 
@@ -319,21 +319,21 @@ module.exports = {
 
             if (msgs.length < 1 || msgs.length > 4) {
 
-                console.log(Bright+FgGreen+"»»»»»»»»»»»»»»»»EMANUEL MASTER FUNCTIONS«««««««««««««««"+Reset)
+                console.log(FgBlue+"»»»»»»»»»»»»»»»»EMANUEL MASTER FUNCTIONS«««««««««««««««"+Reset)
                 console.log(FgRed+Bright+"  Onde:"+Reset, FgRed+"SendMul("+user+",["+msgs+"],"+dg+")"+Reset)
                 console.log(FgRed+Bright+"  Erro:"+Reset, FgRed+"Numero de mensagens < 1 ou > 4"+Reset)
-                console.log(Bright+FgGreen+"»»»»»»»»»»»»»»»»EMANUEL MASTER FUNCTIONS«««««««««««««««"+Reset)    
+                console.log(FgBlue+"»»»»»»»»»»»»»»»»EMANUEL MASTER FUNCTIONS«««««««««««««««"+Reset)    
 
                 return false
 
             }
             else {
 
-                console.log(Bright+FgGreen+"»»»»»»»»»»»»»»»»EMANUEL MASTER FUNCTIONS«««««««««««««««"+Reset)
+                console.log(FgBlue+"»»»»»»»»»»»»»»»»EMANUEL MASTER FUNCTIONS«««««««««««««««"+Reset)
                 console.log(FgYellow+"  Mensagens:"+Reset, Bright+msgs+Reset)
                 console.log(FgYellow+"  Enviadas para:"+Reset, Bright+user+Reset)
                 console.log(FgYellow+"  Digitando de:"+Reset, Bright+dg, "ms"+Reset)
-                console.log(Bright+FgGreen+"»»»»»»»»»»»»»»»»EMANUEL MASTER FUNCTIONS«««««««««««««««"+Reset)    
+                console.log(FgBlue+"»»»»»»»»»»»»»»»»EMANUEL MASTER FUNCTIONS«««««««««««««««"+Reset)    
 
             }
 
@@ -367,12 +367,12 @@ module.exports = {
                 }
             });
 
-            console.log(Bright+FgGreen+"»»»»»»»»»»»»»»»»EMANUEL MASTER FUNCTIONS«««««««««««««««"+Reset)
+            console.log(FgBlue+"»»»»»»»»»»»»»»»»EMANUEL MASTER FUNCTIONS«««««««««««««««"+Reset)
             console.log(FgYellow+"  Imagem:"+Reset, Bright+img+Reset)
             console.log(FgYellow+"  Mensagem:"+Reset, Bright+msg+Reset)
             console.log(FgYellow+"  Enviada para:"+Reset, Bright+user+Reset)
             console.log(FgYellow+"  Digitando de:"+Reset, Bright+dg, "ms"+Reset)
-            console.log(Bright+FgGreen+"»»»»»»»»»»»»»»»»EMANUEL MASTER FUNCTIONS«««««««««««««««"+Reset)    
+            console.log(FgBlue+"»»»»»»»»»»»»»»»»EMANUEL MASTER FUNCTIONS«««««««««««««««"+Reset)    
 
             return true
         }
@@ -402,11 +402,11 @@ module.exports = {
                 }
             });
 
-            console.log(Bright+FgGreen+"»»»»»»»»»»»»»»»»EMANUEL MASTER FUNCTIONS«««««««««««««««"+Reset)
+            console.log(FgBlue+"»»»»»»»»»»»»»»»»EMANUEL MASTER FUNCTIONS«««««««««««««««"+Reset)
             console.log(FgYellow+"  Video:"+Reset, Bright+vdo+Reset)
             console.log(FgYellow+"  Enviada para:"+Reset, Bright+user+Reset)
             console.log(FgYellow+"  Digitando de:"+Reset, Bright+dg, "ms"+Reset)
-            console.log(Bright+FgGreen+"»»»»»»»»»»»»»»»»EMANUEL MASTER FUNCTIONS«««««««««««««««"+Reset) 
+            console.log(FgBlue+"»»»»»»»»»»»»»»»»EMANUEL MASTER FUNCTIONS«««««««««««««««"+Reset) 
 
             return true
         }
