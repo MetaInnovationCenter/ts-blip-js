@@ -3,7 +3,7 @@ const axios = require('axios');
 let processStatus = 0
 
 module.exports = {
-    startHanaBot: (client, userId) => {
+    startHanaBot: async (client, userId) => {
         let status = "Qual login?"
         client.addMessageReceiver(true, function(message) {
             if(message.content.state == undefined) {
@@ -30,6 +30,8 @@ module.exports = {
                         let orchProcessKey
                         let orchAccessToken
                         let orchOutputArgs
+
+                        break;
 
                         //Authentication request
                         let axiosBody = {
@@ -121,7 +123,6 @@ module.exports = {
                             //End Get Releases Request
                         });
                         //End Auth Request
-                        console.log("aaaaaaa");
                         break;
                     case "Login Errado":
                         console.log("Switch on Status: Login Errado");
@@ -133,10 +134,15 @@ module.exports = {
                         else if(message.content.toLowerCase() == 'nao' ||
                                 message.content.toLowerCase() == 'não') {
                                 emf.SendMessage(userId ,"Certo, te vejo na próxima então")
+                                return 'close'
                         }
                         break;
                 }
+                console.log("out of switch");
             }
-        });
+            
+        })
+        .then(response => console.log(response))
+        
     }
 }

@@ -35,6 +35,7 @@ client.connect() // This method return a 'promise'.
                         console.log("Switch on case: Qual sistema?")
                         if(message.content.toLowerCase() == 'sap'){
                             chatModuleHana.startHanaBot(client, message.from)
+                            .then(botStatus => console.log(botStatus))
                             status = "Bot SAP"
                         }
                         break;
