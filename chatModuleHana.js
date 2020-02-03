@@ -91,13 +91,13 @@ module.exports = {
                                     
                                     let delayOutput = setInterval(
                                         async function getOutput() {
-                                            console.log("get job init");
-    
                                             const response = await axios.get('https://platform.uipath.com/' + orchTenantURL +'/odata/Jobs?$filter=Id%20eq%20' + orchJobId, axiosGenericHeaders)
                                             
-                                            orchOutputArgs = response.data.value[0].OutputArguments.split("\"")[3]
+                                            let orchJobInfo = response.data.value[0].Info
+                                            orchJobInfo == null ? console.log("Job Info: Not Started") : console.log("Job Info: " + orchJobInfo)
                                             
-                                            if(!((orchOutputArgs == null) || (orchOutputArgs == '{}'))) {
+                                            if(orchJobInfo == 'Job completed') {
+                                                orchOutputArgs = response.data.value[0].OutputArguments.split("\"")[3]
                                                 if(orchOutputArgs == '2') {
                                                     status = "Login Errado"
                                                     console.log('Esse usuário não existe no sistema, deseja tentar novamente?')
@@ -110,8 +110,8 @@ module.exports = {
                                                 }
                                                 clearInterval(delayOutput)
                                             }
-                                            console.log(orchOutputArgs);
-                                            console.log('Status login: ' + orchOutputArgs);
+                                            //console.log(orchOutputArgs);
+                                            //console.log('Status login: ' + orchOutputArgs);
                                         }
                                         , 4000);
 
@@ -132,11 +132,8 @@ module.exports = {
                         }
                         else if(message.content.toLowerCase() == 'nao' ||
                                 message.content.toLowerCase() == 'não') {
-                                status = "Tchau"
+                                emf.SendMessage(userId ,"Certo, te vejo na próxima então")
                         }
-                    case "Tchau":
-                        console.log("case tchau");
-                        emf.SendMessage(userId ,"Certo, te vejo na próxima então")
                         break;
                 }
             }

@@ -122,11 +122,19 @@ module.exports = {
 
             if (dg == undefined) {dg = 0}
 
+<<<<<<< HEAD
             console.log(Bright+FgGreen+"»»»»»»»»»»»»»»»»EMANUEL MASTER FUNCTIONS«««««««««««««««"+Reset)
             console.log(FgYellow+"  Mengagem:"+Reset, Bright+msg+Reset)
             console.log(FgYellow+"  enviada para:"+Reset, Bright+user+Reset)
             console.log(FgYellow+"  digitando de:"+Reset, Bright+dg, "ms"+Reset)
             console.log(Bright+FgGreen+"»»»»»»»»»»»»»»»»EMANUEL MASTER FUNCTIONS«««««««««««««««"+Reset)
+=======
+            console.log("»»»»»»»»»»»»»»»»EMANUEL MASTER FUNCTIONS«««««««««««««««")
+            console.log("Mengagem:", msg)
+            console.log("enviada para:", user)
+            console.log("digitando de:", dg, "ms")
+            console.log("»»»»»»»»»»»»»»»»EMANUEL MASTER FUNCTIONS«««««««««««««««")
+>>>>>>> 8cff28f1d3aa9555f7440d2ac2acd369d5cb1014
 
             return true
 
