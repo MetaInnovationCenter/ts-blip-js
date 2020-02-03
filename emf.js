@@ -122,19 +122,11 @@ module.exports = {
 
             if (dg == undefined) {dg = 0}
 
-<<<<<<< HEAD
             console.log(Bright+FgGreen+"»»»»»»»»»»»»»»»»EMANUEL MASTER FUNCTIONS«««««««««««««««"+Reset)
             console.log(FgYellow+"  Mengagem:"+Reset, Bright+msg+Reset)
-            console.log(FgYellow+"  enviada para:"+Reset, Bright+user+Reset)
-            console.log(FgYellow+"  digitando de:"+Reset, Bright+dg, "ms"+Reset)
+            console.log(FgYellow+"  Enviada para:"+Reset, Bright+user+Reset)
+            console.log(FgYellow+"  Digitando de:"+Reset, Bright+dg, "ms"+Reset)
             console.log(Bright+FgGreen+"»»»»»»»»»»»»»»»»EMANUEL MASTER FUNCTIONS«««««««««««««««"+Reset)
-=======
-            console.log("»»»»»»»»»»»»»»»»EMANUEL MASTER FUNCTIONS«««««««««««««««")
-            console.log("Mengagem:", msg)
-            console.log("enviada para:", user)
-            console.log("digitando de:", dg, "ms")
-            console.log("»»»»»»»»»»»»»»»»EMANUEL MASTER FUNCTIONS«««««««««««««««")
->>>>>>> 8cff28f1d3aa9555f7440d2ac2acd369d5cb1014
 
             return true
 
@@ -256,9 +248,9 @@ module.exports = {
 
                 console.log(Bright+FgGreen+"»»»»»»»»»»»»»»»»EMANUEL MASTER FUNCTIONS«««««««««««««««"+Reset)
                 console.log(FgYellow+"  Mengagem:"+Reset, Bright+msg+Reset)
-                console.log(FgYellow+"  opções:"+Reset, Bright+ops+Reset)
-                console.log(FgYellow+"  enviada para:"+Reset, Bright+user+Reset)
-                console.log(FgYellow+"  digitando de:"+Reset, Bright+dg, "ms"+Reset)
+                console.log(FgYellow+"  Opções:"+Reset, Bright+ops+Reset)
+                console.log(FgYellow+"  Enviada para:"+Reset, Bright+user+Reset)
+                console.log(FgYellow+"  Digitando de:"+Reset, Bright+dg, "ms"+Reset)
                 console.log(Bright+FgGreen+"»»»»»»»»»»»»»»»»EMANUEL MASTER FUNCTIONS«««««««««««««««"+Reset)    
 
             }
@@ -339,8 +331,8 @@ module.exports = {
 
                 console.log(Bright+FgGreen+"»»»»»»»»»»»»»»»»EMANUEL MASTER FUNCTIONS«««««««««««««««"+Reset)
                 console.log(FgYellow+"  Mengagems:"+Reset, Bright+msgs+Reset)
-                console.log(FgYellow+"  enviadas para:"+Reset, Bright+user+Reset)
-                console.log(FgYellow+"  digitando de:"+Reset, Bright+dg, "ms"+Reset)
+                console.log(FgYellow+"  Enviadas para:"+Reset, Bright+user+Reset)
+                console.log(FgYellow+"  Digitando de:"+Reset, Bright+dg, "ms"+Reset)
                 console.log(Bright+FgGreen+"»»»»»»»»»»»»»»»»EMANUEL MASTER FUNCTIONS«««««««««««««««"+Reset)    
 
             }
@@ -378,8 +370,8 @@ module.exports = {
             console.log(Bright+FgGreen+"»»»»»»»»»»»»»»»»EMANUEL MASTER FUNCTIONS«««««««««««««««"+Reset)
             console.log(FgYellow+"  Imagem:"+Reset, Bright+img+Reset)
             console.log(FgYellow+"  Mengagem:"+Reset, Bright+msg+Reset)
-            console.log(FgYellow+"  enviada para:"+Reset, Bright+user+Reset)
-            console.log(FgYellow+"  digitando de:"+Reset, Bright+dg, "ms"+Reset)
+            console.log(FgYellow+"  Enviada para:"+Reset, Bright+user+Reset)
+            console.log(FgYellow+"  Digitando de:"+Reset, Bright+dg, "ms"+Reset)
             console.log(Bright+FgGreen+"»»»»»»»»»»»»»»»»EMANUEL MASTER FUNCTIONS«««««««««««««««"+Reset)    
 
             return true
@@ -412,8 +404,8 @@ module.exports = {
 
             console.log(Bright+FgGreen+"»»»»»»»»»»»»»»»»EMANUEL MASTER FUNCTIONS«««««««««««««««"+Reset)
             console.log(FgYellow+"  Video:"+Reset, Bright+vdo+Reset)
-            console.log(FgYellow+"  enviada para:"+Reset, Bright+user+Reset)
-            console.log(FgYellow+"  digitando de:"+Reset, Bright+dg, "ms"+Reset)
+            console.log(FgYellow+"  Enviada para:"+Reset, Bright+user+Reset)
+            console.log(FgYellow+"  Digitando de:"+Reset, Bright+dg, "ms"+Reset)
             console.log(Bright+FgGreen+"»»»»»»»»»»»»»»»»EMANUEL MASTER FUNCTIONS«««««««««««««««"+Reset) 
 
             return true
