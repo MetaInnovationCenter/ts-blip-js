@@ -1,3 +1,9 @@
+let status = "Boas Vindas"
+module.exports = {
+    setIndexStatus: (indexStatus) => {
+        status = indexStatus
+    }
+}
 var BlipSdk = require("blip-sdk")
 var WebSocketTransport = require("lime-transport-websocket")
 var chatModuleHana = require("./chatModuleHana")
@@ -5,7 +11,6 @@ var emf = require("./emf.js")
 
 let IDENTIFIER = 'tssapsdk';
 let ACCESS_KEY = 'b3RPRjhGbDhxYUNQY0gzZGJ2cjY=';
-let status = "Boas Vindas"
 
 // Create a client instance passing the identifier and accessKey of your chatbot
 let client = new BlipSdk.ClientBuilder()
@@ -35,12 +40,12 @@ client.connect() // This method return a 'promise'.
                         console.log("Switch on case: Qual sistema?")
                         if(message.content.toLowerCase() == 'sap'){
                             chatModuleHana.startHanaBot(client, message.from)
-                            .then(botStatus => console.log(botStatus))
-                            status = "Bot SAP"
+                            //.then(botStatus => console.log(botStatus))
+                            //status = "Bot SAP"
                         }
                         break;
                     case "Bot SAP":
-                        //console.log("Switch on case: Bot SAP")
+                        console.log("Switch on case: Bot SAP")
                         break;
                 }
                 console.log("User Input:" + message.content)

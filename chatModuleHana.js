@@ -1,5 +1,6 @@
 var emf = require("./emf.js")
 const axios = require('axios');
+const indexModule = require('./index.js')
 let processStatus = 0
 
 module.exports = {
@@ -31,7 +32,7 @@ module.exports = {
                         let orchAccessToken
                         let orchOutputArgs
 
-                        break;
+                        
 
                         //Authentication request
                         let axiosBody = {
@@ -109,6 +110,7 @@ module.exports = {
                                                     status = "Sucesso"
                                                     console.log("Senha trocada com sucesso")
                                                     emf.SendMessage(userId, "Senha trocada com sucesso")
+                                                    indexModule.setIndexStatus('Boas Vindas')
                                                 }
                                                 clearInterval(delayOutput)
                                             }
@@ -134,15 +136,14 @@ module.exports = {
                         else if(message.content.toLowerCase() == 'nao' ||
                                 message.content.toLowerCase() == 'não') {
                                 emf.SendMessage(userId ,"Certo, te vejo na próxima então")
-                                return 'close'
+                                indexModule.setIndexStatus('Boas Vindas')
                         }
                         break;
                 }
                 console.log("out of switch");
             }
             
-        })
-        .then(response => console.log(response))
-        
+        });
+        console.log("escapei")
     }
 }
