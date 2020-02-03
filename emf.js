@@ -122,11 +122,11 @@ module.exports = {
 
             if (dg == undefined) {dg = 0}
 
-            console.log("\x1b[32m»»»»»»»»»»»»»»»»EMANUEL MASTER FUNCTIONS«««««««««««««««")
-            console.log("Mengagem:", msg)
-            console.log("enviada para:", user)
-            console.log("digitando de:", dg, "ms")
-            console.log("\x1b[32m»»»»»»»»»»»»»»»»EMANUEL MASTER FUNCTIONS«««««««««««««««")
+            console.log(Bright+FgGreen+"»»»»»»»»»»»»»»»»EMANUEL MASTER FUNCTIONS«««««««««««««««"+Reset)
+            console.log(FgYellow+"  Mengagem:"+Reset, Bright+msg+Reset)
+            console.log(FgYellow+"  enviada para:"+Reset, Bright+user+Reset)
+            console.log(FgYellow+"  digitando de:"+Reset, Bright+dg, "ms"+Reset)
+            console.log(Bright+FgGreen+"»»»»»»»»»»»»»»»»EMANUEL MASTER FUNCTIONS«««««««««««««««"+Reset)
 
             return true
 
@@ -166,6 +166,7 @@ module.exports = {
                         ]
                     }
                 })
+
             }
             if (ops.length == 2) {
                 Client.sendMessage({
@@ -232,6 +233,28 @@ module.exports = {
                     }
                 })
             }
+
+            if (ops.length < 1 || ops.length > 4) {
+
+                console.log(Bright+FgGreen+"»»»»»»»»»»»»»»»»EMANUEL MASTER FUNCTIONS«««««««««««««««"+Reset)
+                console.log(FgRed+Bright+"  Onde:"+Reset, FgRed+"SendOptions("+user+","+msg+",["+ops+"],"+dg+")"+Reset)
+                console.log(FgRed+Bright+"  Erro:"+Reset, FgRed+"Numero de opções < 1 ou > 4"+Reset)
+                console.log(Bright+FgGreen+"»»»»»»»»»»»»»»»»EMANUEL MASTER FUNCTIONS«««««««««««««««"+Reset)    
+
+                return false
+
+            }
+            else {
+
+                console.log(Bright+FgGreen+"»»»»»»»»»»»»»»»»EMANUEL MASTER FUNCTIONS«««««««««««««««"+Reset)
+                console.log(FgYellow+"  Mengagem:"+Reset, Bright+msg+Reset)
+                console.log(FgYellow+"  opções:"+Reset, Bright+ops+Reset)
+                console.log(FgYellow+"  enviada para:"+Reset, Bright+user+Reset)
+                console.log(FgYellow+"  digitando de:"+Reset, Bright+dg, "ms"+Reset)
+                console.log(Bright+FgGreen+"»»»»»»»»»»»»»»»»EMANUEL MASTER FUNCTIONS«««««««««««««««"+Reset)    
+
+            }
+
             return true
         }
         catch {
@@ -293,6 +316,27 @@ module.exports = {
                     }
                 });
             }
+
+            if (msgs.length < 1 || msgs.length > 4) {
+
+                console.log(Bright+FgGreen+"»»»»»»»»»»»»»»»»EMANUEL MASTER FUNCTIONS«««««««««««««««"+Reset)
+                console.log(FgRed+Bright+"  Onde:"+Reset, FgRed+"SendMul("+user+",["+msgs+"],"+dg+")"+Reset)
+                console.log(FgRed+Bright+"  Erro:"+Reset, FgRed+"Numero de mensagens < 1 ou > 4"+Reset)
+                console.log(Bright+FgGreen+"»»»»»»»»»»»»»»»»EMANUEL MASTER FUNCTIONS«««««««««««««««"+Reset)    
+
+                return false
+
+            }
+            else {
+
+                console.log(Bright+FgGreen+"»»»»»»»»»»»»»»»»EMANUEL MASTER FUNCTIONS«««««««««««««««"+Reset)
+                console.log(FgYellow+"  Mengagems:"+Reset, Bright+msgs+Reset)
+                console.log(FgYellow+"  enviadas para:"+Reset, Bright+user+Reset)
+                console.log(FgYellow+"  digitando de:"+Reset, Bright+dg, "ms"+Reset)
+                console.log(Bright+FgGreen+"»»»»»»»»»»»»»»»»EMANUEL MASTER FUNCTIONS«««««««««««««««"+Reset)    
+
+            }
+
             return true
         }
         catch {
@@ -322,6 +366,14 @@ module.exports = {
                     uri: img
                 }
             });
+
+            console.log(Bright+FgGreen+"»»»»»»»»»»»»»»»»EMANUEL MASTER FUNCTIONS«««««««««««««««"+Reset)
+            console.log(FgYellow+"  Imagem:"+Reset, Bright+img+Reset)
+            console.log(FgYellow+"  Mengagem:"+Reset, Bright+msg+Reset)
+            console.log(FgYellow+"  enviada para:"+Reset, Bright+user+Reset)
+            console.log(FgYellow+"  digitando de:"+Reset, Bright+dg, "ms"+Reset)
+            console.log(Bright+FgGreen+"»»»»»»»»»»»»»»»»EMANUEL MASTER FUNCTIONS«««««««««««««««"+Reset)    
+
             return true
         }
         catch {
@@ -349,6 +401,13 @@ module.exports = {
                 uri: vdo,
                 }
             });
+
+            console.log(Bright+FgGreen+"»»»»»»»»»»»»»»»»EMANUEL MASTER FUNCTIONS«««««««««««««««"+Reset)
+            console.log(FgYellow+"  Video:"+Reset, Bright+vdo+Reset)
+            console.log(FgYellow+"  enviada para:"+Reset, Bright+user+Reset)
+            console.log(FgYellow+"  digitando de:"+Reset, Bright+dg, "ms"+Reset)
+            console.log(Bright+FgGreen+"»»»»»»»»»»»»»»»»EMANUEL MASTER FUNCTIONS«««««««««««««««"+Reset) 
+
             return true
         }
         catch {
@@ -356,6 +415,9 @@ module.exports = {
         }
     },
 
+     /** 
+     * Printa as cores no console.
+    */
     PrintaCor: () => {
 
         console.log(Bright+" Bright "+Reset)
@@ -386,6 +448,49 @@ module.exports = {
         console.log(BgMagenta +" BgMagenta "+Reset)
         console.log(BgCyan  +" BgCyan  "+Reset)
         console.log(BgWhite  +" BgWhite  "+Reset)
+
+    },
+
+    /** 
+     * Retorna a cor pedida, se não existir retorna false
+     * @param {String} cor - cor desejada
+     * 
+     * Cores -> [branco, vermelho, verde, amarelo, azul, magenta, ciano, preto]
+     * 
+     * Formatação -> [negrito, sublinhado]
+     * 
+     * Atras -> [abranco, avermelho, averde, aamarelo, aazul, amagenta, aciano, apreto]
+     *
+     * OBS: O console mantem as cores anteriores, para remover TODAS as cores use reset
+    */
+    Color: (cor) => {
+
+        cor = cor.toLowerCase()
+
+        if (cor == "reset") {return Reset}
+
+        if (cor == "branco") {return FgWhite}
+        if (cor == "vermelho") {return FgRed}
+        if (cor == "verde") {return FgGreen}
+        if (cor == "amarelo") {return FgYellow}
+        if (cor == "azul") {return FgBlue}
+        if (cor == "magenta") {return FgMagenta}
+        if (cor == "ciano") {return FgCyan}
+        if (cor == "preto") {return FgBlack}
+
+        if (cor == "negrito") {return Bright}
+        if (cor == "sublinhado") {return Underscore}
+
+        if (cor == "abranco") {return BgBlack}
+        if (cor == "avermelho") {return BgRed}
+        if (cor == "averde") {return BgGreen}
+        if (cor == "aamarelo") {return BgYellow}
+        if (cor == "aazul") {return BgBlue}
+        if (cor == "amagenta") {return BgMagenta}
+        if (cor == "aciano") {return BgCyan}
+        if (cor == "apreto") {return BgBlack}
+
+        return false
 
     }
 
