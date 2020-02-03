@@ -122,11 +122,11 @@ module.exports = {
 
             if (dg == undefined) {dg = 0}
 
-            console.log("\x1b[32m»»»»»»»»»»»»»»»»EMANUEL MASTER FUNCTIONS«««««««««««««««")
+            console.log("»»»»»»»»»»»»»»»»EMANUEL MASTER FUNCTIONS«««««««««««««««")
             console.log("Mengagem:", msg)
             console.log("enviada para:", user)
             console.log("digitando de:", dg, "ms")
-            console.log("\x1b[32m»»»»»»»»»»»»»»»»EMANUEL MASTER FUNCTIONS«««««««««««««««")
+            console.log("»»»»»»»»»»»»»»»»EMANUEL MASTER FUNCTIONS«««««««««««««««")
 
             return true
 
