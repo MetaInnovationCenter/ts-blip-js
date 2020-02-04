@@ -1,9 +1,11 @@
 //Módulos para manipulação de variáveis por outro arquivo
 module.exports = {
-    spliceUser:  (user) => {
-        let userIndex = userList.indexOf(user)
+    spliceUser:  (userId) => {
+        userList.forEach(user => {
+            if(user.id == userId)
+                userIndex = userList.indexOf(user)
+        });
         userList.splice(userIndex, 1)
-        userStatus.splice(userIndex, 1)
     }
 }
 //Bibliotecas
@@ -18,9 +20,8 @@ let ACCESS_KEY = 'b3RPRjhGbDhxYUNQY0gzZGJ2cjY=';
 
 //Variáveis para controle de multiplos usuários
 let userList = []
-let userStatus = []
 let newUserFlag = true
-let currentUserIndex
+let userIndex
 
 // Cliente websocket para conexão entre o node e o blip
 let client = new BlipSdk.ClientBuilder()
@@ -41,32 +42,33 @@ client.connect()
         userList.forEach(user => {
             console.log(user)
             //Se o usuário está na lista
-            if(user == message.from) {
+            if(user.id == message.from) {
                 console.log("User already on the list");
                 newUserFlag = false
-                currentUserIndex = userList.indexOf(user)
+                userIndex = userList.indexOf(user)
             }
         });
         //Se o usuário não está na lista
         if(newUserFlag == true) {
             console.log("New user added to the list");
-            userList.push(message.from)
-            userStatus.push('Boas Vindas')
-            currentUserIndex = userList.indexOf(message.from)
+            userList.push(new Object)
+            userIndex = userList.length - 1
+            userList[userIndex].id = message.from
+            userList[userIndex].status = 'Boas Vindas'
         }
-        switch (userStatus[currentUserIndex]) {
+        switch (userList[userIndex].status) {
             case "Boas Vindas":
                 emf.SetClient(client) //Seta o cliente para o emf ter acesso
                 emf.SendMessage(message.from, "Olá!! Seja bem-vindo(a)! Deseja trocar a senha de qual sistema?", 1000)
                 console.log("Switch on case: Boas Vindas")
-                userStatus[currentUserIndex] = "Qual sistema?"
+                userList[userIndex].status = "Qual sistema?"
                 break;
             case "Qual sistema?":
                 console.log("Switch on case: Qual sistema?")
                 if(message.content.toLowerCase() == 'sap'){
                     //Inicia o outro arquivo
                     chatModuleHana.startHanaBot(client, message.from, message)
-                    userStatus[currentUserIndex] = "Bot SAP"
+                    userList[userIndex].status = "Bot SAP"
                 }
                 break;
             case "Bot SAP":

@@ -9,7 +9,6 @@ let processStatus = 0
 //Variáveis para controle de multiplos usuários
 let newUserFlag
 let userList = []
-let userStatus = []
 
 module.exports = {
     startHanaBot: async (client, userId, message) => {
@@ -18,29 +17,30 @@ module.exports = {
         userList.forEach(user => {
             console.log(user)
             //Se o usuário está na lista
-            if(user == message.from) {
+            if(user.id == message.from) {
                 console.log("User already on the list");
                 newUserFlag = false
-                currentUserIndex = userList.indexOf(user)
+                userIndex = userList.indexOf(user)
             }
         });
         //Se o usuário não está na lista
         if(newUserFlag == true) {
             console.log("New user added to the list");
-            userList.push(message.from)
-            userStatus.push('Qual login?')
-            currentUserIndex = userList.indexOf(message.from)
+            userList.push(new Object)
+            userIndex = userList.length - 1
+            userList[userIndex].id = message.from
+            userList[userIndex].status = 'Qual login?'
         }
-        switch(userStatus[currentUserIndex]) {
+        switch(userList[userIndex].status) {
             case "Qual login?":
                 console.log("Switch on case: Qual login?")
                 emf.SendMessage(userId, "Certo, qual o seu login nesse sistema?",1000)
-                userStatus[currentUserIndex] = "Aviso Processando"
+                userList[userIndex].status = "Aviso Processando"
                 break;
             case "Aviso Processando":
                 emf.SendMessage(userId, "Seu pedido foi adicionado à fila, " + message.content)
                 let userLogin = message.content
-                userStatus[currentUserIndex] = "Start Job"
+                userList[userIndex].status = "Start Job"
             case "Start Job":
                 console.log("Switch on case: Start Job");
 
@@ -109,7 +109,7 @@ module.exports = {
                         axios.post('https://platform.uipath.com/' + orchTenantURL + '/odata/Jobs/UiPath.Server.Configuration.OData.StartJobs', axiosStartJobBody, axiosStartJobHeaders)
                         .then(function(response){
                             console.log("Start Job Request Successful");
-                            userStatus[currentUserIndex] = "Check Output";
+                            userList[userIndex].status = "Check Output";
                             console.log(response.data.value[0].Id);
                             orchJobId = response.data.value[0].Id
                             
@@ -125,18 +125,17 @@ module.exports = {
                                     if(orchJobInfo == 'Job completed') {
                                         orchOutputArgs = response.data.value[0].OutputArguments.split("\"")[3]
                                         if(orchOutputArgs == '2') {
-                                            userStatus[currentUserIndex] = "Login Errado"
+                                            userList[userIndex].status = "Login Errado"
                                             console.log('Esse usuário não existe no sistema, deseja tentar novamente?')
                                             emf.SendMessage(userId, 'Esse usuário não existe no sistema, deseja tentar novamente?')
                                         }
                                         else if(orchOutputArgs == '1') {
-                                            userStatus[currentUserIndex] = "Sucesso"
+                                            userList[userIndex].status = "Sucesso"
                                             console.log("Senha trocada com sucesso")
                                             emf.SendMessage(userId, "Senha trocada com sucesso")
 
                                             //Deletes user from the list
-                                            userList.splice(currentUserIndex, 1)
-                                            userStatus.splice(currentUserIndex, 1)
+                                            userList.splice(userIndex, 1)
                                             indexModule.spliceUser(userId)
                                         }
                                         clearInterval(delayOutput)
@@ -157,15 +156,15 @@ module.exports = {
             case "Login Errado":
                 console.log("Switch on Status: Login Errado");
                 if(message.content.toLowerCase() == 'sim') {
-                    userStatus[currentUserIndex] = "Aviso Processando"
+                    userList[userIndex].status = "Aviso Processando"
                     processStatus = 1
                     emf.SendMessage(userId, "Certo, qual o seu login nesse sistema?",1000)
                 }
                 else if(message.content.toLowerCase() == 'nao' ||
                         message.content.toLowerCase() == 'não') {
                         emf.SendMessage(userId ,"Certo, te vejo na próxima então")
-                        userList.splice(currentUserIndex, 1)
-                        userStatus.splice(currentUserIndex, 1)
+                        userList.splice(userIndex, 1)
+                        userStatus.splice(userIndex, 1)
                         indexModule.spliceUser(userId)
                 }
                 break;
