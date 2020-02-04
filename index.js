@@ -1,7 +1,11 @@
-let status = "Boas Vindas"
 module.exports = {
     setIndexStatus: (indexStatus) => {
         status = indexStatus
+    },
+    spliceUser:  (user) => {
+        let userIndex = userList.indexOf(user)
+        userList.splice(userIndex, 1)
+        userStatus.splice(userIndex, 1)
     }
 }
 var BlipSdk = require("blip-sdk")
@@ -12,6 +16,11 @@ var emf = require("./emf.js")
 let IDENTIFIER = 'tssapsdk';
 let ACCESS_KEY = 'b3RPRjhGbDhxYUNQY0gzZGJ2cjY=';
 
+let userList = []
+let userStatus = []
+let newUserFlag = true
+let currentUserIndex
+
 // Create a client instance passing the identifier and accessKey of your chatbot
 let client = new BlipSdk.ClientBuilder()
     .withIdentifier(IDENTIFIER)
@@ -20,36 +29,51 @@ let client = new BlipSdk.ClientBuilder()
     .build();
 
 client.connect() // This method return a 'promise'.
-    .then(function(session) {
-        console.log('Application started. Press Ctrl + c to stop.')
+.then(function(session) {
+    console.log('Application started. Press Ctrl + c to stop.')
 
-        //Mensagem inicial
-        client.addMessageReceiver(true, function(message) {
-            //console.log(message.content.state)
-            //console.log(message.content)
-            
-            if(message.content.state == undefined) {
-                switch (status) {
-                    case "Boas Vindas":
-                        emf.SetClient(client)
-                        emf.SendMessage(message.from, "Olá!! Seja bem-vindo(a)! Deseja trocar a senha de qual sistema?", 1000)
-                        console.log("Switch on case: Boas Vindas")
-                        status = "Qual sistema?"
-                        break;
-                    case "Qual sistema?":
-                        console.log("Switch on case: Qual sistema?")
-                        if(message.content.toLowerCase() == 'sap'){
-                            chatModuleHana.startHanaBot(client, message.from)
-                            //.then(botStatus => console.log(botStatus))
-                            status = "Bot SAP"
-                        }
-                        break;
-                    case "Bot SAP":
-                        console.log("Switch on case: Bot SAP")
-                        break;
-                }
-                console.log("User Input:" + message.content)
+    //Receiver de Texto
+    client.addMessageReceiver((message) => message.type === 'text/plain', (message) => {
+        newUserFlag = true
+        //Confere se a mensagem atual é de um usuário novo ou um que já está na lista
+        userList.forEach(user => {
+            console.log(user)
+            //Se o usuário está na lista
+            if(user == message.from) {
+                console.log("User already on the list");
+                newUserFlag = false
+                currentUserIndex = userList.indexOf(user)
             }
         });
-    })
-    .catch(function(err) { /* Connection failed. */ });
+        //Se o usuário não está na lista
+        if(newUserFlag == true) {
+            console.log("New user added to the list");
+            userList.push(message.from)
+            userStatus.push('Boas Vindas')
+            currentUserIndex = userList.indexOf(message.from)
+        }
+        switch (userStatus[currentUserIndex]) {
+            case "Boas Vindas":
+                emf.SetClient(client)
+                emf.SendMessage(message.from, "Olá!! Seja bem-vindo(a)! Deseja trocar a senha de qual sistema?", 1000)
+                console.log("Switch on case: Boas Vindas")
+                userStatus[currentUserIndex] = "Qual sistema?"
+                break;
+            case "Qual sistema?":
+                console.log("Switch on case: Qual sistema?")
+                if(message.content.toLowerCase() == 'sap'){
+                    chatModuleHana.startHanaBot(client, message.from, message)
+                    //.then(botStatus => console.log(botStatus))
+                    userStatus[currentUserIndex] = "Bot SAP"
+                }
+                break;
+            case "Bot SAP":
+                console.log("Switch on case: Bot SAP")
+                chatModuleHana.startHanaBot(client, message.from, message)
+                break;
+        }
+        console.log("User Input:" + message.content)
+        
+    });
+})
+.catch(function(err) { console.log("Falha na conexão, erro: " + err) });
