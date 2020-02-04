@@ -1,9 +1,12 @@
+//Bibliotecas
 var emf = require("./emf.js")
 const axios = require('axios');
 const indexModule = require('./index.js')
 
+//Flag de retentiva para o RPA
 let processStatus = 0
-let status = "Qual login?"
+
+//Variáveis para controle de multiplos usuários
 let newUserFlag
 let userList = []
 let userStatus = []
@@ -33,14 +36,14 @@ module.exports = {
                 console.log("Switch on case: Qual login?")
                 emf.SendMessage(userId, "Certo, qual o seu login nesse sistema?",1000)
                 userStatus[currentUserIndex] = "Aviso Processando"
-                console.log(userStatus[currentUserIndex]);
                 break;
             case "Aviso Processando":
-                emf.SendMessage(userId, "Estou processando seu pedido, " + message.content)
+                emf.SendMessage(userId, "Seu pedido foi adicionado à fila, " + message.content)
                 let userLogin = message.content
                 userStatus[currentUserIndex] = "Start Job"
             case "Start Job":
                 console.log("Switch on case: Start Job");
+
                 //Orchestrator data
                 let orchClientId = '8DEv1AMNXczW3y4U15LL3jYf62jK93n5'
                 let orchUserKey = '2YnYIsSRY4TXSVxKXjHIdR8Wsv9CIN6ChP4fb4SfgTYdi'
@@ -51,8 +54,6 @@ module.exports = {
                 let orchProcessKey
                 let orchAccessToken
                 let orchOutputArgs
-
-                
 
                 //Authentication request
                 let axiosBody = {
@@ -68,9 +69,9 @@ module.exports = {
                     }
                 };
                 
+                //Request de autenticação
                 axios.post('https://account.uipath.com/oauth/token', axiosBody, axiosHeaders)
                 .then(function (response) {
-                    //console.log(response.data.scope);
                     console.log("Request successful")
                     orchAccessToken = response.data.access_token;
 
@@ -112,6 +113,8 @@ module.exports = {
                             console.log(response.data.value[0].Id);
                             orchJobId = response.data.value[0].Id
                             
+                            let flagProcessStarted = false
+                            //Loop que confere se o rpa já finalizou seu processo
                             let delayOutput = setInterval(
                                 async function getOutput() {
                                     const response = await axios.get('https://platform.uipath.com/' + orchTenantURL +'/odata/Jobs?$filter=Id%20eq%20' + orchJobId, axiosGenericHeaders)
@@ -134,15 +137,16 @@ module.exports = {
                                             //Deletes user from the list
                                             userList.splice(currentUserIndex, 1)
                                             userStatus.splice(currentUserIndex, 1)
-                                            //indexModule.setIndexStatus('Boas Vindas')
+                                            indexModule.spliceUser(userId)
                                         }
                                         clearInterval(delayOutput)
                                     }
-                                    //console.log(orchOutputArgs);
-                                    //console.log('Status login: ' + orchOutputArgs);
+                                    else if(orchJobInfo == 'Job started processing' && flagProcessStarted == false) {
+                                        emf.SendMessage(userId, "Estou processando seu pedido")
+                                        flagProcessStarted = true
+                                    }
                                 }
                                 , 4000);
-
                         });
                         //End Start Job Request
                     });
@@ -160,7 +164,9 @@ module.exports = {
                 else if(message.content.toLowerCase() == 'nao' ||
                         message.content.toLowerCase() == 'não') {
                         emf.SendMessage(userId ,"Certo, te vejo na próxima então")
-                        indexModule.setIndexStatus('Boas Vindas')
+                        userList.splice(currentUserIndex, 1)
+                        userStatus.splice(currentUserIndex, 1)
+                        indexModule.spliceUser(userId)
                 }
                 break;
         }
