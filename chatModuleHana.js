@@ -6,8 +6,7 @@ let processStatus = 0
 module.exports = {
     startHanaBot: async (client, userId) => {
         let status = "Qual login?"
-        client.addMessageReceiver(true, function(message) {
-            if(message.content.state == undefined) {
+        client.addMessageReceiver((message) => message.type === 'text/plain', (message) => {
                 switch(status) {
                     case "Qual login?":
                         console.log("Switch on case: Qual login?")
@@ -141,7 +140,7 @@ module.exports = {
                         break;
                 }
                 console.log("out of switch");
-            }
+            
             
         });
         console.log("escapei")

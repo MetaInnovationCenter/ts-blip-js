@@ -41,7 +41,7 @@ client.connect() // This method return a 'promise'.
                         if(message.content.toLowerCase() == 'sap'){
                             chatModuleHana.startHanaBot(client, message.from)
                             //.then(botStatus => console.log(botStatus))
-                            //status = "Bot SAP"
+                            status = "Bot SAP"
                         }
                         break;
                     case "Bot SAP":
