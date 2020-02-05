@@ -1,5 +1,5 @@
 //Bibliotecas
-var emf = require("./emfB.js")
+var emfB = require("./emfB.js")
 const axios = require('axios');
 const indexModule = require('./index.js')
 
@@ -34,11 +34,11 @@ module.exports = {
         switch(userList[userIndex].status) {
             case "Qual login?":
                 console.log("Switch on case: Qual login?")
-                emf.SendMessage(userId, "Certo, qual o seu login nesse sistema?",1000)
+                emfB.SendMessage(userId, "Certo, qual o seu login nesse sistema?",1000)
                 userList[userIndex].status = "Aviso Processando"
                 break;
             case "Aviso Processando":
-                emf.SendMessage(userId, "Seu pedido foi adicionado à fila, " + message.content)
+                emfB.SendMessage(userId, "Seu pedido foi adicionado à fila, " + message.content)
                 let userLogin = message.content
                 userList[userIndex].status = "Start Job"
             case "Start Job":
@@ -127,12 +127,12 @@ module.exports = {
                                         if(orchOutputArgs == '2') {
                                             userList[userIndex].status = "Login Errado"
                                             console.log('Esse usuário não existe no sistema, deseja tentar novamente?')
-                                            emf.SendMessage(userId, 'Esse usuário não existe no sistema, deseja tentar novamente?')
+                                            emfB.SendMessage(userId, 'Esse usuário não existe no sistema, deseja tentar novamente?')
                                         }
                                         else if(orchOutputArgs == '1') {
                                             userList[userIndex].status = "Sucesso"
                                             console.log("Senha trocada com sucesso")
-                                            emf.SendMessage(userId, "Senha trocada com sucesso")
+                                            emfB.SendMessage(userId, "Senha trocada com sucesso")
 
                                             //Deletes user from the list
                                             userList.splice(userIndex, 1)
@@ -141,7 +141,7 @@ module.exports = {
                                         clearInterval(delayOutput)
                                     }
                                     else if(orchJobInfo == 'Job started processing' && flagProcessStarted == false) {
-                                        emf.SendMessage(userId, "Estou processando seu pedido")
+                                        emfB.SendMessage(userId, "Estou processando seu pedido")
                                         flagProcessStarted = true
                                     }
                                 }
@@ -158,11 +158,11 @@ module.exports = {
                 if(message.content.toLowerCase() == 'sim') {
                     userList[userIndex].status = "Aviso Processando"
                     processStatus = 1
-                    emf.SendMessage(userId, "Certo, qual o seu login nesse sistema?",1000)
+                    emfB.SendMessage(userId, "Certo, qual o seu login nesse sistema?",1000)
                 }
                 else if(message.content.toLowerCase() == 'nao' ||
                         message.content.toLowerCase() == 'não') {
-                        emf.SendMessage(userId ,"Certo, te vejo na próxima então")
+                        emfB.SendMessage(userId ,"Certo, te vejo na próxima então")
                         userList.splice(userIndex, 1)
                         userStatus.splice(userIndex, 1)
                         indexModule.spliceUser(userId)

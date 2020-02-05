@@ -12,7 +12,7 @@ module.exports = {
 var BlipSdk = require("blip-sdk")
 var WebSocketTransport = require("lime-transport-websocket")
 var chatModuleHana = require("./chatModuleHana")
-var emf = require("./emfB.js")
+var emfB = require("./emfB.js")
 
 //Dados do robo no portal.blip.ai
 let IDENTIFIER = 'tssapsdk';
@@ -58,8 +58,8 @@ client.connect()
         }
         switch (userList[userIndex].status) {
             case "Boas Vindas":
-                emf.SetClient(client) //Seta o cliente para o emf ter acesso
-                emf.SendMessage(message.from, "Olá!! Seja bem-vindo(a)! Deseja trocar a senha de qual sistema?", 1000)
+                emfB.SetClient(client) //Seta o cliente para o emf ter acesso
+                emfB.SendMessage(message.from, "Olá!! Seja bem-vindo(a)! Deseja trocar a senha de qual sistema?", 1000)
                 console.log("Switch on case: Boas Vindas")
                 userList[userIndex].status = "Qual sistema?"
                 break;
