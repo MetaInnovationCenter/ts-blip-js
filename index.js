@@ -1,4 +1,4 @@
-//Secure branch
+//Master
 
 //Módulos para manipulação de variáveis por outro arquivo
 module.exports = {
