@@ -3,9 +3,6 @@ var emfB = require("./emfB.js")
 const axios = require('axios');
 const indexModule = require('./index.js')
 
-//Flag de retentiva para o RPA
-let processStatus = 0
-
 //Variáveis para controle de multiplos usuários
 let newUserFlag
 let userList = []
@@ -30,6 +27,7 @@ module.exports = {
             userIndex = userList.length - 1
             userList[userIndex].id = message.from
             userList[userIndex].status = 'Qual login?'
+            userList[userIndex].processStatus = 0
         }
         switch(userList[userIndex].status) {
             case "Qual login?":
@@ -44,28 +42,31 @@ module.exports = {
             case "Start Job":
                 console.log("Switch on case: Start Job");
 
-                //Orchestrator data
+                // //Orchestrator data Léo
+                // let orchClientId = '8DEv1AMNXczW3y4U15LL3jYf62jK93n5'
+                // let orchUserKey = '2YnYIsSRY4TXSVxKXjHIdR8Wsv9CIN6ChP4fb4SfgTYdi'
+                // let orchProcessId = '67392'
+                // let orchTenantLogicalName = 'MetaDefaultxi2r298584'
+                // let orchTenantURL = 'metaybbsotc/MetaDefault'
+
+                //Orchestrator data Nicolas
                 let orchClientId = '8DEv1AMNXczW3y4U15LL3jYf62jK93n5'
-                let orchUserKey = '2YnYIsSRY4TXSVxKXjHIdR8Wsv9CIN6ChP4fb4SfgTYdi'
-                let orchProcessId = '67392'
-                let orchTenantLogicalName = 'MetaDefaultxi2r298584'
-                let orchTenantURL = 'metaybbsotc/MetaDefault'
-                let orchJobId
-                let orchProcessKey
-                let orchAccessToken
-                let orchOutputArgs
+                let orchUserKey = '8ZQ2vjK1vMnfqVD3HwLsJdp_xbovxwFOVlQmftjmkpE7r'
+                let orchTenantLogicalName = 'MetaInnovatj65c298574'
+                let orchTenantURL = 'metainnovationt/MetaInnovationTeamDefault'
+                let orchProcessName = 'Desafio.Blip.RPA'
 
                 //Authentication request
                 let axiosBody = {
                     grant_type: "refresh_token",
-                    client_id: "8DEv1AMNXczW3y4U15LL3jYf62jK93n5",
-                    refresh_token: "2YnYIsSRY4TXSVxKXjHIdR8Wsv9CIN6ChP4fb4SfgTYdi"
+                    client_id: orchClientId,
+                    refresh_token: orchUserKey
                 };
                 
                 let axiosHeaders = {
                     headers: {
                         'Content-Type' : 'application/json',
-                        'X-UIPATH-TenantName' : 'MetaDefaultxi2r298584'
+                        'X-UIPATH-TenantName' : orchTenantLogicalName
                     }
                 };
                 
@@ -73,7 +74,7 @@ module.exports = {
                 axios.post('https://account.uipath.com/oauth/token', axiosBody, axiosHeaders)
                 .then(function (response) {
                     console.log("Request successful")
-                    orchAccessToken = response.data.access_token;
+                    let orchAccessToken = response.data.access_token;
 
                     let axiosGenericHeaders = {
                         headers: {
@@ -83,11 +84,11 @@ module.exports = {
                     }; 
                     
                     //Get Releases Request
-                    axios.get('https://platform.uipath.com/' + orchTenantURL +'/odata/Releases?$filter=Id%20eq%20' + orchProcessId, axiosGenericHeaders)
+                    axios.get('https://platform.uipath.com/' + orchTenantURL +'/odata/Releases?filter=ProcessKey%20eq%20' + orchProcessName, axiosGenericHeaders) //?$filter=Id%20eq%20' + orchProcessId
                     .then(function(response) {
                         console.log("Get Releases Request Successful")
                         console.log("" + response.data.value[0].Key)
-                        orchProcessKey = response.data.value[0].Key
+                        let orchProcessKey = response.data.value[0].Key
 
                         //Start Job Request
                         let axiosStartJobBody = {
@@ -96,7 +97,7 @@ module.exports = {
                                 "Strategy": "All",
                                 "RobotIds": [],
                                 "NoOfRobots": 0,
-                                "InputArguments": "{\"login\":\"" + userLogin + "\", \"statusProcesso\":\"" + processStatus + "\"}"
+                                "InputArguments": "{\"login\":\"" + userLogin + "\", \"statusProcesso\":\"" + userList[userIndex].processStatus + "\"}"
                                 }
                         };
                         let axiosStartJobHeaders = {
@@ -111,7 +112,7 @@ module.exports = {
                             console.log("Start Job Request Successful");
                             userList[userIndex].status = "Check Output";
                             console.log(response.data.value[0].Id);
-                            orchJobId = response.data.value[0].Id
+                            let orchJobId = response.data.value[0].Id
                             
                             let flagProcessStarted = false
                             //Loop que confere se o rpa já finalizou seu processo
@@ -123,7 +124,7 @@ module.exports = {
                                     orchJobInfo == null ? console.log("Job Info: Not Started") : console.log("Job Info: " + orchJobInfo)
                                     
                                     if(orchJobInfo == 'Job completed') {
-                                        orchOutputArgs = response.data.value[0].OutputArguments.split("\"")[3]
+                                        let orchOutputArgs = response.data.value[0].OutputArguments.split("\"")[3]
                                         if(orchOutputArgs == '2') {
                                             userList[userIndex].status = "Login Errado"
                                             console.log('Esse usuário não existe no sistema, deseja tentar novamente?')
@@ -157,7 +158,7 @@ module.exports = {
                 console.log("Switch on Status: Login Errado");
                 if(message.content.toLowerCase() == 'sim') {
                     userList[userIndex].status = "Aviso Processando"
-                    processStatus = 1
+                    userList[userIndex].processStatus = 1
                     emfB.SendMessage(userId, "Certo, qual o seu login nesse sistema?",1000)
                 }
                 else if(message.content.toLowerCase() == 'nao' ||
