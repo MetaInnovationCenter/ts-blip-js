@@ -12,7 +12,7 @@ module.exports = {
 var BlipSdk = require("blip-sdk")
 var WebSocketTransport = require("lime-transport-websocket")
 var chatModuleHana = require("./chatModuleHana")
-var emf = require("./emf.js")
+var emf = require("./emfB.js")
 
 //Dados do robo no portal.blip.ai
 let IDENTIFIER = 'tssapsdk';
