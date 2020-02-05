@@ -13,7 +13,7 @@ module.exports = {
 //Bibliotecas
 var BlipSdk = require("blip-sdk")
 var WebSocketTransport = require("lime-transport-websocket")
-var chatModuleHana = require("./chatModuleHana")
+var botCheckHANA = require("./botCheckHANA")
 var emfB = require("./emfB.js")
 
 //Dados do robo no portal.blip.ai
@@ -69,13 +69,13 @@ client.connect()
                 console.log("Switch on case: Qual sistema?")
                 if(message.content.toLowerCase() == 'sap'){
                     //Inicia o outro arquivo
-                    chatModuleHana.startHanaBot(client, message.from, message)
+                    botCheckHANA.startHanaBot(client, message.from, message)
                     userList[userIndex].status = "Bot SAP"
                 }
                 break;
             case "Bot SAP":
                 console.log("Switch on case: Bot SAP")
-                chatModuleHana.startHanaBot(client, message.from, message)
+                botCheckHANA.startHanaBot(client, message.from, message)
                 break;
         }
         console.log("User Input:" + message.content)
