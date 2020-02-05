@@ -42,19 +42,19 @@ module.exports = {
             case "Start Job":
                 console.log("Switch on case: Start Job");
 
-                // //Orchestrator data Léo
-                // let orchClientId = '8DEv1AMNXczW3y4U15LL3jYf62jK93n5'
-                // let orchUserKey = '2YnYIsSRY4TXSVxKXjHIdR8Wsv9CIN6ChP4fb4SfgTYdi'
-                // let orchProcessId = '67392'
-                // let orchTenantLogicalName = 'MetaDefaultxi2r298584'
-                // let orchTenantURL = 'metaybbsotc/MetaDefault'
-
-                //Orchestrator data Nicolas
+                //Orchestrator data Léo
                 let orchClientId = '8DEv1AMNXczW3y4U15LL3jYf62jK93n5'
-                let orchUserKey = '8ZQ2vjK1vMnfqVD3HwLsJdp_xbovxwFOVlQmftjmkpE7r'
-                let orchTenantLogicalName = 'MetaInnovatj65c298574'
-                let orchTenantURL = 'metainnovationt/MetaInnovationTeamDefault'
-                let orchProcessName = 'Desafio.Blip.RPA'
+                let orchUserKey = '2YnYIsSRY4TXSVxKXjHIdR8Wsv9CIN6ChP4fb4SfgTYdi'
+                let orchTenantLogicalName = 'MetaDefaultxi2r298584'
+                let orchTenantURL = 'metaybbsotc/MetaDefault'
+                let orchProcessName = 'SAP_DemoRobots'
+
+                // //Orchestrator data Nicolas
+                // let orchClientId = '8DEv1AMNXczW3y4U15LL3jYf62jK93n5'
+                // let orchUserKey = '8ZQ2vjK1vMnfqVD3HwLsJdp_xbovxwFOVlQmftjmkpE7r'
+                // let orchTenantLogicalName = 'MetaInnovatj65c298574'
+                // let orchTenantURL = 'metainnovationt/MetaInnovationTeamDefault'
+                // let orchProcessName = 'Desafio.Blip.RPA'
 
                 //Authentication request
                 let axiosBody = {
@@ -82,12 +82,12 @@ module.exports = {
                             'X-UIPATH-TenantName' : orchTenantLogicalName
                         }
                     }; 
-                    
+                    console.log(orchProcessName)
                     //Get Releases Request
-                    axios.get('https://platform.uipath.com/' + orchTenantURL +'/odata/Releases?filter=ProcessKey%20eq%20' + orchProcessName, axiosGenericHeaders) //?$filter=Id%20eq%20' + orchProcessId
+                    axios.get('https://platform.uipath.com/' + orchTenantURL +'/odata/Releases?$filter=%20Name%20eq%20%27' + orchProcessName + '%27', axiosGenericHeaders) //?$filter=Id%20eq%20' + orchProcessId
                     .then(function(response) {
                         console.log("Get Releases Request Successful")
-                        console.log("" + response.data.value[0].Key)
+                        console.log(response.data)
                         let orchProcessKey = response.data.value[0].Key
 
                         //Start Job Request
@@ -149,6 +149,9 @@ module.exports = {
                                 , 4000);
                         });
                         //End Start Job Request
+                    })
+                    .catch(function(error) {
+                        console.log(error)
                     });
                     //End Get Releases Request
                 });
