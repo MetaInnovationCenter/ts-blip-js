@@ -1,3 +1,5 @@
+//Secure branch
+
 //Módulos para manipulação de variáveis por outro arquivo
 module.exports = {
     spliceUser:  (userId) => {
