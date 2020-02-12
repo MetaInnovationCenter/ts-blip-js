@@ -13,7 +13,7 @@ module.exports = {
 //Bibliotecas
 var BlipSdk = require("blip-sdk")
 var WebSocketTransport = require("lime-transport-websocket")
-var botCheckHANA = require("./botCheckHANA")
+var botCheckSAP = require("./botCheckSAP")
 var emfB = require("./emfB.js")
 
 //Dados do robo no portal.blip.ai
@@ -45,14 +45,14 @@ client.connect()
             console.log(user)
             //Se o usuário está na lista
             if(user.id == message.from) {
-                console.log("User already on the list");
+                console.log("User already on index list");
                 newUserFlag = false
                 userIndex = userList.indexOf(user)
             }
         });
         //Se o usuário não está na lista
         if(newUserFlag == true) {
-            console.log("New user added to the list");
+            console.log("New user added to index list");
             userList.push(new Object)
             userIndex = userList.length - 1
             userList[userIndex].id = message.from
@@ -69,13 +69,13 @@ client.connect()
                 console.log("Switch on case: Qual sistema?")
                 if(message.content.toLowerCase() == 'sap'){
                     //Inicia o outro arquivo
-                    botCheckHANA.startHanaBot(client, message.from, message)
+                    botCheckSAP.start(client, message.from, message)
                     userList[userIndex].status = "Bot SAP"
                 }
                 break;
             case "Bot SAP":
                 console.log("Switch on case: Bot SAP")
-                botCheckHANA.startHanaBot(client, message.from, message)
+                botCheckSAP.start(client, message.from, message)
                 break;
         }
         console.log("User Input:" + message.content)

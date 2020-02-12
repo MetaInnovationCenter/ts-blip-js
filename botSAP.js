@@ -8,7 +8,7 @@ let newUserFlag
 let userList = []
 
 module.exports = {
-    start: async (client, userId, message) => {
+    startHanaBot: async (client, userId, message) => {
         newUserFlag = true
         //Confere se a mensagem atual é de um usuário novo ou um que já está na lista
         userList.forEach(user => {
@@ -27,7 +27,7 @@ module.exports = {
             userIndex = userList.length - 1
             userList[userIndex].id = message.from
             userList[userIndex].status = 'Qual login?'
-            userList[userIndex].processStatus = 'confere'
+            userList[userIndex].processStatus = 0
         }
         switch(userList[userIndex].status) {
             case "Qual login?":
@@ -36,7 +36,7 @@ module.exports = {
                 userList[userIndex].status = "Aviso Processando"
                 break;
             case "Aviso Processando":
-                emfB.SendMessage(userId, "Vou conferir se seu login está correto, " + message.content)
+                emfB.SendMessage(userId, "Seu pedido foi adicionado à fila, " + message.content)
                 let userLogin = message.content
                 userList[userIndex].status = "Start Job"
             case "Start Job":
@@ -47,7 +47,7 @@ module.exports = {
                 let orchUserKey = '2YnYIsSRY4TXSVxKXjHIdR8Wsv9CIN6ChP4fb4SfgTYdi'
                 let orchTenantLogicalName = 'MetaDefaultxi2r298584'
                 let orchTenantURL = 'metaybbsotc/MetaDefault'
-                let orchProcessName = 'SAP.S4HANA_DemoRobots'
+                let orchProcessName = 'SAP_DemoRobots'
 
                 // //Orchestrator data Nicolas
                 // let orchClientId = '8DEv1AMNXczW3y4U15LL3jYf62jK93n5'
@@ -120,32 +120,29 @@ module.exports = {
                                 async function getOutput() {
                                     const response = await axios.get('https://platform.uipath.com/' + orchTenantURL +'/odata/Jobs?$filter=Id%20eq%20' + orchJobId, axiosGenericHeaders)
                                     
-                                    console.log(response.data.value[0].OutputArguments);
-
                                     let orchJobInfo = response.data.value[0].Info
                                     orchJobInfo == null ? console.log("Job Info: Not Started") : console.log("Job Info: " + orchJobInfo)
                                     
                                     if(orchJobInfo == 'Job completed') {
-                                        let orchOutputArgs = JSON.parse(response.data.value[0].OutputArguments)
-                                        console.log(orchOutputArgs)
-                                        if(orchOutputArgs.statusLogin == 'inexistente') {
+                                        let orchOutputArgs = response.data.value[0].OutputArguments.split("\"")[3]
+                                        if(orchOutputArgs == '2') {
                                             userList[userIndex].status = "Login Errado"
                                             console.log('Esse usuário não existe no sistema, deseja tentar novamente?')
                                             emfB.SendMessage(userId, 'Esse usuário não existe no sistema, deseja tentar novamente?')
                                         }
-                                        else if(orchOutputArgs.statusLogin == 'existe') {
-                                            userList[userIndex].status = "Login Existe"
-                                            userList[userIndex].codeBlip = orchOutputArgs.codeBlip
-                                            console.log("Login existe")
-                                            
-                                            emfB.SendMessage(userId, "Certo, seu login foi inserido corretamente.\
-                                                                         Te mandei um e-mail com um código de segurança,\
-                                                                          pode digitar esse código aqui pra mim?")
+                                        else if(orchOutputArgs == '1') {
+                                            userList[userIndex].status = "Sucesso"
+                                            console.log("Senha trocada com sucesso")
+                                            emfB.SendMessage(userId, "Senha trocada com sucesso")
+
+                                            //Deletes user from the list
+                                            userList.splice(userIndex, 1)
+                                            indexModule.spliceUser(userId)
                                         }
                                         clearInterval(delayOutput)
                                     }
                                     else if(orchJobInfo == 'Job started processing' && flagProcessStarted == false) {
-                                        emfB.SendMessage(userId, "Estou conferindo")
+                                        emfB.SendMessage(userId, "Estou processando seu pedido")
                                         flagProcessStarted = true
                                     }
                                 }
@@ -160,22 +157,11 @@ module.exports = {
                 });
                 //End Auth Request
                 break;
-            case 'Login Existe':
-                if(message.content == userList[userIndex].codeBlip) {
-                    console.log('Código correto')
-                    emfB.SendMessage(userId, 'Código inserido corretamente,\
-                                             coloquei seu pedido de troca de senha na fila')
-                }
-                else {
-                    console.log('Código errado');
-                    emfB.SendMessage(userId, 'Código inserido incorretamente, por favor tente novamente')
-                }
-                break;
             case "Login Errado":
                 console.log("Switch on Status: Login Errado");
                 if(message.content.toLowerCase() == 'sim') {
                     userList[userIndex].status = "Aviso Processando"
-                    userList[userIndex].processStatus = 'retentativa'
+                    userList[userIndex].processStatus = 1
                     emfB.SendMessage(userId, "Certo, qual o seu login nesse sistema?",1000)
                 }
                 else if(message.content.toLowerCase() == 'nao' ||
