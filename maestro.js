@@ -1,17 +1,17 @@
 const axios = require('axios')
 const emfB = require('./emfB.js')
 
-// //Orchestrator data Léo
-// let orchClientId = '8DEv1AMNXczW3y4U15LL3jYf62jK93n5'
-// let orchUserKey = '2YnYIsSRY4TXSVxKXjHIdR8Wsv9CIN6ChP4fb4SfgTYdi'
-// let orchTenantLogicalName = 'MetaDefaultxi2r298584'
-// let orchTenantURL = 'metaybbsotc/MetaDefault'
-
-//Orchestrator data Mak
+//Orchestrator data Léo
 let orchClientId = '8DEv1AMNXczW3y4U15LL3jYf62jK93n5'
-let orchUserKey = 'Z8VQl1PmNDYT5fJkFpYjDLE1c1rdZffhjFN2yBxr0MkI4'
-let orchTenantLogicalName = 'MetaDefaultaldz298583'
-let orchTenantURL = 'metayofvcgb/MetaDefault'
+let orchUserKey = '2YnYIsSRY4TXSVxKXjHIdR8Wsv9CIN6ChP4fb4SfgTYdi'
+let orchTenantLogicalName = 'MetaDefaultxi2r298584'
+let orchTenantURL = 'metaybbsotc/MetaDefault'
+
+// //Orchestrator data Mak
+// let orchClientId = '8DEv1AMNXczW3y4U15LL3jYf62jK93n5'
+// let orchUserKey = 'Z8VQl1PmNDYT5fJkFpYjDLE1c1rdZffhjFN2yBxr0MkI4'
+// let orchTenantLogicalName = 'MetaDefaultaldz298583'
+// let orchTenantURL = 'metayofvcgb/MetaDefault'
 
 // //Orchestrator data Nicolas
 // let orchClientId = '8DEv1AMNXczW3y4U15LL3jYf62jK93n5'
@@ -57,6 +57,7 @@ module.exports = {
         }; 
 
         //Get Releases Request
+        console.log('aaaaaaaaaaaaaaaaaaaaa ' + orchProcessName)
         await axios.get('https://platform.uipath.com/' + orchTenantURL +'/odata/Releases?$filter=%20Name%20eq%20%27' + orchProcessName + '%27', axiosGenericHeaders) //?$filter=Id%20eq%20' + orchProcessId
         .then(function(response) {
             console.log(emfB.Color('verde') + "Get Releases Request Successful" + emfB.Color('reset'))
@@ -85,6 +86,10 @@ module.exports = {
         else if(processStatus == 'trocaSenha') {
             inputArguments = "{\"login\":\"" + userLogin + "\", \"statusProcesso\":\"" + processStatus + "\", \"emailInput\":\"" + userEmail + "\"}"
             console.log("status : trocaSenha");
+        }
+        else if(processStatus == 'init') {
+            inputArguments = "{\"login\":\"" + userLogin + "\", \"statusProcesso\":\"" + processStatus + "\"}"
+            console.log("status: init");
         }
 
         let axiosStartJobBody = {

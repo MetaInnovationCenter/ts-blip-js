@@ -14,6 +14,7 @@ module.exports = {
 var BlipSdk = require("blip-sdk")
 var WebSocketTransport = require("lime-transport-websocket")
 var botCheckSAP = require("./botCheckSAP")
+var botSAP = require('./botSAP')
 var emfB = require("./emfB.js")
 
 //Dados do robo no portal.blip.ai
@@ -70,12 +71,19 @@ client.connect()
                 if(message.content.toLowerCase() == 'sap'){
                     //Inicia o outro arquivo
                     botCheckSAP.start(client, message.from, message)
-                    userList[userIndex].status = "Bot SAP"
+                    userList[userIndex].status = "Bot SAP HANA"
+                }
+                if(message.content.toLowerCase() == 'sapc'){
+                    botSAP.start(client, message.from, message)
+                    userList[userIndex].status = "Bot SAP ECC"
                 }
                 break;
-            case "Bot SAP":
-                console.log("Switch on case: Bot SAP")
+            case "Bot SAP HANA":
+                console.log("Switch on case: Bot SAP HANA")
                 botCheckSAP.start(client, message.from, message)
+                break;
+            case "Bot SAP ECC":
+                botSAP.start(client, message.from, message)
                 break;
         }
         console.log("User Input:" + message.content)

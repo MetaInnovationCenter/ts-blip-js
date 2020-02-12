@@ -32,8 +32,8 @@ module.exports = {
         }
 
         //Acquiring Process Info to start jobs
-        let orchProcessInfo = await maestro.getProcessInfo('SAP_sap') 
-        //SAP.S4HANA_DemoRobots Leo
+        let orchProcessInfo = await maestro.getProcessInfo('SAP.S4HANA_DemoRobots') 
+        //SAP.S4HANA_DemoRobots Leo   SAP_sap
         //
         let orchProcessKey = orchProcessInfo.processKey
         let orchAccessToken = orchProcessInfo.accessToken
@@ -47,8 +47,7 @@ module.exports = {
             case "Aviso Processando":
                 emfB.SendMessage(userId, "Vou conferir se seu login está correto, " + message.content)
                 userList[userIndex].userLogin = message.content
-                userList[userIndex].status = "Start Job"
-            case "Start Job Confere":
+                userList[userIndex].status = "Start Job Confere"
                 console.log("Switch on case: Start Job");
 
                 //Start Job Confere Request
@@ -128,12 +127,15 @@ module.exports = {
                                 let orchOutputArgs = JSON.parse(orchJobOutput.OutputArguments)
                                 console.log(orchOutputArgs)
 
-                                if(orchOutputArgs.statusEmail == 'senhatrocada') {
+                                if(orchOutputArgs.statusEmail == 'enviado') {
                                     userList[userIndex].status = "Sucesso"
                                     console.log('Senha trocada com sucesso :)')
                                     emfB.SendMessage(userId, 'Senha trocada com sucesso :),\
                                                                 te enviei sua senha temporária por e-mail,\
                                                                 até a próxima')
+                                    //Deletes user from the list
+                                    userList.splice(userIndex, 1)
+                                    indexModule.spliceUser(userList[userIndex].id)
                                 }
                                 else if(orchOutputArgs.statusEmail == 'FALTA ESSA FLAG') {
                                     //???
