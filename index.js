@@ -68,12 +68,12 @@ client.connect()
                 break;
             case "Qual sistema?":
                 console.log("Switch on case: Qual sistema?")
-                if(message.content.toLowerCase() == 'sap'){
+                if(message.content.toLowerCase().includes('hana')){
                     //Inicia o outro arquivo
                     botCheckSAP.start(client, message.from, message)
                     userList[userIndex].status = "Bot SAP HANA"
                 }
-                if(message.content.toLowerCase() == 'sapc'){
+                if(message.content.toLowerCase().includes('ecc')){
                     botSAP.start(client, message.from, message)
                     userList[userIndex].status = "Bot SAP ECC"
                 }
