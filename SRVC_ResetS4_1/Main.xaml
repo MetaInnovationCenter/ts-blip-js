@@ -8,7 +8,7 @@
   <mva:VisualBasic.Settings>
     <x:Null />
   </mva:VisualBasic.Settings>
-  <sap:VirtualizedContainerService.HintSize>1004,1250</sap:VirtualizedContainerService.HintSize>
+  <sap:VirtualizedContainerService.HintSize>1004,1290</sap:VirtualizedContainerService.HintSize>
   <sap2010:WorkflowViewState.IdRef>ActivityBuilder_1</sap2010:WorkflowViewState.IdRef>
   <TextExpression.NamespacesForImplementation>
     <scg:List x:TypeArguments="x:String" Capacity="44">
@@ -269,7 +269,7 @@
                   <av:PointCollection x:Key="ConnectorLocation">569.5,629 619.5,629</av:PointCollection>
                 </scg:Dictionary>
               </sap:WorkflowViewStateService.ViewState>
-              <Sequence DisplayName="Sequence - Pega email e manda código" sap:VirtualizedContainerService.HintSize="376,357" sap2010:WorkflowViewState.IdRef="Sequence_13">
+              <Sequence DisplayName="Sequence - Pega email e manda código" sap:VirtualizedContainerService.HintSize="200,66" sap2010:WorkflowViewState.IdRef="Sequence_13">
                 <sap:WorkflowViewStateService.ViewState>
                   <scg:Dictionary x:TypeArguments="x:String, x:Object">
                     <x:Boolean x:Key="IsExpanded">True</x:Boolean>
@@ -389,7 +389,7 @@
                       <av:Size x:Key="ShapeSize">200,66</av:Size>
                     </scg:Dictionary>
                   </sap:WorkflowViewStateService.ViewState>
-                  <Sequence DisplayName="Sequence - Envia nova senha" sap:VirtualizedContainerService.HintSize="200,66" sap2010:WorkflowViewState.IdRef="Sequence_22">
+                  <Sequence DisplayName="Sequence - Envia nova senha" sap:VirtualizedContainerService.HintSize="242,688" sap2010:WorkflowViewState.IdRef="Sequence_22">
                     <Sequence.Variables>
                       <Variable x:TypeArguments="x:String" Default="Hello World" Name="senha" />
                       <Variable x:TypeArguments="x:Boolean" Name="lasterror" />
@@ -518,7 +518,7 @@
                         </ui:SendHotkey.Target>
                       </ui:SendHotkey>
                     </Sequence>
-                    <Sequence DisplayName="Sequence - Envia email" sap:VirtualizedContainerService.HintSize="200,66" sap2010:WorkflowViewState.IdRef="Sequence_19">
+                    <Sequence DisplayName="Sequence - Envia email" sap:VirtualizedContainerService.HintSize="376,337" sap2010:WorkflowViewState.IdRef="Sequence_19">
                       <sap:WorkflowViewStateService.ViewState>
                         <scg:Dictionary x:TypeArguments="x:String, x:Object">
                           <x:Boolean x:Key="IsExpanded">False</x:Boolean>
@@ -535,7 +535,7 @@
                           <OutArgument x:TypeArguments="x:String">[statusEmail]</OutArgument>
                         </Assign.To>
                         <Assign.Value>
-                          <InArgument x:TypeArguments="x:String">Enviado</InArgument>
+                          <InArgument x:TypeArguments="x:String">enviado</InArgument>
                         </Assign.Value>
                       </Assign>
                     </Sequence>
@@ -620,7 +620,7 @@
                         </sap:WorkflowViewStateService.ViewState>
                       </ui:SendHotkey>
                     </Sequence>
-                    <Sequence DisplayName="Sequence - Advertence error" sap:VirtualizedContainerService.HintSize="376,289" sap2010:WorkflowViewState.IdRef="Sequence_44">
+                    <Sequence DisplayName="Sequence - Advertence error" sap:VirtualizedContainerService.HintSize="200,66" sap2010:WorkflowViewState.IdRef="Sequence_44">
                       <sap:WorkflowViewStateService.ViewState>
                         <scg:Dictionary x:TypeArguments="x:String, x:Object">
                           <x:Boolean x:Key="IsExpanded">False</x:Boolean>
