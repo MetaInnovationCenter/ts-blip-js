@@ -51,9 +51,9 @@ module.exports = {
                 //Stores orchestrator info in the user object
                 users[current].maestro = {
                     clientId: '8DEv1AMNXczW3y4U15LL3jYf62jK93n5',
-                    userKey: '2YnYIsSRY4TXSVxKXjHIdR8Wsv9CIN6ChP4fb4SfgTYdi',
-                    tenantLogicalName: 'MetaDefaultxi2r298584',
-                    tenantURL: 'metaybbsotc/MetaDefault'
+                    userKey: 'Z8VQl1PmNDYT5fJkFpYjDLE1c1rdZffhjFN2yBxr0MkI4',
+                    tenantLogicalName: 'MetaDefaultaldz298583',
+                    tenantURL: 'metayofvcgb/MetaDefault'
                 }
                 //Gets process info by process name
                 await maestro.getProcessInfo(users[current].maestro, 'SRVC_ResetECC_2_Maki')

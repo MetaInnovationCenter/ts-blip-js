@@ -62,7 +62,7 @@ client.connect()
         switch (userList[userIndex].status) {
             case "Boas Vindas":
                 emfB.SetClient(client) //Seta o cliente para o emf ter acesso
-                emfB.SendMessage(message.from, "Olá!! Seja bem-vindo(a)! Deseja trocar a senha de qual sistema?", 1000)
+                emfB.SendOptions(message.from, "Olá!! Seja bem-vindo(a)! Deseja trocar a senha de qual sistema?", ['SAP ECC', 'S/4 HANA'], 1000)
                 console.log("Switch on case: Boas Vindas")
                 userList[userIndex].status = "Qual sistema?"
                 break;
