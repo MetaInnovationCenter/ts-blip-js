@@ -175,8 +175,9 @@ module.exports = {
                                                                 te enviei sua senha temporária por e-mail,\
                                                                 até a próxima')
                                     //Deletes user from the list
-                                    users.splice(current, 1)
                                     indexModule.spliceUser(users[current].id)
+                                    users.splice(current, 1)
+                                    
                                 }
                                 else if(orchOutputArgs.statusEmail == 'FALTA ESSA FLAG') {
                                     //???
@@ -206,15 +207,15 @@ module.exports = {
                 else if(message.content.toLowerCase() == 'nao' ||
                         message.content.toLowerCase() == 'não') {
                         emfB.SendMessage(users[current].id ,"Certo, te vejo na próxima então")
-                        users.splice(current, 1)
-                        userStatus.splice(current, 1)
+                        //Deletes user from the list
                         indexModule.spliceUser(users[current].id)
+                        users.splice(current, 1) 
                 }
                 break;
             case 'Sucesso':
                 //Deletes user from the list
-                users.splice(current, 1)
                 indexModule.spliceUser(users[current].id)
+                users.splice(current, 1)
                 break;
         }
     }
