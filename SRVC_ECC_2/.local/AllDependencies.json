@@ -823,6 +823,15 @@
           "lib/net452/UiPath.Vision.Core.dll": {},
           "lib/net452/UiPath.Vision.dll": {}
         }
+      },
+      "UiPathTeam.GenerateRandomPassword.Activities/1.0.4": {
+        "type": "package",
+        "compile": {
+          "lib/net452/_._": {}
+        },
+        "runtime": {
+          "lib/net452/UiPathTeam.GenerateRandomPassword.Activities.dll": {}
+        }
       }
     }
   },
@@ -1592,6 +1601,17 @@
         "uipath.vision.2.0.0.nupkg.sha512",
         "uipath.vision.nuspec"
       ]
+    },
+    "UiPathTeam.GenerateRandomPassword.Activities/1.0.4": {
+      "sha512": "wr8sciGWhwJi2Pe0Tkvi4yd7/Wl/Y6X73IjrA5PvqWN5byx/X4gq4cdSDlUWH/aog1K6kt43kNtIt1+e3CtPuA==",
+      "type": "package",
+      "path": "uipathteam.generaterandompassword.activities/1.0.4",
+      "files": [
+        ".nupkg.metadata",
+        "lib/net452/UiPathTeam.GenerateRandomPassword.Activities.dll",
+        "uipathteam.generaterandompassword.activities.1.0.4.nupkg.sha512",
+        "uipathteam.generaterandompassword.activities.nuspec"
+      ]
     }
   },
   "projectFileDependencyGroups": {
@@ -1600,7 +1620,8 @@
       "UiPath.Excel.Activities >= 2.8.0-preview <= 2.8.0-preview",
       "UiPath.Mail.Activities >= 1.8.0-preview <= 1.8.0-preview",
       "UiPath.System.Activities >= 19.12.0-preview <= 19.12.0-preview",
-      "UiPath.UIAutomation.Activities >= 19.12.0-preview <= 19.12.0-preview"
+      "UiPath.UIAutomation.Activities >= 19.12.0-preview <= 19.12.0-preview",
+      "UiPathTeam.GenerateRandomPassword.Activities >= 1.0.4 <= 1.0.4"
     ]
   },
   "packageFolders": {
@@ -1608,11 +1629,11 @@
   },
   "project": {
     "restore": {
-      "projectUniqueName": "SRVC_ResetS4_1",
-      "projectName": "SRVC_ResetS4_1",
-      "projectPath": "C:\\Users\\pedro.fleck\\Documents\\ts-blip-js\\SRVC_ResetS4_1\\.local",
+      "projectUniqueName": "SRVC_ResetECC_2",
+      "projectName": "SRVC_ResetECC_2",
+      "projectPath": "C:\\Users\\pedro.fleck\\Documents\\ts-blip-js\\SRVC_ECC_2\\.local",
       "packagesPath": "C:\\Users\\pedro.fleck\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\pedro.fleck\\Documents\\ts-blip-js\\SRVC_ResetS4_1\\.local"
+      "outputPath": "C:\\Users\\pedro.fleck\\Documents\\ts-blip-js\\SRVC_ECC_2\\.local"
     },
     "frameworks": {
       "net461": {
@@ -1636,6 +1657,11 @@
             "include": "Runtime",
             "target": "Package",
             "version": "[19.12.0-preview, 19.12.0-preview]"
+          },
+          "UiPathTeam.GenerateRandomPassword.Activities": {
+            "include": "Runtime",
+            "target": "Package",
+            "version": "[1.0.4, 1.0.4]"
           }
         }
       }

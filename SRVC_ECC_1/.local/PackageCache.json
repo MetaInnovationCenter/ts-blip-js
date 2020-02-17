@@ -104,6 +104,15 @@
         "C:\\Users\\pedro.fleck\\.nuget\\packages\\uipath.vision/2.0.0\\lib/net452/UiPath.Vision.Tesseract.dll",
         "C:\\Users\\pedro.fleck\\.nuget\\packages\\uipath.vision/2.0.0\\lib/net452/UiPath.Vision.dll"
       ]
+    },
+    {
+      "Package": {
+        "Id": "UiPathTeam.GenerateRandomPassword.Activities",
+        "Version": "1.0.4"
+      },
+      "Assemblies": [
+        "C:\\Users\\pedro.fleck\\.nuget\\packages\\uipathteam.generaterandompassword.activities/1.0.4\\lib/net452/UiPathTeam.GenerateRandomPassword.Activities.dll"
+      ]
     }
   ],
   "Conflicts": [],
@@ -335,6 +344,11 @@
           "Item2": "[2.2.1, )"
         }
       ]
+    },
+    "UiPathTeam.GenerateRandomPassword.Activities": {
+      "Id": "UiPathTeam.GenerateRandomPassword.Activities",
+      "Version": "1.0.4",
+      "Dependencies": []
     }
   }
 }
