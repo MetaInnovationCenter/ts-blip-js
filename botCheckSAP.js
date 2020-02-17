@@ -6,118 +6,159 @@ const maestro = require('./maestro.js')
 
 //Variáveis para controle de multiplos usuários
 let newUserFlag
-let userList = []
+let users = []
 
 module.exports = {
-    start: async (client, userId, message) => {
+    start: async (client, message, sapVersion) => {
         newUserFlag = true
         //Confere se a mensagem atual é de um usuário novo ou um que já está na lista
-        userList.forEach(user => {
+        users.forEach(user => {
             console.log(user)
             //Se o usuário está na lista
             if(user.id == message.from) {
-                console.log("User already on botCheckSAP list");
+                console.log("User already on botCheckSAP list")
                 newUserFlag = false
-                userIndex = userList.indexOf(user)
+                current = users.indexOf(user)
             }
         });
         //Se o usuário não está na lista
         if(newUserFlag == true) {
             console.log("New user added to botCheckSAP list");
-            userList.push(new Object)
-            userIndex = userList.length - 1
-            userList[userIndex].id = message.from
-            userList[userIndex].status = 'Qual login?'
-            userList[userIndex].processStatus = 'confere'
-        }
+            users.push(new Object)
+            current = users.length - 1 //Novo usuário sempre é adicionado no fim do array
 
-        //Acquiring Process Info to start jobs
-        let orchProcessInfo = await maestro.getProcessInfo('SAP.S4HANA_DemoRobots') 
-        //SAP.S4HANA_DemoRobots Leo   SAP_sap
-        //
-        let orchProcessKey = orchProcessInfo.processKey
-        let orchAccessToken = orchProcessInfo.accessToken
-        
-        switch(userList[userIndex].status) {
+            //Dados padrão de um novo usuário
+            users[current].id = message.from
+            users[current].status = 'Qual login?'
+            users[current].processStatus = 'confere'
+            users[current].sapVersion = sapVersion
+
+            //Info do orchestrator do server maçã
+            users[current].maestro = {
+                clientId: '8DEv1AMNXczW3y4U15LL3jYf62jK93n5',
+                userKey: '67sFvQ61tTh8MQQg59rEef2Bcgcw-Lsef2XU4IMwJLhdM',
+                tenantLogicalName: 'InovTeamDefszqw301979',
+                tenantURL: 'inovteam/InovCenter'
+            }
+
+            //Adquire informações específicas de cada processo ECC/HANA
+            if(sapVersion == 'hana') {
+                await maestro.getProcessInfo(users[current].maestro, 'SRVC_ResetS4_2_Mestre')
+                .then((response) => {
+                    users[current].maestro.processKey = response.processKey
+                    users[current].maestro.accessToken = response.accessToken
+                    users[current].maestro.ready = true
+                })
+            }
+            
+            else if(sapVersion == 'ecc') {
+                await maestro.getProcessInfo(users[current].maestro, 'SRVC_ResetECC_2_Mestre')
+                .then((response) => {
+                    users[current].maestro.processKey = response.processKey
+                    users[current].maestro.accessToken = response.accessToken
+                })
+            }
+
+            // if(sapVersion == 'hana') {
+            //     //Stores orchestrator info in the user object
+            //     users[current].maestro = {
+            //         clientId: '8DEv1AMNXczW3y4U15LL3jYf62jK93n5',
+            //         userKey: '2YnYIsSRY4TXSVxKXjHIdR8Wsv9CIN6ChP4fb4SfgTYdi',
+            //         tenantLogicalName: 'MetaDefaultxi2r298584',
+            //         tenantURL: 'metaybbsotc/MetaDefault'
+            //     }
+            //     await maestro.getProcessInfo(users[current].maestro, 'SRVC_ResetS4_2_Leo')
+            //     .then((response) => {
+            //         users[current].maestro.processKey = response.processKey
+            //         users[current].maestro.accessToken = response.accessToken
+            //         users[current].maestro.ready = true
+            //     })
+            // }
+            // else if(sapVersion == 'ecc') {
+            //     //Stores orchestrator info in the user object
+            //     users[current].maestro = {
+            //         clientId: '8DEv1AMNXczW3y4U15LL3jYf62jK93n5',
+            //         userKey: 'Z8VQl1PmNDYT5fJkFpYjDLE1c1rdZffhjFN2yBxr0MkI4',
+            //         tenantLogicalName: 'MetaDefaultaldz298583',
+            //         tenantURL: 'metayofvcgb/MetaDefault'
+            //     }
+            //     //Gets process info by process name
+            //     await maestro.getProcessInfo(users[current].maestro, 'SRVC_ResetECC_2_Maki')
+            //     .then((response) => {
+            //         users[current].maestro.processKey = response.processKey
+            //         users[current].maestro.accessToken = response.accessToken
+            //     })
+            // }
+        }
+    
+        switch(users[current].status) {
             case "Qual login?":
                 console.log("Switch on case: Qual login?")
-                emfB.SendMessage(userId, "Certo, qual o seu login nesse sistema?",1000)
-                userList[userIndex].status = "Aviso Processando"
+                emfB.SendMessage(users[current].id, "Certo, qual o seu login nesse sistema?",1000)
+                users[current].status = "Aviso Processando"
                 break;
             case "Aviso Processando":
-                emfB.SendMessage(userId, "Vou conferir se seu login está correto, " + message.content)
-                userList[userIndex].userLogin = message.content
-                userList[userIndex].status = "Start Job Confere"
-                console.log("Switch on case: Start Job");
+                emfB.SendMessage(users[current].id, "Vou conferir se seu login está correto, " + message.content)
+                users[current].userLogin = message.content
+                users[current].status = "Start Job Confere"
+                console.log("Switch on case: Start Job")
 
-                //Start Job Confere Request
-                orchJobId = await maestro.startJob(orchProcessKey, orchAccessToken, 
-                                                userList[userIndex].userLogin,
-                                                userList[userIndex].processStatus)
+                //Start Job 
+                orchJobId = await maestro.startJob(users[current].maestro, 
+                                                users[current].userLogin,
+                                                users[current].processStatus)
                 console.log('orchJobId: ' + orchJobId)
 
-                let flagProcessStarted = false
-                //Async loop to check output
-                let delayOutput = setInterval(
-                    async function getOutput() {
-                        let orchJobOutput = await maestro.getJobOutput(orchJobId, orchAccessToken)
-                        console.log(orchJobOutput.Info)
+                //Resolves when rpa starts processing
+                await maestro.didProcessStart(users[current].maestro, orchJobId)
+                .then(() => {
+                    emfB.SendMessage(users[current].id, "Estou conferindo")
+                })
 
-                        let orchJobInfo = orchJobOutput.Info
-                        orchJobInfo == null ? console.log("Job Info: Not Started") : console.log("Job Info: " + orchJobInfo)
-                        
-                        if(orchJobInfo == 'Job completed') {
-                            let orchOutputArgs = JSON.parse(orchJobOutput.OutputArguments)
-                            console.log(orchOutputArgs)
-
-                            if(orchOutputArgs.statusLogin == 'inexistente') {
-                                userList[userIndex].status = "Login Errado"
-                                console.log('Esse usuário não existe no sistema, deseja tentar novamente?')
-                                emfB.SendMessage(userId, 'Esse usuário não existe no sistema, deseja tentar novamente?')
-                                clearInterval(delayOutput)
-                            }
-                            else if(orchOutputArgs.statusLogin == 'existe') {
-                                userList[userIndex].status = "Login Existe"
-                                userList[userIndex].codeBlip = orchOutputArgs.codeBlip
-                                userList[userIndex].email = orchOutputArgs.emailOutput
-                                console.log("Login existe")
-                                
-                                emfB.SendMessage(userId, "Certo, seu login foi inserido corretamente.\
-                                                                Te mandei um e-mail com um código de segurança,\
-                                                                pode digitar esse código aqui pra mim?")
-                            }
-                            clearInterval(delayOutput)
-                        }
-                        else if(orchJobInfo == 'Job started processing' && flagProcessStarted == false) {
-                            emfB.SendMessage(userId, "Estou conferindo")
-                            flagProcessStarted = true
-                        }
+                //Resolves when rpa finishes processing
+                await maestro.didProcessFinish(users[current].maestro, orchJobId)
+                .then((outputArguments) => {
+                    if(outputArguments.statusLogin == 'inexistente') {
+                        users[current].status = "Login Errado"
+                        console.log('Esse usuário não existe no sistema, deseja tentar novamente?')
+                        emfB.SendMessage(users[current].id, 'Esse usuário não existe no sistema, deseja tentar novamente?')
                     }
-                    , 4000);
-
+                    else if(outputArguments.statusLogin == 'existe') {
+                        users[current].status = "Login Existe"
+                        users[current].codeBlip = outputArguments.codeBlip
+                        users[current].email = outputArguments.emailOutput
+                        console.log("Login existe")
+                        console.log('Codigo: ' + users[current].codeBlip)
+                        
+                        emfB.SendMessage(users[current].id, "Certo, seu login foi inserido corretamente.\
+                                                        Te mandei um e-mail com um código de segurança,\
+                                                        pode digitar esse código aqui pra mim?")
+                    }
+                    
+                })
                 break;
             case 'Login Existe':
-                if(message.content == userList[userIndex].codeBlip) {
+                if(message.content == users[current].codeBlip) {
                     console.log('Código correto')
-                    emfB.SendMessage(userId, 'Código inserido corretamente,\
+                    emfB.SendMessage(users[current].id, 'Código inserido corretamente,\
                                              coloquei seu pedido de troca de senha na fila')
                     
-                    userList[userIndex].processStatus = 'trocaSenha'
+                    users[current].processStatus = 'trocaSenha'
 
-                    console.log(userList[userIndex].email)
+                    console.log(users[current].email)
 
                     //Start Job Troca Senha Request
-                    orchJobId = await maestro.startJob(orchProcessKey, orchAccessToken, 
-                                                        userList[userIndex].userLogin,
-                                                        userList[userIndex].processStatus,
-                                                        userList[userIndex].email)
+                    orchJobId = await maestro.startJob(users[current].maestro, 
+                                                        users[current].userLogin,
+                                                        users[current].processStatus,
+                                                        users[current].email)
                     console.log('orchJobId: ' + orchJobId)
 
                     let flagProcessStarted = false
                     //Async loop to check output
                     let delayOutput = setInterval(
                         async function getOutput() {
-                            let orchJobOutput = await maestro.getJobOutput(orchJobId, orchAccessToken)
+                            let orchJobOutput = await maestro.getJobOutput(users[current].maestro, orchJobId)
                             console.log(orchJobOutput.Info)
 
                             let orchJobInfo = orchJobOutput.Info
@@ -128,14 +169,15 @@ module.exports = {
                                 console.log(orchOutputArgs)
 
                                 if(orchOutputArgs.statusEmail == 'enviado') {
-                                    userList[userIndex].status = "Sucesso"
+                                    users[current].status = "Sucesso"
                                     console.log('Senha trocada com sucesso :)')
-                                    emfB.SendMessage(userId, 'Senha trocada com sucesso :),\
+                                    emfB.SendMessage(users[current].id, 'Senha trocada com sucesso :),\
                                                                 te enviei sua senha temporária por e-mail,\
                                                                 até a próxima')
                                     //Deletes user from the list
-                                    userList.splice(userIndex, 1)
-                                    indexModule.spliceUser(userList[userIndex].id)
+                                    indexModule.spliceUser(users[current].id)
+                                    users.splice(current, 1)
+                                    
                                 }
                                 else if(orchOutputArgs.statusEmail == 'FALTA ESSA FLAG') {
                                     //???
@@ -143,7 +185,7 @@ module.exports = {
                                 clearInterval(delayOutput)
                             }
                             else if(orchJobInfo == 'Job started processing' && flagProcessStarted == false) {
-                                emfB.SendMessage(userId, "Estou trocando sua senha")
+                                emfB.SendMessage(users[current].id, "Estou trocando sua senha")
                                 flagProcessStarted = true
                             }
                         }
@@ -152,28 +194,28 @@ module.exports = {
                 }
                 else {
                     console.log('Código errado');
-                    emfB.SendMessage(userId, 'Código inserido incorretamente, por favor tente novamente')
+                    emfB.SendMessage(users[current].id, 'Código inserido incorretamente, por favor tente novamente')
                 }
                 break;
             case "Login Errado":
                 console.log("Switch on Status: Login Errado");
                 if(message.content.toLowerCase() == 'sim') {
-                    userList[userIndex].status = "Aviso Processando"
-                    userList[userIndex].processStatus = 'retentativa'
-                    emfB.SendMessage(userId, "Certo, qual o seu login nesse sistema?",1000)
+                    users[current].status = "Aviso Processando"
+                    users[current].processStatus = 'retentativa'
+                    emfB.SendMessage(users[current].id, "Certo, qual o seu login nesse sistema?",1000)
                 }
                 else if(message.content.toLowerCase() == 'nao' ||
                         message.content.toLowerCase() == 'não') {
-                        emfB.SendMessage(userId ,"Certo, te vejo na próxima então")
-                        userList.splice(userIndex, 1)
-                        userStatus.splice(userIndex, 1)
-                        indexModule.spliceUser(userId)
+                        emfB.SendMessage(users[current].id ,"Certo, te vejo na próxima então")
+                        //Deletes user from the list
+                        indexModule.spliceUser(users[current].id)
+                        users.splice(current, 1) 
                 }
                 break;
             case 'Sucesso':
                 //Deletes user from the list
-                userList.splice(userIndex, 1)
-                indexModule.spliceUser(userList[userIndex].id)
+                indexModule.spliceUser(users[current].id)
+                users.splice(current, 1)
                 break;
         }
     }

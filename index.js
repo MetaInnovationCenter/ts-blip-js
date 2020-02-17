@@ -62,7 +62,7 @@ client.connect()
         switch (userList[userIndex].status) {
             case "Boas Vindas":
                 emfB.SetClient(client) //Seta o cliente para o emf ter acesso
-                emfB.SendMessage(message.from, "Olá!! Seja bem-vindo(a)! Deseja trocar a senha de qual sistema?", 1000)
+                emfB.SendOptions(message.from, "Olá!! Seja bem-vindo(a)! Deseja trocar a senha de qual sistema?", ['SAP ECC', 'S/4 HANA'], 1000)
                 console.log("Switch on case: Boas Vindas")
                 userList[userIndex].status = "Qual sistema?"
                 break;
@@ -70,20 +70,24 @@ client.connect()
                 console.log("Switch on case: Qual sistema?")
                 if(message.content.toLowerCase().includes('hana')){
                     //Inicia o outro arquivo
-                    botCheckSAP.start(client, message.from, message)
+                    botCheckSAP.start(client, message, 'hana')
                     userList[userIndex].status = "Bot SAP HANA"
                 }
-                if(message.content.toLowerCase().includes('ecc')){
-                    botSAP.start(client, message.from, message)
+                else if(message.content.toLowerCase().includes('ecc')){
+                    botCheckSAP.start(client, message, 'ecc')
                     userList[userIndex].status = "Bot SAP ECC"
+                }
+                else {
+                    console.log("Nenhum sistema detectado");
+                    emfB.SendMessage(message.from, "Desculpe, não entendi. Posso trocar sua senha nos sistemas SAP S/4 HANA e SAP ECC, qual deles você utiliza?", 1000)
                 }
                 break;
             case "Bot SAP HANA":
                 console.log("Switch on case: Bot SAP HANA")
-                botCheckSAP.start(client, message.from, message)
+                botCheckSAP.start(client, message, 'hana')
                 break;
             case "Bot SAP ECC":
-                botSAP.start(client, message.from, message)
+                botCheckSAP.start(client, message, 'ecc')
                 break;
         }
         console.log("User Input:" + message.content)

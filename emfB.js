@@ -62,9 +62,9 @@ module.exports = {
 
         Client = client
 
-        console.log(FgBlue+"»»»»»»»»»»»»»»»»EMANUEL MASTER FUNCTIONS WATSON«««««««««««««««««««"+Reset)
+        console.log(FgBlue+"»»»»»»»»»»»»»»»»EMANUEL MASTER FUNCTIONS BLIP«««««««««««««««««««"+Reset)
         console.log(FgYellow+"  Info:"+Reset, Bright, "Client Definido", Reset)
-        console.log(FgBlue+"»»»»»»»»»»»»»»»»EMANUEL MASTER FUNCTIONS WATSON«««««««««««««««««««"+Reset)
+        console.log(FgBlue+"»»»»»»»»»»»»»»»»EMANUEL MASTER FUNCTIONS BLIP«««««««««««««««««««"+Reset)
 
     },
 

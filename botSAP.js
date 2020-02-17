@@ -32,7 +32,7 @@ module.exports = {
         }
 
         //Acquiring Process Info to start jobs
-        let orchProcessInfo = await maestro.getProcessInfo('SAP.S4HANA.default_DemoRobots') 
+        let orchProcessInfo = await maestro.getProcessInfo('SAP.sem.conf_sapSemConf') 
         //SAP.S4HANA_DemoRobots Leo confere     SAP_sap Mak Confere
         //
         let orchProcessKey = orchProcessInfo.processKey
