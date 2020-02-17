@@ -27,43 +27,70 @@ module.exports = {
             users.push(new Object)
             current = users.length - 1 //Novo usuário sempre é adicionado no fim do array
 
+            //Dados padrão de um novo usuário
             users[current].id = message.from
             users[current].status = 'Qual login?'
             users[current].processStatus = 'confere'
             users[current].sapVersion = sapVersion
 
+            //Info do orchestrator do server maçã
+            users[current].maestro = {
+                clientId: '8DEv1AMNXczW3y4U15LL3jYf62jK93n5',
+                userKey: '67sFvQ61tTh8MQQg59rEef2Bcgcw-Lsef2XU4IMwJLhdM',
+                tenantLogicalName: 'InovTeamDefszqw301979',
+                tenantURL: 'inovteam/InovCenter'
+            }
+
+            //Adquire informações específicas de cada processo ECC/HANA
             if(sapVersion == 'hana') {
-                //Stores orchestrator info in the user object
-                users[current].maestro = {
-                    clientId: '8DEv1AMNXczW3y4U15LL3jYf62jK93n5',
-                    userKey: '2YnYIsSRY4TXSVxKXjHIdR8Wsv9CIN6ChP4fb4SfgTYdi',
-                    tenantLogicalName: 'MetaDefaultxi2r298584',
-                    tenantURL: 'metaybbsotc/MetaDefault'
-                }
-                await maestro.getProcessInfo(users[current].maestro, 'SRVC_ResetS4_2_Leo')
+                await maestro.getProcessInfo(users[current].maestro, 'SRVC_ResetS4_2_Mestre')
                 .then((response) => {
                     users[current].maestro.processKey = response.processKey
                     users[current].maestro.accessToken = response.accessToken
                     users[current].maestro.ready = true
                 })
             }
+            
             else if(sapVersion == 'ecc') {
-                //Stores orchestrator info in the user object
-                users[current].maestro = {
-                    clientId: '8DEv1AMNXczW3y4U15LL3jYf62jK93n5',
-                    userKey: 'Z8VQl1PmNDYT5fJkFpYjDLE1c1rdZffhjFN2yBxr0MkI4',
-                    tenantLogicalName: 'MetaDefaultaldz298583',
-                    tenantURL: 'metayofvcgb/MetaDefault'
-                }
-                //Gets process info by process name
-                await maestro.getProcessInfo(users[current].maestro, 'SRVC_ResetECC_2_Maki')
+                await maestro.getProcessInfo(users[current].maestro, 'SRVC_ResetECC_2_Mestre')
                 .then((response) => {
                     users[current].maestro.processKey = response.processKey
                     users[current].maestro.accessToken = response.accessToken
                 })
             }
-        }
 
+            // if(sapVersion == 'hana') {
+            //     //Stores orchestrator info in the user object
+            //     users[current].maestro = {
+            //         clientId: '8DEv1AMNXczW3y4U15LL3jYf62jK93n5',
+            //         userKey: '2YnYIsSRY4TXSVxKXjHIdR8Wsv9CIN6ChP4fb4SfgTYdi',
+            //         tenantLogicalName: 'MetaDefaultxi2r298584',
+            //         tenantURL: 'metaybbsotc/MetaDefault'
+            //     }
+            //     await maestro.getProcessInfo(users[current].maestro, 'SRVC_ResetS4_2_Leo')
+            //     .then((response) => {
+            //         users[current].maestro.processKey = response.processKey
+            //         users[current].maestro.accessToken = response.accessToken
+            //         users[current].maestro.ready = true
+            //     })
+            // }
+            // else if(sapVersion == 'ecc') {
+            //     //Stores orchestrator info in the user object
+            //     users[current].maestro = {
+            //         clientId: '8DEv1AMNXczW3y4U15LL3jYf62jK93n5',
+            //         userKey: 'Z8VQl1PmNDYT5fJkFpYjDLE1c1rdZffhjFN2yBxr0MkI4',
+            //         tenantLogicalName: 'MetaDefaultaldz298583',
+            //         tenantURL: 'metayofvcgb/MetaDefault'
+            //     }
+            //     //Gets process info by process name
+            //     await maestro.getProcessInfo(users[current].maestro, 'SRVC_ResetECC_2_Maki')
+            //     .then((response) => {
+            //         users[current].maestro.processKey = response.processKey
+            //         users[current].maestro.accessToken = response.accessToken
+            //     })
+            // }
+        }
+    
         switch(users[current].status) {
             case "Qual login?":
                 console.log("Switch on case: Qual login?")
@@ -76,50 +103,39 @@ module.exports = {
                 users[current].status = "Start Job Confere"
                 console.log("Switch on case: Start Job")
 
-                //Start Job Confere Request
+                //Start Job 
                 orchJobId = await maestro.startJob(users[current].maestro, 
                                                 users[current].userLogin,
                                                 users[current].processStatus)
                 console.log('orchJobId: ' + orchJobId)
 
-                let flagProcessStarted = false
-                //Async loop to check output
-                let delayOutput = setInterval(
-                    async function getOutput() {
-                        let jobOutput = await maestro.getJobOutput(users[current].maestro, orchJobId)
-                        console.log(jobOutput.Info)
+                //Resolves when rpa starts processing
+                await maestro.didProcessStart(users[current].maestro, orchJobId)
+                .then(() => {
+                    emfB.SendMessage(users[current].id, "Estou conferindo")
+                })
 
-                        jobOutput.Info == null ? console.log("Job Info: Not Started") : console.log("Job Info: " + jobOutput.Info)
-                        
-                        if(jobOutput.Info == 'Job completed') {
-                            let outputArgs = JSON.parse(jobOutput.OutputArguments)
-                            console.log(outputArgs)
-
-                            if(outputArgs.statusLogin == 'inexistente') {
-                                users[current].status = "Login Errado"
-                                console.log('Esse usuário não existe no sistema, deseja tentar novamente?')
-                                emfB.SendMessage(users[current].id, 'Esse usuário não existe no sistema, deseja tentar novamente?')
-                                clearInterval(delayOutput)
-                            }
-                            else if(outputArgs.statusLogin == 'existe') {
-                                users[current].status = "Login Existe"
-                                users[current].codeBlip = outputArgs.codeBlip
-                                users[current].email = outputArgs.emailOutput
-                                console.log("Login existe")
-                                
-                                emfB.SendMessage(users[current].id, "Certo, seu login foi inserido corretamente.\
-                                                                Te mandei um e-mail com um código de segurança,\
-                                                                pode digitar esse código aqui pra mim?")
-                            }
-                            clearInterval(delayOutput)
-                        }
-                        else if(jobOutput.Info == 'Job started processing' && flagProcessStarted == false) {
-                            emfB.SendMessage(users[current].id, "Estou conferindo")
-                            flagProcessStarted = true
-                        }
+                //Resolves when rpa finishes processing
+                await maestro.didProcessFinish(users[current].maestro, orchJobId)
+                .then((outputArguments) => {
+                    if(outputArguments.statusLogin == 'inexistente') {
+                        users[current].status = "Login Errado"
+                        console.log('Esse usuário não existe no sistema, deseja tentar novamente?')
+                        emfB.SendMessage(users[current].id, 'Esse usuário não existe no sistema, deseja tentar novamente?')
                     }
-                    , 4000);
-
+                    else if(outputArguments.statusLogin == 'existe') {
+                        users[current].status = "Login Existe"
+                        users[current].codeBlip = outputArguments.codeBlip
+                        users[current].email = outputArguments.emailOutput
+                        console.log("Login existe")
+                        console.log('Codigo: ' + users[current].codeBlip)
+                        
+                        emfB.SendMessage(users[current].id, "Certo, seu login foi inserido corretamente.\
+                                                        Te mandei um e-mail com um código de segurança,\
+                                                        pode digitar esse código aqui pra mim?")
+                    }
+                    
+                })
                 break;
             case 'Login Existe':
                 if(message.content == users[current].codeBlip) {

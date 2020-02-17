@@ -140,26 +140,55 @@ module.exports = {
         
     },
     didProcessStart: async(orch, jobId) => {
-        let flagProcessStarted = false
-        //Async loop to check output
-        let delayOutput = setInterval(
-            async function getOutput() {
-                let axiosGenericHeaders = {
-                    headers: {
-                        'Authorization' : "Bearer " + orch.accessToken,
-                        'X-UIPATH-TenantName' : orch.tenantLogicalName
+        return new Promise((resolve, reject) => {
+            let delayOutput = setInterval(
+                async function getOutput() {
+                    let axiosGenericHeaders = {
+                        headers: {
+                            'Authorization': "Bearer " + orch.accessToken,
+                            'X-UIPATH-TenantName': orch.tenantLogicalName
+                        }
                     }
-                }; 
-        
-                const response = await axios.get('https://platform.uipath.com/' 
-                                                    + orch.tenantURL 
-                                                    +'/odata/Jobs?$filter=Id%20eq%20' 
-                                                    + jobId, axiosGenericHeaders)
-
-                response.Info == null ? console.log("Job Info: Not Started") : console.log("Job Info: " + response.Info)
-                
-                clearInterval(delayOutput)
-            }
-            , 4000);
+                    const response = await axios.get('https://platform.uipath.com/'
+                                                        + orch.tenantURL
+                                                        + '/odata/Jobs?$filter=Id%20eq%20'
+                                                        + jobId, axiosGenericHeaders)
+    
+                    if (response.data.value[0].Info == null) {
+                        console.log("Job Info: Not Started")
+                    }
+                    else {
+                        console.log("job started on maestro")
+                        clearInterval(delayOutput)
+                        resolve('Job Started')
+                    }
+                }
+                , 4000);
+        })
+    },
+    didProcessFinish: async(orch, jobId) => {
+        return new Promise((resolve, reject) => {
+            let delayOutput = setInterval(
+                async function getOutput() {
+                    let axiosGenericHeaders = {
+                        headers: {
+                            'Authorization': "Bearer " + orch.accessToken,
+                            'X-UIPATH-TenantName': orch.tenantLogicalName
+                        }
+                    }
+                    const response = await axios.get('https://platform.uipath.com/'
+                                                        + orch.tenantURL
+                                                        + '/odata/Jobs?$filter=Id%20eq%20'
+                                                        + jobId, axiosGenericHeaders)
+    
+                    if (response.data.value[0].Info == 'Job completed') {
+                        resolve(JSON.parse(response.data.value[0].OutputArguments))
+                    }
+                    else {
+                        console.log(response.data.value[0].Info)
+                    }
+                }
+                , 4000);
+        })
     }
 }
