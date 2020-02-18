@@ -79,7 +79,7 @@ client.connect()
                 }
                 else {
                     console.log("Nenhum sistema detectado");
-                    emfB.SendMessage(message.from, "Desculpe, não entendi. Posso trocar sua senha nos sistemas SAP S/4 HANA e SAP ECC, qual deles você utiliza?", 1000)
+                    emfB.SendOptions(message.from, "Desculpe, não entendi. Posso trocar sua senha nos sistemas SAP S/4 HANA e SAP ECC, qual deles você utiliza?", ['SAP ECC', 'S/4 HANA'], 1000)
                 }
                 break;
             case "Bot SAP HANA":
