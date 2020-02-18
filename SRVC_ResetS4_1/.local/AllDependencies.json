@@ -1604,15 +1604,15 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\leonardo.brum\\.nuget\\packages\\": {}
+    "C:\\Users\\pedro.fleck\\.nuget\\packages\\": {}
   },
   "project": {
     "restore": {
       "projectUniqueName": "SRVC_ResetS4_1",
       "projectName": "SRVC_ResetS4_1",
-      "projectPath": "C:\\Users\\leonardo.brum\\Documents\\UiPath\\SRVC_ResetS4_1\\.local",
-      "packagesPath": "C:\\Users\\leonardo.brum\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\leonardo.brum\\Documents\\UiPath\\SRVC_ResetS4_1\\.local"
+      "projectPath": "C:\\Users\\pedro.fleck\\Documents\\ts-blip-js\\SRVC_ResetS4_1\\.local",
+      "packagesPath": "C:\\Users\\pedro.fleck\\.nuget\\packages\\",
+      "outputPath": "C:\\Users\\pedro.fleck\\Documents\\ts-blip-js\\SRVC_ResetS4_1\\.local"
     },
     "frameworks": {
       "net461": {
