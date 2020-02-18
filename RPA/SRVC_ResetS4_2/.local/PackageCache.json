@@ -1,0 +1,828 @@
+{
+  "Packages": [
+    {
+      "Package": {
+        "Id": "PasswordGenerator.NetStandard",
+        "Version": "1.0.0"
+      },
+      "Assemblies": [
+        "C:\\Users\\pedro.fleck\\.nuget\\packages\\microsoft.win32.primitives/4.0.1\\lib/net46/Microsoft.Win32.Primitives.dll",
+        "C:\\Users\\pedro.fleck\\.nuget\\packages\\passwordgenerator.netstandard/1.0.0\\lib/netstandard1.0/PasswordGenerator.NetStandard.dll",
+        "C:\\Users\\pedro.fleck\\.nuget\\packages\\system.appcontext/4.1.0\\lib/net46/System.AppContext.dll",
+        "C:\\Users\\pedro.fleck\\.nuget\\packages\\system.console/4.0.0\\lib/net46/System.Console.dll",
+        "C:\\Users\\pedro.fleck\\.nuget\\packages\\system.diagnostics.diagnosticsource/4.0.0\\lib/net46/System.Diagnostics.DiagnosticSource.dll",
+        "C:\\Users\\pedro.fleck\\.nuget\\packages\\system.globalization.calendars/4.0.1\\lib/net46/System.Globalization.Calendars.dll",
+        "C:\\Users\\pedro.fleck\\.nuget\\packages\\system.io.compression/4.1.0\\lib/net46/System.IO.Compression.dll",
+        "C:\\Users\\pedro.fleck\\.nuget\\packages\\system.io.compression.zipfile/4.0.1\\lib/net46/System.IO.Compression.ZipFile.dll",
+        "C:\\Users\\pedro.fleck\\.nuget\\packages\\system.io.filesystem/4.0.1\\lib/net46/System.IO.FileSystem.dll",
+        "C:\\Users\\pedro.fleck\\.nuget\\packages\\system.io.filesystem.primitives/4.0.1\\lib/net46/System.IO.FileSystem.Primitives.dll",
+        "C:\\Users\\pedro.fleck\\.nuget\\packages\\system.net.http/4.1.0\\lib/net46/System.Net.Http.dll",
+        "C:\\Users\\pedro.fleck\\.nuget\\packages\\system.net.sockets/4.1.0\\lib/net46/System.Net.Sockets.dll",
+        "C:\\Users\\pedro.fleck\\.nuget\\packages\\system.runtime.interopservices.runtimeinformation/4.0.0\\lib/net45/System.Runtime.InteropServices.RuntimeInformation.dll",
+        "C:\\Users\\pedro.fleck\\.nuget\\packages\\system.security.cryptography.algorithms/4.2.0\\lib/net461/System.Security.Cryptography.Algorithms.dll",
+        "C:\\Users\\pedro.fleck\\.nuget\\packages\\system.security.cryptography.encoding/4.0.0\\lib/net46/System.Security.Cryptography.Encoding.dll",
+        "C:\\Users\\pedro.fleck\\.nuget\\packages\\system.security.cryptography.primitives/4.0.0\\lib/net46/System.Security.Cryptography.Primitives.dll",
+        "C:\\Users\\pedro.fleck\\.nuget\\packages\\system.security.cryptography.x509certificates/4.1.0\\lib/net461/System.Security.Cryptography.X509Certificates.dll"
+      ]
+    },
+    {
+      "Package": {
+        "Id": "UiPath.Excel.Activities",
+        "Version": "2.8.0-preview"
+      },
+      "Assemblies": [
+        "C:\\Users\\pedro.fleck\\.nuget\\packages\\closedxml/0.87.1\\lib/net40/ClosedXML.dll",
+        "C:\\Users\\pedro.fleck\\.nuget\\packages\\csvhelper/2.13.5\\lib/net40-client/CsvHelper.dll",
+        "C:\\Users\\pedro.fleck\\.nuget\\packages\\documentformat.openxml/2.5.0\\lib/DocumentFormat.OpenXml.dll",
+        "C:\\Users\\pedro.fleck\\.nuget\\packages\\microsoft.visualstudio.ole.interop/7.10.6071\\lib/Microsoft.VisualStudio.OLE.Interop.dll",
+        "C:\\Users\\pedro.fleck\\.nuget\\packages\\npoi/2.4.1\\lib/net45/NPOI.OOXML.dll",
+        "C:\\Users\\pedro.fleck\\.nuget\\packages\\npoi/2.4.1\\lib/net45/NPOI.OpenXml4Net.dll",
+        "C:\\Users\\pedro.fleck\\.nuget\\packages\\npoi/2.4.1\\lib/net45/NPOI.OpenXmlFormats.dll",
+        "C:\\Users\\pedro.fleck\\.nuget\\packages\\npoi/2.4.1\\lib/net45/NPOI.dll",
+        "C:\\Users\\pedro.fleck\\.nuget\\packages\\sharpziplib/1.0.0\\lib/net45/ICSharpCode.SharpZipLib.dll",
+        "C:\\Users\\pedro.fleck\\.nuget\\packages\\uipath.excel.activities/2.8.0-preview\\lib/net461/UiPath.Excel.Activities.Design.dll",
+        "C:\\Users\\pedro.fleck\\.nuget\\packages\\uipath.excel.activities/2.8.0-preview\\lib/net461/UiPath.Excel.Activities.dll",
+        "C:\\Users\\pedro.fleck\\.nuget\\packages\\uipath.excel.activities/2.8.0-preview\\lib/net461/UiPath.Excel.dll"
+      ]
+    },
+    {
+      "Package": {
+        "Id": "UiPath.Mail.Activities",
+        "Version": "1.8.0-preview"
+      },
+      "Assemblies": [
+        "C:\\Users\\pedro.fleck\\.nuget\\packages\\bouncycastle/1.8.5\\lib/BouncyCastle.Crypto.dll",
+        "C:\\Users\\pedro.fleck\\.nuget\\packages\\interop.domino.dll/1.0.0\\lib/Interop.Domino.dll",
+        "C:\\Users\\pedro.fleck\\.nuget\\packages\\microsoft.exchange.webservices/2.2.0\\lib/40/Microsoft.Exchange.WebServices.Auth.dll",
+        "C:\\Users\\pedro.fleck\\.nuget\\packages\\microsoft.exchange.webservices/2.2.0\\lib/40/Microsoft.Exchange.WebServices.dll",
+        "C:\\Users\\pedro.fleck\\.nuget\\packages\\system.valuetuple/4.5.0\\lib/net461/System.ValueTuple.dll",
+        "C:\\Users\\pedro.fleck\\.nuget\\packages\\uipath.mail.activities/1.8.0-preview\\lib/net461/MailKit.dll",
+        "C:\\Users\\pedro.fleck\\.nuget\\packages\\uipath.mail.activities/1.8.0-preview\\lib/net461/MimeKit.dll",
+        "C:\\Users\\pedro.fleck\\.nuget\\packages\\uipath.mail.activities/1.8.0-preview\\lib/net461/UiPath.Mail.Activities.Design.dll",
+        "C:\\Users\\pedro.fleck\\.nuget\\packages\\uipath.mail.activities/1.8.0-preview\\lib/net461/UiPath.Mail.Activities.dll",
+        "C:\\Users\\pedro.fleck\\.nuget\\packages\\uipath.mail.activities/1.8.0-preview\\lib/net461/UiPath.Mail.dll"
+      ]
+    },
+    {
+      "Package": {
+        "Id": "UiPath.System.Activities",
+        "Version": "19.12.0-preview"
+      },
+      "Assemblies": [
+        "C:\\Users\\pedro.fleck\\.nuget\\packages\\csvhelper/2.13.5\\lib/net40-client/CsvHelper.dll",
+        "C:\\Users\\pedro.fleck\\.nuget\\packages\\microsoft.aspnet.signalr.client/2.4.0\\lib/net45/Microsoft.AspNet.SignalR.Client.dll",
+        "C:\\Users\\pedro.fleck\\.nuget\\packages\\microsoft.rest.clientruntime/2.3.20\\lib/net461/Microsoft.Rest.ClientRuntime.dll",
+        "C:\\Users\\pedro.fleck\\.nuget\\packages\\newtonsoft.json/11.0.2\\lib/net45/Newtonsoft.Json.dll",
+        "C:\\Users\\pedro.fleck\\.nuget\\packages\\uipath.system.activities/19.12.0-preview\\lib/net461/ActiproSoftware.Docking.Wpf.dll",
+        "C:\\Users\\pedro.fleck\\.nuget\\packages\\uipath.system.activities/19.12.0-preview\\lib/net461/ActiproSoftware.Ribbon.Wpf.dll",
+        "C:\\Users\\pedro.fleck\\.nuget\\packages\\uipath.system.activities/19.12.0-preview\\lib/net461/ActiproSoftware.Shared.Wpf.dll",
+        "C:\\Users\\pedro.fleck\\.nuget\\packages\\uipath.system.activities/19.12.0-preview\\lib/net461/ActiproSoftware.SyntaxEditor.Addons.DotNet.Wpf.dll",
+        "C:\\Users\\pedro.fleck\\.nuget\\packages\\uipath.system.activities/19.12.0-preview\\lib/net461/ActiproSoftware.SyntaxEditor.Wpf.dll",
+        "C:\\Users\\pedro.fleck\\.nuget\\packages\\uipath.system.activities/19.12.0-preview\\lib/net461/ActiproSoftware.Text.Addons.DotNet.Wpf.dll",
+        "C:\\Users\\pedro.fleck\\.nuget\\packages\\uipath.system.activities/19.12.0-preview\\lib/net461/ActiproSoftware.Text.LLParser.Wpf.dll",
+        "C:\\Users\\pedro.fleck\\.nuget\\packages\\uipath.system.activities/19.12.0-preview\\lib/net461/ActiproSoftware.Text.Wpf.dll",
+        "C:\\Users\\pedro.fleck\\.nuget\\packages\\uipath.system.activities/19.12.0-preview\\lib/net461/ActiproSoftware.Wizard.Wpf.dll",
+        "C:\\Users\\pedro.fleck\\.nuget\\packages\\uipath.system.activities/19.12.0-preview\\lib/net461/UiPath.OrchestratorClient.dll",
+        "C:\\Users\\pedro.fleck\\.nuget\\packages\\uipath.system.activities/19.12.0-preview\\lib/net461/UiPath.System.Activities.Design.dll",
+        "C:\\Users\\pedro.fleck\\.nuget\\packages\\uipath.system.activities/19.12.0-preview\\lib/net461/UiPath.System.Activities.dll"
+      ]
+    },
+    {
+      "Package": {
+        "Id": "UiPath.UIAutomation.Activities",
+        "Version": "19.12.0-preview"
+      },
+      "Assemblies": [
+        "C:\\Users\\pedro.fleck\\.nuget\\packages\\avalonedit/5.0.3\\lib/Net40/ICSharpCode.AvalonEdit.dll",
+        "C:\\Users\\pedro.fleck\\.nuget\\packages\\extended.wpf.toolkit/2.8.0\\lib/net40/Xceed.Wpf.AvalonDock.Themes.Aero.dll",
+        "C:\\Users\\pedro.fleck\\.nuget\\packages\\extended.wpf.toolkit/2.8.0\\lib/net40/Xceed.Wpf.AvalonDock.Themes.Metro.dll",
+        "C:\\Users\\pedro.fleck\\.nuget\\packages\\extended.wpf.toolkit/2.8.0\\lib/net40/Xceed.Wpf.AvalonDock.Themes.VS2010.dll",
+        "C:\\Users\\pedro.fleck\\.nuget\\packages\\extended.wpf.toolkit/2.8.0\\lib/net40/Xceed.Wpf.AvalonDock.dll",
+        "C:\\Users\\pedro.fleck\\.nuget\\packages\\extended.wpf.toolkit/2.8.0\\lib/net40/Xceed.Wpf.DataGrid.dll",
+        "C:\\Users\\pedro.fleck\\.nuget\\packages\\extended.wpf.toolkit/2.8.0\\lib/net40/Xceed.Wpf.Toolkit.dll",
+        "C:\\Users\\pedro.fleck\\.nuget\\packages\\humanizer.core/2.4.2\\lib/netstandard2.0/Humanizer.dll",
+        "C:\\Users\\pedro.fleck\\.nuget\\packages\\newtonsoft.json/11.0.2\\lib/net45/Newtonsoft.Json.dll",
+        "C:\\Users\\pedro.fleck\\.nuget\\packages\\uipath/19.12.7284.25613-preview\\lib/UiPath.Interop.dll",
+        "C:\\Users\\pedro.fleck\\.nuget\\packages\\uipath.ocr.contracts/2.3.0-preview\\lib/net45/UiPath.OCR.Contracts.dll",
+        "C:\\Users\\pedro.fleck\\.nuget\\packages\\uipath.uiautomation.activities/19.12.0-preview\\lib/net461/ActiproSoftware.DataGrid.Contrib.Wpf.dll",
+        "C:\\Users\\pedro.fleck\\.nuget\\packages\\uipath.uiautomation.activities/19.12.0-preview\\lib/net461/ActiproSoftware.Docking.Wpf.dll",
+        "C:\\Users\\pedro.fleck\\.nuget\\packages\\uipath.uiautomation.activities/19.12.0-preview\\lib/net461/ActiproSoftware.Editors.Wpf.dll",
+        "C:\\Users\\pedro.fleck\\.nuget\\packages\\uipath.uiautomation.activities/19.12.0-preview\\lib/net461/ActiproSoftware.Ribbon.Wpf.dll",
+        "C:\\Users\\pedro.fleck\\.nuget\\packages\\uipath.uiautomation.activities/19.12.0-preview\\lib/net461/ActiproSoftware.Shared.Wpf.dll",
+        "C:\\Users\\pedro.fleck\\.nuget\\packages\\uipath.uiautomation.activities/19.12.0-preview\\lib/net461/ActiproSoftware.SyntaxEditor.Addons.DotNet.Wpf.dll",
+        "C:\\Users\\pedro.fleck\\.nuget\\packages\\uipath.uiautomation.activities/19.12.0-preview\\lib/net461/ActiproSoftware.SyntaxEditor.Wpf.dll",
+        "C:\\Users\\pedro.fleck\\.nuget\\packages\\uipath.uiautomation.activities/19.12.0-preview\\lib/net461/ActiproSoftware.Text.Addons.DotNet.Wpf.dll",
+        "C:\\Users\\pedro.fleck\\.nuget\\packages\\uipath.uiautomation.activities/19.12.0-preview\\lib/net461/ActiproSoftware.Text.LLParser.Wpf.dll",
+        "C:\\Users\\pedro.fleck\\.nuget\\packages\\uipath.uiautomation.activities/19.12.0-preview\\lib/net461/ActiproSoftware.Text.Wpf.dll",
+        "C:\\Users\\pedro.fleck\\.nuget\\packages\\uipath.uiautomation.activities/19.12.0-preview\\lib/net461/ActiproSoftware.Wizard.Wpf.dll",
+        "C:\\Users\\pedro.fleck\\.nuget\\packages\\uipath.uiautomation.activities/19.12.0-preview\\lib/net461/UiPath.CV.Activities.Design.dll",
+        "C:\\Users\\pedro.fleck\\.nuget\\packages\\uipath.uiautomation.activities/19.12.0-preview\\lib/net461/UiPath.CV.Activities.dll",
+        "C:\\Users\\pedro.fleck\\.nuget\\packages\\uipath.uiautomation.activities/19.12.0-preview\\lib/net461/UiPath.CV.dll",
+        "C:\\Users\\pedro.fleck\\.nuget\\packages\\uipath.uiautomation.activities/19.12.0-preview\\lib/net461/UiPath.UIAutomation.Activities.Design.dll",
+        "C:\\Users\\pedro.fleck\\.nuget\\packages\\uipath.uiautomation.activities/19.12.0-preview\\lib/net461/UiPath.UiAutomation.Activities.dll",
+        "C:\\Users\\pedro.fleck\\.nuget\\packages\\uipath.uiautomation.activities/19.12.0-preview\\lib/net461/UiPath.Wizards.dll",
+        "C:\\Users\\pedro.fleck\\.nuget\\packages\\uipath.vision/2.0.0\\lib/net452/UiPath.Vision.AzureComputerVision.dll",
+        "C:\\Users\\pedro.fleck\\.nuget\\packages\\uipath.vision/2.0.0\\lib/net452/UiPath.Vision.Core.dll",
+        "C:\\Users\\pedro.fleck\\.nuget\\packages\\uipath.vision/2.0.0\\lib/net452/UiPath.Vision.GoogleCloud.dll",
+        "C:\\Users\\pedro.fleck\\.nuget\\packages\\uipath.vision/2.0.0\\lib/net452/UiPath.Vision.Microsoft.dll",
+        "C:\\Users\\pedro.fleck\\.nuget\\packages\\uipath.vision/2.0.0\\lib/net452/UiPath.Vision.MicrosoftCloud.dll",
+        "C:\\Users\\pedro.fleck\\.nuget\\packages\\uipath.vision/2.0.0\\lib/net452/UiPath.Vision.Tesseract.dll",
+        "C:\\Users\\pedro.fleck\\.nuget\\packages\\uipath.vision/2.0.0\\lib/net452/UiPath.Vision.dll"
+      ]
+    },
+    {
+      "Package": {
+        "Id": "UiPathTeam.GenerateRandomPassword.Activities",
+        "Version": "1.0.4"
+      },
+      "Assemblies": [
+        "C:\\Users\\pedro.fleck\\.nuget\\packages\\uipathteam.generaterandompassword.activities/1.0.4\\lib/net452/UiPathTeam.GenerateRandomPassword.Activities.dll"
+      ]
+    }
+  ],
+  "Conflicts": [],
+  "ResolvedDependencies": {
+    "AvalonEdit": {
+      "Id": "AvalonEdit",
+      "Version": "5.0.3",
+      "Dependencies": []
+    },
+    "BouncyCastle": {
+      "Id": "BouncyCastle",
+      "Version": "1.8.5",
+      "Dependencies": []
+    },
+    "ClosedXML": {
+      "Id": "ClosedXML",
+      "Version": "0.87.1",
+      "Dependencies": [
+        {
+          "Item1": "DocumentFormat.OpenXml",
+          "Item2": "[2.5.0, )"
+        }
+      ]
+    },
+    "CsvHelper": {
+      "Id": "CsvHelper",
+      "Version": "2.13.5",
+      "Dependencies": []
+    },
+    "DocumentFormat.OpenXml": {
+      "Id": "DocumentFormat.OpenXml",
+      "Version": "2.5.0",
+      "Dependencies": []
+    },
+    "Extended.Wpf.Toolkit": {
+      "Id": "Extended.Wpf.Toolkit",
+      "Version": "2.8.0",
+      "Dependencies": []
+    },
+    "Humanizer.Core": {
+      "Id": "Humanizer.Core",
+      "Version": "2.4.2",
+      "Dependencies": []
+    },
+    "interop.domino.dll": {
+      "Id": "interop.domino.dll",
+      "Version": "1.0.0",
+      "Dependencies": []
+    },
+    "Microsoft.AspNet.SignalR.Client": {
+      "Id": "Microsoft.AspNet.SignalR.Client",
+      "Version": "2.4.0",
+      "Dependencies": [
+        {
+          "Item1": "Newtonsoft.Json",
+          "Item2": "[6.0.4, )"
+        }
+      ]
+    },
+    "Microsoft.Exchange.WebServices": {
+      "Id": "Microsoft.Exchange.WebServices",
+      "Version": "2.2.0",
+      "Dependencies": []
+    },
+    "Microsoft.NETCore.Platforms": {
+      "Id": "Microsoft.NETCore.Platforms",
+      "Version": "1.0.1",
+      "Dependencies": []
+    },
+    "Microsoft.Rest.ClientRuntime": {
+      "Id": "Microsoft.Rest.ClientRuntime",
+      "Version": "2.3.20",
+      "Dependencies": [
+        {
+          "Item1": "Newtonsoft.Json",
+          "Item2": "[10.0.3, )"
+        }
+      ]
+    },
+    "Microsoft.VisualStudio.OLE.Interop": {
+      "Id": "Microsoft.VisualStudio.OLE.Interop",
+      "Version": "7.10.6071",
+      "Dependencies": []
+    },
+    "Microsoft.Win32.Primitives": {
+      "Id": "Microsoft.Win32.Primitives",
+      "Version": "4.0.1",
+      "Dependencies": []
+    },
+    "NETStandard.Library": {
+      "Id": "NETStandard.Library",
+      "Version": "1.6.0",
+      "Dependencies": [
+        {
+          "Item1": "Microsoft.NETCore.Platforms",
+          "Item2": "[1.0.1, )"
+        },
+        {
+          "Item1": "Microsoft.Win32.Primitives",
+          "Item2": "[4.0.1, )"
+        },
+        {
+          "Item1": "System.AppContext",
+          "Item2": "[4.1.0, )"
+        },
+        {
+          "Item1": "System.Collections",
+          "Item2": "[4.0.11, )"
+        },
+        {
+          "Item1": "System.Collections.Concurrent",
+          "Item2": "[4.0.12, )"
+        },
+        {
+          "Item1": "System.Console",
+          "Item2": "[4.0.0, )"
+        },
+        {
+          "Item1": "System.Diagnostics.Debug",
+          "Item2": "[4.0.11, )"
+        },
+        {
+          "Item1": "System.Diagnostics.Tools",
+          "Item2": "[4.0.1, )"
+        },
+        {
+          "Item1": "System.Diagnostics.Tracing",
+          "Item2": "[4.1.0, )"
+        },
+        {
+          "Item1": "System.Globalization",
+          "Item2": "[4.0.11, )"
+        },
+        {
+          "Item1": "System.Globalization.Calendars",
+          "Item2": "[4.0.1, )"
+        },
+        {
+          "Item1": "System.IO",
+          "Item2": "[4.1.0, )"
+        },
+        {
+          "Item1": "System.IO.Compression",
+          "Item2": "[4.1.0, )"
+        },
+        {
+          "Item1": "System.IO.Compression.ZipFile",
+          "Item2": "[4.0.1, )"
+        },
+        {
+          "Item1": "System.IO.FileSystem",
+          "Item2": "[4.0.1, )"
+        },
+        {
+          "Item1": "System.IO.FileSystem.Primitives",
+          "Item2": "[4.0.1, )"
+        },
+        {
+          "Item1": "System.Linq",
+          "Item2": "[4.1.0, )"
+        },
+        {
+          "Item1": "System.Linq.Expressions",
+          "Item2": "[4.1.0, )"
+        },
+        {
+          "Item1": "System.Net.Http",
+          "Item2": "[4.1.0, )"
+        },
+        {
+          "Item1": "System.Net.Primitives",
+          "Item2": "[4.0.11, )"
+        },
+        {
+          "Item1": "System.Net.Sockets",
+          "Item2": "[4.1.0, )"
+        },
+        {
+          "Item1": "System.ObjectModel",
+          "Item2": "[4.0.12, )"
+        },
+        {
+          "Item1": "System.Reflection",
+          "Item2": "[4.1.0, )"
+        },
+        {
+          "Item1": "System.Reflection.Extensions",
+          "Item2": "[4.0.1, )"
+        },
+        {
+          "Item1": "System.Reflection.Primitives",
+          "Item2": "[4.0.1, )"
+        },
+        {
+          "Item1": "System.Resources.ResourceManager",
+          "Item2": "[4.0.1, )"
+        },
+        {
+          "Item1": "System.Runtime",
+          "Item2": "[4.1.0, )"
+        },
+        {
+          "Item1": "System.Runtime.Extensions",
+          "Item2": "[4.1.0, )"
+        },
+        {
+          "Item1": "System.Runtime.Handles",
+          "Item2": "[4.0.1, )"
+        },
+        {
+          "Item1": "System.Runtime.InteropServices",
+          "Item2": "[4.1.0, )"
+        },
+        {
+          "Item1": "System.Runtime.InteropServices.RuntimeInformation",
+          "Item2": "[4.0.0, )"
+        },
+        {
+          "Item1": "System.Runtime.Numerics",
+          "Item2": "[4.0.1, )"
+        },
+        {
+          "Item1": "System.Security.Cryptography.Algorithms",
+          "Item2": "[4.2.0, )"
+        },
+        {
+          "Item1": "System.Security.Cryptography.Encoding",
+          "Item2": "[4.0.0, )"
+        },
+        {
+          "Item1": "System.Security.Cryptography.Primitives",
+          "Item2": "[4.0.0, )"
+        },
+        {
+          "Item1": "System.Security.Cryptography.X509Certificates",
+          "Item2": "[4.1.0, )"
+        },
+        {
+          "Item1": "System.Text.Encoding",
+          "Item2": "[4.0.11, )"
+        },
+        {
+          "Item1": "System.Text.Encoding.Extensions",
+          "Item2": "[4.0.11, )"
+        },
+        {
+          "Item1": "System.Text.RegularExpressions",
+          "Item2": "[4.1.0, )"
+        },
+        {
+          "Item1": "System.Threading",
+          "Item2": "[4.0.11, )"
+        },
+        {
+          "Item1": "System.Threading.Tasks",
+          "Item2": "[4.0.11, )"
+        },
+        {
+          "Item1": "System.Threading.Timer",
+          "Item2": "[4.0.1, )"
+        },
+        {
+          "Item1": "System.Xml.ReaderWriter",
+          "Item2": "[4.0.11, )"
+        },
+        {
+          "Item1": "System.Xml.XDocument",
+          "Item2": "[4.0.11, )"
+        }
+      ]
+    },
+    "Newtonsoft.Json": {
+      "Id": "Newtonsoft.Json",
+      "Version": "11.0.2",
+      "Dependencies": []
+    },
+    "NPOI": {
+      "Id": "NPOI",
+      "Version": "2.4.1",
+      "Dependencies": [
+        {
+          "Item1": "SharpZipLib",
+          "Item2": "[1.0.0, )"
+        }
+      ]
+    },
+    "PasswordGenerator.NetStandard": {
+      "Id": "PasswordGenerator.NetStandard",
+      "Version": "1.0.0",
+      "Dependencies": [
+        {
+          "Item1": "NETStandard.Library",
+          "Item2": "[1.0.0, )"
+        }
+      ]
+    },
+    "SharpZipLib": {
+      "Id": "SharpZipLib",
+      "Version": "1.0.0",
+      "Dependencies": []
+    },
+    "System.AppContext": {
+      "Id": "System.AppContext",
+      "Version": "4.1.0",
+      "Dependencies": []
+    },
+    "System.Collections": {
+      "Id": "System.Collections",
+      "Version": "4.0.11",
+      "Dependencies": []
+    },
+    "System.Collections.Concurrent": {
+      "Id": "System.Collections.Concurrent",
+      "Version": "4.0.12",
+      "Dependencies": []
+    },
+    "System.Console": {
+      "Id": "System.Console",
+      "Version": "4.0.0",
+      "Dependencies": []
+    },
+    "System.Diagnostics.Debug": {
+      "Id": "System.Diagnostics.Debug",
+      "Version": "4.0.11",
+      "Dependencies": []
+    },
+    "System.Diagnostics.DiagnosticSource": {
+      "Id": "System.Diagnostics.DiagnosticSource",
+      "Version": "4.0.0",
+      "Dependencies": []
+    },
+    "System.Diagnostics.Tools": {
+      "Id": "System.Diagnostics.Tools",
+      "Version": "4.0.1",
+      "Dependencies": []
+    },
+    "System.Diagnostics.Tracing": {
+      "Id": "System.Diagnostics.Tracing",
+      "Version": "4.1.0",
+      "Dependencies": []
+    },
+    "System.Globalization": {
+      "Id": "System.Globalization",
+      "Version": "4.0.11",
+      "Dependencies": []
+    },
+    "System.Globalization.Calendars": {
+      "Id": "System.Globalization.Calendars",
+      "Version": "4.0.1",
+      "Dependencies": []
+    },
+    "System.IO": {
+      "Id": "System.IO",
+      "Version": "4.1.0",
+      "Dependencies": []
+    },
+    "System.IO.Compression": {
+      "Id": "System.IO.Compression",
+      "Version": "4.1.0",
+      "Dependencies": []
+    },
+    "System.IO.Compression.ZipFile": {
+      "Id": "System.IO.Compression.ZipFile",
+      "Version": "4.0.1",
+      "Dependencies": []
+    },
+    "System.IO.FileSystem": {
+      "Id": "System.IO.FileSystem",
+      "Version": "4.0.1",
+      "Dependencies": [
+        {
+          "Item1": "System.IO.FileSystem.Primitives",
+          "Item2": "[4.0.1, )"
+        }
+      ]
+    },
+    "System.IO.FileSystem.Primitives": {
+      "Id": "System.IO.FileSystem.Primitives",
+      "Version": "4.0.1",
+      "Dependencies": []
+    },
+    "System.Linq": {
+      "Id": "System.Linq",
+      "Version": "4.1.0",
+      "Dependencies": []
+    },
+    "System.Linq.Expressions": {
+      "Id": "System.Linq.Expressions",
+      "Version": "4.1.0",
+      "Dependencies": []
+    },
+    "System.Net.Http": {
+      "Id": "System.Net.Http",
+      "Version": "4.1.0",
+      "Dependencies": [
+        {
+          "Item1": "Microsoft.Win32.Primitives",
+          "Item2": "[4.0.1, )"
+        },
+        {
+          "Item1": "System.Diagnostics.DiagnosticSource",
+          "Item2": "[4.0.0, )"
+        },
+        {
+          "Item1": "System.Security.Cryptography.X509Certificates",
+          "Item2": "[4.1.0, )"
+        }
+      ]
+    },
+    "System.Net.Primitives": {
+      "Id": "System.Net.Primitives",
+      "Version": "4.0.11",
+      "Dependencies": []
+    },
+    "System.Net.Sockets": {
+      "Id": "System.Net.Sockets",
+      "Version": "4.1.0",
+      "Dependencies": []
+    },
+    "System.ObjectModel": {
+      "Id": "System.ObjectModel",
+      "Version": "4.0.12",
+      "Dependencies": []
+    },
+    "System.Reflection": {
+      "Id": "System.Reflection",
+      "Version": "4.1.0",
+      "Dependencies": []
+    },
+    "System.Reflection.Extensions": {
+      "Id": "System.Reflection.Extensions",
+      "Version": "4.0.1",
+      "Dependencies": []
+    },
+    "System.Reflection.Primitives": {
+      "Id": "System.Reflection.Primitives",
+      "Version": "4.0.1",
+      "Dependencies": []
+    },
+    "System.Resources.ResourceManager": {
+      "Id": "System.Resources.ResourceManager",
+      "Version": "4.0.1",
+      "Dependencies": []
+    },
+    "System.Runtime": {
+      "Id": "System.Runtime",
+      "Version": "4.1.0",
+      "Dependencies": []
+    },
+    "System.Runtime.Extensions": {
+      "Id": "System.Runtime.Extensions",
+      "Version": "4.1.0",
+      "Dependencies": []
+    },
+    "System.Runtime.Handles": {
+      "Id": "System.Runtime.Handles",
+      "Version": "4.0.1",
+      "Dependencies": []
+    },
+    "System.Runtime.InteropServices": {
+      "Id": "System.Runtime.InteropServices",
+      "Version": "4.1.0",
+      "Dependencies": []
+    },
+    "System.Runtime.InteropServices.RuntimeInformation": {
+      "Id": "System.Runtime.InteropServices.RuntimeInformation",
+      "Version": "4.0.0",
+      "Dependencies": []
+    },
+    "System.Runtime.Numerics": {
+      "Id": "System.Runtime.Numerics",
+      "Version": "4.0.1",
+      "Dependencies": []
+    },
+    "System.Security.Cryptography.Algorithms": {
+      "Id": "System.Security.Cryptography.Algorithms",
+      "Version": "4.2.0",
+      "Dependencies": [
+        {
+          "Item1": "System.Security.Cryptography.Primitives",
+          "Item2": "[4.0.0, )"
+        }
+      ]
+    },
+    "System.Security.Cryptography.Encoding": {
+      "Id": "System.Security.Cryptography.Encoding",
+      "Version": "4.0.0",
+      "Dependencies": []
+    },
+    "System.Security.Cryptography.Primitives": {
+      "Id": "System.Security.Cryptography.Primitives",
+      "Version": "4.0.0",
+      "Dependencies": []
+    },
+    "System.Security.Cryptography.X509Certificates": {
+      "Id": "System.Security.Cryptography.X509Certificates",
+      "Version": "4.1.0",
+      "Dependencies": [
+        {
+          "Item1": "System.Security.Cryptography.Algorithms",
+          "Item2": "[4.2.0, )"
+        },
+        {
+          "Item1": "System.Security.Cryptography.Encoding",
+          "Item2": "[4.0.0, )"
+        }
+      ]
+    },
+    "System.Text.Encoding": {
+      "Id": "System.Text.Encoding",
+      "Version": "4.0.11",
+      "Dependencies": []
+    },
+    "System.Text.Encoding.Extensions": {
+      "Id": "System.Text.Encoding.Extensions",
+      "Version": "4.0.11",
+      "Dependencies": []
+    },
+    "System.Text.RegularExpressions": {
+      "Id": "System.Text.RegularExpressions",
+      "Version": "4.1.0",
+      "Dependencies": []
+    },
+    "System.Threading": {
+      "Id": "System.Threading",
+      "Version": "4.0.11",
+      "Dependencies": []
+    },
+    "System.Threading.Tasks": {
+      "Id": "System.Threading.Tasks",
+      "Version": "4.0.11",
+      "Dependencies": []
+    },
+    "System.Threading.Timer": {
+      "Id": "System.Threading.Timer",
+      "Version": "4.0.1",
+      "Dependencies": []
+    },
+    "System.ValueTuple": {
+      "Id": "System.ValueTuple",
+      "Version": "4.5.0",
+      "Dependencies": []
+    },
+    "System.Xml.ReaderWriter": {
+      "Id": "System.Xml.ReaderWriter",
+      "Version": "4.0.11",
+      "Dependencies": []
+    },
+    "System.Xml.XDocument": {
+      "Id": "System.Xml.XDocument",
+      "Version": "4.0.11",
+      "Dependencies": []
+    },
+    "UiPath": {
+      "Id": "UiPath",
+      "Version": "19.12.7284.25613-preview",
+      "Dependencies": []
+    },
+    "UiPath.Excel.Activities": {
+      "Id": "UiPath.Excel.Activities",
+      "Version": "2.8.0-preview",
+      "Dependencies": [
+        {
+          "Item1": "ClosedXML",
+          "Item2": "[0.87.1, )"
+        },
+        {
+          "Item1": "CsvHelper",
+          "Item2": "[2.13.5, )"
+        },
+        {
+          "Item1": "DocumentFormat.OpenXml",
+          "Item2": "[2.5.0, )"
+        },
+        {
+          "Item1": "Microsoft.VisualStudio.OLE.Interop",
+          "Item2": "[7.10.6071, )"
+        },
+        {
+          "Item1": "NPOI",
+          "Item2": "[2.4.1, )"
+        },
+        {
+          "Item1": "SharpZipLib",
+          "Item2": "[1.0.0, )"
+        }
+      ]
+    },
+    "UiPath.Mail.Activities": {
+      "Id": "UiPath.Mail.Activities",
+      "Version": "1.8.0-preview",
+      "Dependencies": [
+        {
+          "Item1": "System.ValueTuple",
+          "Item2": "[4.5.0, )"
+        },
+        {
+          "Item1": "Microsoft.Exchange.WebServices",
+          "Item2": "[2.2.0, )"
+        },
+        {
+          "Item1": "BouncyCastle",
+          "Item2": "[1.8.5, )"
+        },
+        {
+          "Item1": "interop.domino.dll",
+          "Item2": "[1.0.0, )"
+        }
+      ]
+    },
+    "UiPath.OCR.Contracts": {
+      "Id": "UiPath.OCR.Contracts",
+      "Version": "2.3.0-preview",
+      "Dependencies": []
+    },
+    "UiPath.System.Activities": {
+      "Id": "UiPath.System.Activities",
+      "Version": "19.12.0-preview",
+      "Dependencies": [
+        {
+          "Item1": "CsvHelper",
+          "Item2": "[2.13.5, )"
+        },
+        {
+          "Item1": "Microsoft.AspNet.SignalR.Client",
+          "Item2": "[2.4.0, )"
+        },
+        {
+          "Item1": "Microsoft.Rest.ClientRuntime",
+          "Item2": "[2.3.20, )"
+        },
+        {
+          "Item1": "Newtonsoft.Json",
+          "Item2": "[11.0.2, )"
+        }
+      ]
+    },
+    "UiPath.UIAutomation.Activities": {
+      "Id": "UiPath.UIAutomation.Activities",
+      "Version": "19.12.0-preview",
+      "Dependencies": [
+        {
+          "Item1": "UiPath",
+          "Item2": "[19.12.7284.25613-preview, )"
+        },
+        {
+          "Item1": "UiPath.Vision",
+          "Item2": "[2.0.0, )"
+        },
+        {
+          "Item1": "UiPath.OCR.Contracts",
+          "Item2": "[2.3.0-preview, )"
+        },
+        {
+          "Item1": "AvalonEdit",
+          "Item2": "[5.0.3, )"
+        },
+        {
+          "Item1": "Extended.Wpf.Toolkit",
+          "Item2": "[2.8.0, )"
+        },
+        {
+          "Item1": "Humanizer.Core",
+          "Item2": "[2.4.2, )"
+        },
+        {
+          "Item1": "Newtonsoft.Json",
+          "Item2": "[11.0.2, )"
+        }
+      ]
+    },
+    "UiPath.Vision": {
+      "Id": "UiPath.Vision",
+      "Version": "2.0.0",
+      "Dependencies": [
+        {
+          "Item1": "UiPath.OCR.Contracts",
+          "Item2": "[2.2.1, )"
+        }
+      ]
+    },
+    "UiPathTeam.GenerateRandomPassword.Activities": {
+      "Id": "UiPathTeam.GenerateRandomPassword.Activities",
+      "Version": "1.0.4",
+      "Dependencies": []
+    }
+  }
+}
