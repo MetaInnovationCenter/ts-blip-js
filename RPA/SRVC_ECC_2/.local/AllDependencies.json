@@ -870,7 +870,6 @@
       "path": "closedxml/0.87.1",
       "files": [
         ".nupkg.metadata",
-        ".signature.p7s",
         "closedxml.0.87.1.nupkg.sha512",
         "closedxml.nuspec",
         "lib/net35/ClosedXML.dll",
@@ -910,7 +909,6 @@
       "path": "documentformat.openxml/2.5.0",
       "files": [
         ".nupkg.metadata",
-        ".signature.p7s",
         "documentformat.openxml.2.5.0.nupkg.sha512",
         "documentformat.openxml.nuspec",
         "lib/DocumentFormat.OpenXml.dll"
@@ -968,7 +966,6 @@
       "path": "interop.domino.dll/1.0.0",
       "files": [
         ".nupkg.metadata",
-        ".signature.p7s",
         "interop.domino.dll.1.0.0.nupkg.sha512",
         "interop.domino.dll.nuspec",
         "lib/Interop.Domino.dll"
@@ -1046,7 +1043,6 @@
       "path": "microsoft.visualstudio.ole.interop/7.10.6071",
       "files": [
         ".nupkg.metadata",
-        ".signature.p7s",
         "lib/Microsoft.VisualStudio.OLE.Interop.dll",
         "lib/Microsoft.VisualStudio.OLE.Interop.xml",
         "microsoft.visualstudio.ole.interop.7.10.6071.nupkg.sha512",
@@ -1059,7 +1055,6 @@
       "path": "newtonsoft.json/11.0.2",
       "files": [
         ".nupkg.metadata",
-        ".signature.p7s",
         "LICENSE.md",
         "lib/net20/Newtonsoft.Json.dll",
         "lib/net20/Newtonsoft.Json.xml",
