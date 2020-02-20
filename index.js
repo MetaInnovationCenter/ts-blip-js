@@ -62,31 +62,55 @@ client.connect()
         switch (userList[userIndex].status) {
             case "Boas Vindas":
                 emfB.SetClient(client) //Seta o cliente para o emf ter acesso
-                emfB.SendOptions(message.from, "Olá!! Seja bem-vindo(a)! Deseja trocar a senha de qual sistema?", ['SAP ECC', 'S/4 HANA'], 1000)
+                emfB.SendOptions(message.from, "Olá!! Seja bem-vindo(a)! Deseja trocar a senha de qual sistema?", ['SAP ECC', 'S/4 HANA'])
                 console.log("Switch on case: Boas Vindas")
                 userList[userIndex].status = "Qual sistema?"
                 break;
+
             case "Qual sistema?":
                 console.log("Switch on case: Qual sistema?")
-                if(message.content.toLowerCase().includes('hana')){
+                if(message.content.toLowerCase().includes('ecc1')) {
+                    botSAP.start(client, message, 'ecc')
+                    userList[userIndex].status = "Bot SAP ECC 1"
+                }
+                else if(message.content.toLowerCase().includes('hana1')) {
+                    botSAP.start(client, message, 'hana')
+                    userList[userIndex].status = "Bot SAP HANA 1"
+                }
+                else if(message.content.toLowerCase().includes('hana')){
                     //Inicia o outro arquivo
                     botCheckSAP.start(client, message, 'hana')
-                    userList[userIndex].status = "Bot SAP HANA"
+                    userList[userIndex].status = "Bot SAP HANA 2"
                 }
                 else if(message.content.toLowerCase().includes('ecc')){
                     botCheckSAP.start(client, message, 'ecc')
-                    userList[userIndex].status = "Bot SAP ECC"
+                    userList[userIndex].status = "Bot SAP ECC 2"
                 }
+                // else if(message.content.toLowerCase().includes('ecc1')) {
+                //     botSAP.start(client, message, 'ecc')
+                //     userList[userIndex].status = "Bot SAP ECC 1"
+                // }
+                // else if(message.content.toLowerCase().includes('hana1')) {
+                //     botSAP.start(client, message, 'hana')
+                //     userList[userIndex].status = "Bot SAP HANA 1"
+                // }
+
                 else {
                     console.log("Nenhum sistema detectado");
-                    emfB.SendOptions(message.from, "Desculpe, não entendi. Posso trocar sua senha nos sistemas SAP S/4 HANA e SAP ECC, qual deles você utiliza?", ['SAP ECC', 'S/4 HANA'], 1000)
+                    emfB.SendOptions(message.from, "Desculpe, não entendi. Posso trocar sua senha nos sistemas SAP S/4 HANA e SAP ECC, qual deles você utiliza?", ['SAP ECC', 'S/4 HANA'], 2000)
                 }
                 break;
-            case "Bot SAP HANA":
-                console.log("Switch on case: Bot SAP HANA")
+
+            case "Bot SAP HANA 1":
+                botSAP.start(client, message, 'hana')
+                break;
+            case "Bot SAP HANA 2":
                 botCheckSAP.start(client, message, 'hana')
                 break;
-            case "Bot SAP ECC":
+            case "Bot SAP ECC 1":
+                botSAP.start(client, message, 'ecc')
+                break;
+            case "Bot SAP ECC 2":
                 botCheckSAP.start(client, message, 'ecc')
                 break;
         }

@@ -1,78 +1,63 @@
 const axios = require('axios')
 const emfB = require('./emfB.js')
 
-// //Orchestrator data Léo
-// let orch.clientID = '8DEv1AMNXczW3y4U15LL3jYf62jK93n5'
-// let orch.userKey = '2YnYIsSRY4TXSVxKXjHIdR8Wsv9CIN6ChP4fb4SfgTYdi'
-// let orch.tenantLogicalName = 'MetaDefaultxi2r298584'
-// let orch.tenantURL = 'metaybbsotc/MetaDefault'
-
-// //Orchestrator data Mak
-// let orchclientId = '8DEv1AMNXczW3y4U15LL3jYf62jK93n5'
-// let orchuserKey = 'Z8VQl1PmNDYT5fJkFpYjDLE1c1rdZffhjFN2yBxr0MkI4'
-// let orchtenantLogicalName = 'MetaDefaultaldz298583'
-// let orchTenantURL = 'metayofvcgb/MetaDefault'
-
-// //Orchestrator data Nicolas
-// let orchclientId = '8DEv1AMNXczW3y4U15LL3jYf62jK93n5'
-// let orchuserKey = '8ZQ2vjK1vMnfqVD3HwLsJdp_xbovxwFOVlQmftjmkpE7r'
-// let orchtenantLogicalName = 'MetaInnovatj65c298574'
-// let orchTenantURL = 'metainnovationt/MetaInnovationTeamDefault'
-// let orchProcessName = 'Desafio.Blip.RPA'
-
 module.exports = {
     getProcessInfo: async (orch, processName) => {
-        let processKey
-        let accessToken
-        //console.log(orch);
+        return new Promise(async (resolve, reject) => {
+            let processKey
+            let accessToken
+            //console.log(orch);
 
-        //Authentication Body and Headers
-        let axiosAuthBody = {
-            grant_type: "refresh_token",
-            client_id: orch.clientId,
-            refresh_token: orch.userKey
-        };
-        let axiosAuthHeaders = {
-            headers: {
-                'Content-Type' : 'application/json',
-                'X-UIPATH-TenantName' : orch.tenantLogicalName
-            }
-        };
+            //Authentication Body and Headers
+            let axiosAuthBody = {
+                grant_type: "refresh_token",
+                client_id: orch.clientId,
+                refresh_token: orch.userKey
+            };
+            let axiosAuthHeaders = {
+                headers: {
+                    'Content-Type' : 'application/json',
+                    'X-UIPATH-TenantName' : orch.tenantLogicalName
+                }
+            };
 
-        //Authentication Request
-        await axios.post('https://account.uipath.com/oauth/token', axiosAuthBody, axiosAuthHeaders)
-        .then(function (response) {
-            console.log(emfB.Color('verde') + "Auth Sucessful" + emfB.Color('reset'))
-            accessToken = response.data.access_token;
+            //Authentication Request
+            await axios.post('https://account.uipath.com/oauth/token', axiosAuthBody, axiosAuthHeaders)
+            .then(function (response) {
+                console.log(emfB.Color('verde') + "Auth Sucessful" + emfB.Color('reset'))
+                accessToken = response.data.access_token;
+            })
+            .catch(function(err){
+                console.log(emfB.Color('vermelho') + 'Erro na autenticação:' + err)
+                reject(error)
+            });
+            //End Auth Request
+
+            let axiosGenericHeaders = {
+                headers: {
+                    'Authorization' : "Bearer " + accessToken,
+                    'X-UIPATH-TenantName' : orch.tenantLogicalName
+                }
+            }; 
+
+            //Get Releases Request
+            await axios.get('https://platform.uipath.com/' + orch.tenantURL +'/odata/Releases?$filter=%20Name%20eq%20%27' + processName + '%27', axiosGenericHeaders) //?$filter=Id%20eq%20' + orch.ProcessId
+            .then(function(response) {
+                //console.log(response.data)
+                processKey = response.data.value[0].Key
+                console.log(emfB.Color('verde') + "Get Releases Request " + processName  + " Successful" + emfB.Color('reset'))
+            })
+            .catch(function(error) {
+                console.log(emfB.Color('vermelho') + 'Erro em Get Releases:' + error + emfB.Color('reset'))
+                reject(error)
+            });
+            //End Get Releases Request
+
+            resolve({
+                processKey: processKey,
+                accessToken: accessToken
+            }) 
         })
-        .catch(function(err){
-            console.log(emfB.Color('vermelho') + 'Erro na autenticação:' + err)
-        });
-        //End Auth Request
-
-        let axiosGenericHeaders = {
-            headers: {
-                'Authorization' : "Bearer " + accessToken,
-                'X-UIPATH-TenantName' : orch.tenantLogicalName
-            }
-        }; 
-
-        //Get Releases Request
-        await axios.get('https://platform.uipath.com/' + orch.tenantURL +'/odata/Releases?$filter=%20Name%20eq%20%27' + processName + '%27', axiosGenericHeaders) //?$filter=Id%20eq%20' + orch.ProcessId
-        .then(function(response) {
-            //console.log(response.data)
-            processKey = response.data.value[0].Key
-            console.log(emfB.Color('verde') + "Get Releases Request " + processName  + " Successful" + emfB.Color('reset'))
-        })
-        .catch(function(error) {
-            console.log(emfB.Color('vermelho') + 'Erro em Get Releases:' + error + emfB.Color('reset'))
-        });
-        //End Get Releases Request
-
-        return {
-            processKey: processKey,
-            accessToken: accessToken
-        }
     },
     startJob: async(orch, userLogin, processStatus, userEmail) => {
         //Start Job Request
@@ -163,7 +148,7 @@ module.exports = {
                         resolve('Job Started')
                     }
                 }
-                , 4000);
+                , 1000);
         })
     },
     didProcessFinish: async(orch, jobId) => {
@@ -184,11 +169,14 @@ module.exports = {
                     if (response.data.value[0].Info == 'Job completed') {
                         resolve(JSON.parse(response.data.value[0].OutputArguments))
                     }
+                    else if(response.data.value[0].Info.toLowerCase().includes('exception')) {
+                        reject(response.data.value[0].Info)
+                    }
                     else {
                         console.log(response.data.value[0].Info)
                     }
                 }
-                , 4000);
+                , 1000);
         })
     }
 }

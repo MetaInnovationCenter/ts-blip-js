@@ -62,11 +62,11 @@ module.exports = {
     
         switch(users[current].status) {
             case "Adquirindo Login":
-                emfB.SendMessage(users[current].id, "Certo, qual o seu login nesse sistema?",1000)
+                emfB.SendMessage(users[current].id, "Certo, qual o seu login nesse sistema?", 2000)
                 users[current].status = "Conferindo Login"
                 break;
             case "Conferindo Login":
-                emfB.SendMessage(users[current].id, "Vou conferir se seu login está correto, " + message.content)
+                emfB.SendMessage(users[current].id, "Vou conferir se seu login está correto, " + message.content, 2000)
                 users[current].userLogin = message.content
                 users[current].status = "Start Job Confere"
                 console.log("Switch on case: Start Job")
@@ -88,7 +88,7 @@ module.exports = {
                 .then((outputArguments) => {
                     if(outputArguments.statusLogin == 'inexistente') {
                         users[current].status = "Login Errado"
-                        emfB.SendMessage(users[current].id, 'Esse usuário não existe no sistema, deseja tentar novamente?')
+                        emfB.SendMessage(users[current].id, 'Esse usuário não existe no sistema, deseja tentar novamente?', 2000)
                     }
                     else if(outputArguments.statusLogin == 'existe') {
                         users[current].status = "Login Existe"
@@ -97,15 +97,19 @@ module.exports = {
                         
                         emfB.SendMessage(users[current].id, "Certo, seu login foi inserido corretamente.\
                                                         Te mandei um e-mail com um código de segurança,\
-                                                        pode digitar esse código aqui pra mim?")
+                                                        pode digitar esse código aqui pra mim?", 2000)
                     }
                     console.log(outputArguments)
+                })
+                .catch((error) => {
+                    console.log(error)
+                    emfB.SendMessage(message.from, 'Falhou rpa, porra leo', 2000)
                 })
                 break;
             case 'Login Existe':
                 if(message.content == users[current].codeBlip) {
                     emfB.SendMessage(users[current].id, 'Código inserido corretamente,\
-                                             coloquei seu pedido de troca de senha na fila')
+                                             coloquei seu pedido de troca de senha na fila', 2000)
                     
                     users[current].processStatus = 'trocaSenha'
 
@@ -119,46 +123,53 @@ module.exports = {
                     //Resolves when rpa starts processing
                     await maestro.didProcessStart(users[current].maestro, orchJobId)
                     .then(() => {
-                        emfB.SendMessage(users[current].id, "Estou trocando sua senha...")
+                        emfB.SendMessage(users[current].id, "Estou trocando sua senha...", 2000)
                     })
 
                     //Resolves when rpa finishes processing
                     await maestro.didProcessFinish(users[current].maestro, orchJobId)
                     .then((outputArguments) => {
-                        if(orchOutputArgs.statusEmail == 'enviado') {
+                        if(outputArguments.statusEmail == 'enviado') {
                             users[current].status = "Sucesso"
                             console.log('Senha trocada com sucesso :)')
                             emfB.SendMessage(users[current].id, 'Senha trocada com sucesso :),\
                                                         te enviei sua senha temporária por e-mail,\
-                                                        até a próxima')
+                                                        até a próxima', 2000)
                             //Deletes user from the list
                             indexModule.spliceUser(users[current].id)
                             users.splice(current, 1)
                         }
                         else {
-                            emfB.SendMessage(users[current].id, 'O processo falhou :(')
+                            emfB.SendMessage(users[current].id, 'O processo falhou :(', 2000)
                         }
                         console.log(outputArguments)
+                    })
+                    .catch((error) => {
+                        console.log(error)
+                        emfB.SendMessage(message.from, 'Falhou rpa, porra leo', 2000)
                     })
                 }
                 else {
                     console.log('Código errado');
-                    emfB.SendMessage(users[current].id, 'Código inserido incorretamente, por favor tente novamente')
+                    emfB.SendMessage(users[current].id, 'Código inserido incorretamente, por favor tente novamente', 2000)
                 }
                 break;
             case "Login Errado":
                 console.log("Switch on Status: Login Errado");
                 if(message.content.toLowerCase() == 'sim') {
                     users[current].status = "Conferindo Login"
-                    users[current].processStatus = 'retentativa'
-                    emfB.SendMessage(users[current].id, "Certo, qual o seu login nesse sistema?",1000)
+                    users[current].processStatus = 'confere'
+                    emfB.SendMessage(users[current].id, "Certo, qual o seu login nesse sistema?", 2000)
                 }
                 else if(message.content.toLowerCase() == 'nao' ||
                         message.content.toLowerCase() == 'não') {
-                        emfB.SendMessage(users[current].id ,"Certo, te vejo na próxima então")
+                        emfB.SendMessage(users[current].id ,"Certo, te vejo na próxima então", 2000)
                         //Deletes user from the list
                         indexModule.spliceUser(users[current].id)
                         users.splice(current, 1) 
+                }
+                else {
+                    emfB.SendMessage(users[current].id ,"Desculpe, não entendi. Você deseja tentar novamente?", 2000)
                 }
                 break;
         }
