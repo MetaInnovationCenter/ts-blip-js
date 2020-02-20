@@ -133,7 +133,7 @@ module.exports = {
             return true
 
         }
-        catch {
+        catch (e) {
 
             return false
 
@@ -259,7 +259,7 @@ module.exports = {
 
             return true
         }
-        catch {
+        catch (e) {
             return false
         }
     },
@@ -341,7 +341,7 @@ module.exports = {
 
             return true
         }
-        catch {
+        catch (e) {
             return false
         }
     },
@@ -378,7 +378,7 @@ module.exports = {
 
             return true
         }
-        catch {
+        catch (e) {
             return false
         }
     },
@@ -412,7 +412,7 @@ module.exports = {
 
             return true
         }
-        catch {
+        catch (e) {
             return false
         }
     },
