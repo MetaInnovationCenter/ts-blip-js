@@ -72,12 +72,12 @@ module.exports = {
     
         switch(users[current].status) {
             case "Qual login?":
-                emfB.SendMessage(users[current].id, "Certo, qual o seu login nesse sistema?",2000)
+                emfB.SendMessage(users[current].id, "Para isso, preciso que você me diga qual o seu login no sistema!",2000)
                 users[current].status = "Aviso Processando"
                 break;
 
             case "Aviso Processando":
-                emfB.SendMessage(users[current].id, "Ok, adicionei seu pedido de troca de senha na minha fila, " + message.content, 2000)
+                emfB.SendMessage(users[current].id, "Adicionei seu pedido a fila de processos, aguarde.", 2000)
                 users[current].userLogin = message.content
                 users[current].status = "Start Job Confere"
 
@@ -90,14 +90,14 @@ module.exports = {
                 //Resolves when rpa starts processing
                 await maestro.didProcessStart(users[current].maestro, orchJobId)
                 .then(() => {
-                    emfB.SendMessage(users[current].id, "Estou trocando sua senha...", 2000)
+                    emfB.SendMessage(users[current].id, "Agora estou processando, só mais um pouquinho!", 2000)
                 })
 
                 //Resolves when rpa finishes processing
                 await maestro.didProcessFinish(users[current].maestro, orchJobId)
                 .then((outputArguments) => {
                     if(outputArguments.statusEmail == 'enviado') {
-                        emfB.SendMessage(users[current].id, "Senha trocada com sucesso :),\
+                        emfB.SendMessage(users[current].id, "Senha trocada com sucesso 😊,\
                                                                 te enviei sua senha temporária por e-mail,\
                                                                 até a próxima", 2000)
                         //Deletes user from the list
@@ -112,7 +112,7 @@ module.exports = {
                 })
                 .catch((error) => {
                     console.log(error)
-                    emfB.SendMessage(message.from, 'Falhou rpa, porra leo', 2000)
+                    emfB.SendMessage(message.from, 'falha RPA', 2000)
                 })
                 break;
 
@@ -121,7 +121,7 @@ module.exports = {
                 if(message.content.toLowerCase() == 'sim') {
                     users[current].status = "Aviso Processando"
                     users[current].processStatus = 'confere'
-                    emfB.SendMessage(users[current].id, "Certo, qual o seu login nesse sistema?",2000)
+                    emfB.SendMessage(users[current].id, "Insira o seu login nesse sistema.",2000)
                 }
                 else if(message.content.toLowerCase().includes('nao') ||
                         message.content.toLowerCase().includes('não')) {

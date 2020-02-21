@@ -62,11 +62,11 @@ module.exports = {
     
         switch(users[current].status) {
             case "Adquirindo Login":
-                emfB.SendMessage(users[current].id, "Certo, qual o seu login nesse sistema?", 2000)
+                emfB.SendMessage(users[current].id, "Para isso, preciso que você me diga qual o seu login no sistema.", 2000)
                 users[current].status = "Conferindo Login"
                 break;
             case "Conferindo Login":
-                emfB.SendMessage(users[current].id, "Vou conferir se seu login está correto, " + message.content, 2000)
+                emfB.SendMessage(users[current].id, "Vou conferir se seu login está correto!", 2000)
                 users[current].userLogin = message.content
                 users[current].status = "Start Job Confere"
                 console.log("Switch on case: Start Job")
@@ -97,7 +97,8 @@ module.exports = {
                         
                         emfB.SendMessage(users[current].id, "Certo, seu login foi inserido corretamente.\
                                                         Te mandei um e-mail com um código de segurança,\
-                                                        pode digitar esse código aqui pra mim?", 2000)
+                                                        preciso que você digite este código aqui\
+                                                        para continuar com a sua solicitação", 2000)
                     }
                     console.log(outputArguments)
                 })
@@ -108,8 +109,8 @@ module.exports = {
                 break;
             case 'Login Existe':
                 if(message.content == users[current].codeBlip) {
-                    emfB.SendMessage(users[current].id, 'Código inserido corretamente,\
-                                             coloquei seu pedido de troca de senha na fila', 2000)
+                    emfB.SendMessage(users[current].id, 'O código foi inserido corretamente, \
+                                                         dentro de alguns instantes irei realizar o seu pedido.', 2000)
                     
                     users[current].processStatus = 'trocaSenha'
 
@@ -132,9 +133,9 @@ module.exports = {
                         if(outputArguments.statusEmail == 'enviado') {
                             users[current].status = "Sucesso"
                             console.log('Senha trocada com sucesso :)')
-                            emfB.SendMessage(users[current].id, 'Senha trocada com sucesso :),\
-                                                        te enviei sua senha temporária por e-mail,\
-                                                        até a próxima', 2000)
+                            emfB.SendMessage(users[current].id, 'Agora é só você acessar o e-mail cadastrado no sistema \
+                                                                 que a sua nova senha vai estar lá! \
+                                                                 Espero ter te ajudado 😊, até a próxima!', 2000)
                             //Deletes user from the list
                             indexModule.spliceUser(users[current].id)
                             users.splice(current, 1)
