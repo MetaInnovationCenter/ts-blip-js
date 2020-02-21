@@ -14,15 +14,21 @@ let sleep = (milliseconds) => {
 
 let SendDg = (dg, user) => {
 
-    Client.sendMessage({ 
-                
-        type: "application/vnd.lime.chatstate+json",
-        to: user,
-        content: {"state": "composing"},
+    return new Promise(async (resolve) => { 
+        
+        await Client.sendMessage({ 
+                    
+            type: "application/vnd.lime.chatstate+json",
+            to: user,
+            content: {"state": "composing"},
+
+        })
+
+        setTimeout(() => {resolve("Digitando terminado")}, dg)
 
     })
 
-    sleep(dg)
+    //sleep(dg)
 
 }
 
@@ -60,11 +66,17 @@ module.exports = {
     */
     SetClient: (client) => {
 
-        Client = client
+        return new Promise(async (resolve) => {
 
-        console.log(FgBlue+"»»»»»»»»»»»»»»»»EMANUEL MASTER FUNCTIONS BLIP«««««««««««««««««««"+Reset)
-        console.log(FgYellow+"  Info:"+Reset, Bright, "Client Definido", Reset)
-        console.log(FgBlue+"»»»»»»»»»»»»»»»»EMANUEL MASTER FUNCTIONS BLIP«««««««««««««««««««"+Reset)
+            Client = client
+
+            console.log(FgBlue+"»»»»»»»»»»»»»»»»EMANUEL MASTER FUNCTIONS BLIP«««««««««««««««««««"+Reset)
+            console.log(FgYellow+"  Info:"+Reset, Bright, "Client Definido", Reset)
+            console.log(FgBlue+"»»»»»»»»»»»»»»»»EMANUEL MASTER FUNCTIONS BLIP«««««««««««««««««««"+Reset)
+
+            resolve("Cliente (Bot) definido com sucesso")
+
+        })
 
     },
 
@@ -95,49 +107,53 @@ module.exports = {
     */
     SendMessage: (user, msg, dg) => {
 
-        try{
+        return new Promise(async (resolve, reject) => {
 
-            if (dg > 0) { 
+            try{
 
-                SendDg(dg, user)
-                    
-                Client.sendMessage({ 
-                            
-                    type: "text/plain", 
-                    to: user,
-                    content: msg
+                if (dg > 0) { 
+
+                    await SendDg(dg, user)
                         
-                })
+                    Client.sendMessage({ 
+                                
+                        type: "text/plain", 
+                        to: user,
+                        content: msg
+                            
+                    })
 
-            }
-            else {
+                }
+                else {
 
-                Client.sendMessage({ 
+                    Client.sendMessage({ 
+                        
+                        type: "text/plain", 
+                        to: user,
+                        content: msg, 
                     
-                    type: "text/plain", 
-                    to: user,
-                    content: msg, 
-                
-                })
+                    })
+
+                }
+
+                if (dg == undefined) {dg = 0}
+
+                console.log(FgBlue+"»»»»»»»»»»»»»»»»EMANUEL MASTER FUNCTIONS BLIP«««««««««««««««««««"+Reset)
+                console.log(FgYellow+"  Mensagem:"+Reset, Bright+msg+Reset)
+                console.log(FgYellow+"  Enviada para:"+Reset, Bright+user+Reset)
+                console.log(FgYellow+"  Digitando de:"+Reset, Bright+dg, "ms"+Reset)
+                console.log(FgBlue+"»»»»»»»»»»»»»»»»EMANUEL MASTER FUNCTIONS BLIP«««««««««««««««««««"+Reset)
+
+                resolve(true)
+
+            }
+            catch (e) {
+
+                reject(false)
 
             }
 
-            if (dg == undefined) {dg = 0}
-
-            console.log(FgBlue+"»»»»»»»»»»»»»»»»EMANUEL MASTER FUNCTIONS BLIP«««««««««««««««««««"+Reset)
-            console.log(FgYellow+"  Mensagem:"+Reset, Bright+msg+Reset)
-            console.log(FgYellow+"  Enviada para:"+Reset, Bright+user+Reset)
-            console.log(FgYellow+"  Digitando de:"+Reset, Bright+dg, "ms"+Reset)
-            console.log(FgBlue+"»»»»»»»»»»»»»»»»EMANUEL MASTER FUNCTIONS BLIP«««««««««««««««««««"+Reset)
-
-            return true
-
-        }
-        catch (e) {
-
-            return false
-
-        }
+        })
 
     },
 
