@@ -96,11 +96,11 @@ client.connect()
                 console.log("time is " + hour)
 
                 if ( hour>5 & hour<12) {
-                    emfB.SendMessage(message.from, "Bom dia, eu sou o Max 😀️. Estou aqui para te ajudar!")   
+                    emfB.SendMessage(message.from, "Bom dia, eu sou o Max Assistant 😀. Estou aqui para te ajudar!")   
                 } else if(hour>12 & hour<18) {
-                    emfB.SendMessage(message.from, "Boa tarde, eu sou o Max 😀️. Estou aqui para te ajudar!")
+                    emfB.SendMessage(message.from, "Boa tarde, eu sou o Max Assistant 😀. Estou aqui para te ajudar!")
                 } else if(hour>18 & hour<5) {
-                    emfB.SendMessage(message.from, "Boa noite, eu sou o Max 😀️. Estou aqui para te ajudar!")
+                    emfB.SendMessage(message.from, "Boa noite, eu sou o Max Assistant 😀. Estou aqui para te ajudar!")
                 }
                 emfB.SendOptions(message.from, "O que você precisa?", ['Reset de senha SAP'], 3000)
                 console.log("Switch on case: Boas Vindas")
