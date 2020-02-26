@@ -181,9 +181,6 @@ module.exports = {
                     if (response.data.value[0].Info == 'Job completed') {
                         resolve(JSON.parse(response.data.value[0].OutputArguments))
                     }
-                    else if(response.data.value[0].Info.toLowerCase().includes('exception')) {
-                        reject(response.data.value[0].Info)
-                    }
                     else {
                         console.log(response.data.value[0].Info)
                     }
