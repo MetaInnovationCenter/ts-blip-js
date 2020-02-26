@@ -366,7 +366,73 @@ module.exports = {
         })
     },
 
-     /** 
+    /**
+     * Manda uma mensagem com opções (persistente) (min 1, max ∞).
+     * Retorna true quando tudo certo, false quando não
+     * @param {String} user - Id do Usuario
+     * @param {String} msg - Mensagen que fica acima das opções ("" -> sem mensagem, mas fica horrível)
+     * @param {Array<String>} ops - Opções ("" -> opção sem mensagem, fica horrível)
+     * @param {Number} dg - Tempo de "Digitando" (dg <= 0 -> sem digitando) (em milisegundos)
+    */
+    SendMenu: (user, msg, ops, dg) => {
+
+        return new Promise(async (resolve, reject) => {
+                
+            try {
+
+                if (ops.length < 1 || ops.length == undefined) {
+
+                    console.log(FgBlue+"»»»»»»»»»»»»»»»»EMANUEL MASTER FUNCTIONS BLIP«««««««««««««««««"+Reset)
+                    console.log(FgRed+Bright+"  Onde:"+Reset, FgRed+"SendMenu("+user+","+msg+",["+ops+"],"+dg+")"+Reset)
+                    console.log(FgRed+Bright+"  Erro:"+Reset, FgRed+"Numero de opções < 1"+Reset)
+                    console.log(FgBlue+"»»»»»»»»»»»»»»»»EMANUEL MASTER FUNCTIONS BLIP«««««««««««««««««"+Reset)  
+
+                    resolve(false)
+                    throw new Error("Numero de opções < 1")
+
+                }
+
+                if (dg > 0) {
+                    await SendDg(dg, user)
+                }
+
+                let obj = {
+                    type: "application/vnd.lime.select+json",
+                    to: user,
+                    content: {
+                        scope:"persistent",
+                        text: msg,
+                        options: []
+                    }
+                }
+
+                for (i in ops) {
+
+                    obj.content.options.push({text: ops[i]})
+
+                }
+
+                Client.sendMessage(obj)
+
+                console.log(FgBlue+"»»»»»»»»»»»»»»»»EMANUEL MASTER FUNCTIONS BLIP«««««««««««««««««"+Reset)
+                console.log(FgYellow+"  Mensagem:"+Reset, Bright+msg+Reset)
+                console.log(FgYellow+"  Opções:"+Reset, Bright+ops+Reset)
+                console.log(FgYellow+"  Enviada para:"+Reset, Bright+user+Reset)
+                console.log(FgYellow+"  Digitando de:"+Reset, Bright+dg, "ms"+Reset)
+                console.log(FgBlue+"»»»»»»»»»»»»»»»»EMANUEL MASTER FUNCTIONS BLIP«««««««««««««««««"+Reset)
+
+                resolve(true)
+
+            }
+            catch (e) {
+                reject(false)
+            }
+
+        })
+
+    },
+
+    /** 
      * Printa as cores no console.
     */
     PrintaCor: () => {
