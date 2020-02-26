@@ -102,7 +102,7 @@ client.connect()
                 } else if(hour>18 & hour<5) {
                     emfB.SendMessage(message.from, "Boa noite, eu sou o Max Assistant 😀. Estou aqui para te ajudar!")
                 }
-                emfB.SendOptions(message.from, "O que você precisa?", ['Reset de senha SAP'], 3000)
+                emfB.SendMenu(message.from, "O que você precisa?", ['SAP > Reset de Senha','SAP > FOLHA TOTVS','SAP > FOLHA MS','SAP > Solução Fiscal','SAP > GRC In/Outbound'], 1000)
                 console.log("Switch on case: Boas Vindas")
                 userList[userIndex].status = "Versões SAP"
                 break;
@@ -117,7 +117,7 @@ client.connect()
                 }
                 else
                 {
-                    emfB.SendOptions(message.from, "Desculpe, não entendi, pois sou um bot treinado apenas para te ajudar com os seguintes itens:", ['Reset de senha SAP'], 2000)
+                    emfB.SendMenu(message.from, "Desculpe, não entendi, pois sou um bot treinado apenas para te ajudar com os seguintes itens:", ['SAP > Reset de Senha'], 1000)
                     if(message.content.toLowerCase().includes('reset'))
                     {
                         userList[userIndex].status = "Versões SAP"
