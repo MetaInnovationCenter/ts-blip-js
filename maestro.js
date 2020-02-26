@@ -59,7 +59,14 @@ module.exports = {
             }) 
         })
     },
-    startJob: async(orch, userLogin, processStatus, userEmail) => {
+    /**
+     * Adds a job with the given inputs to the orchestrator generic queue
+     * @param {Object} orchestratorInfo orchestrator API access info
+     * @param {String} userLogin SAP Login of user
+     * @param {String} processStatus process status for RPA handling
+     * @param {String} userEmail user email for the RPA robot to send
+     */
+    startJob: async(orchestratorInfo, userLogin, processStatus, userEmail) => {
         return new Promise(async (resolve, reject) => {
             let jobId
             let inputArguments
@@ -84,7 +91,7 @@ module.exports = {
 
             let axiosStartJobBody = {
                 startInfo: {
-                    "ReleaseKey": orch.processKey,
+                    "ReleaseKey": orchestratorInfo.processKey,
                     "Strategy": "All",
                     "RobotIds": [],
                     "NoOfRobots": 0,
@@ -94,13 +101,13 @@ module.exports = {
 
             let axiosStartJobHeaders = {
                 headers: {
-                    'Authorization' : "Bearer " + orch.accessToken,
-                    'X-UIPATH-TenantName' : orch.tenantLogicalName,
+                    'Authorization' : "Bearer " + orchestratorInfo.accessToken,
+                    'X-UIPATH-TenantName' : orchestratorInfo.tenantLogicalName,
                     'Content-Type': 'application/json'
                 }
             }; 
-            console.log('https://platform.uipath.com/' + orch.tenantURL + '/odata/Jobs/UiPath.Server.Configuration.OData.StartJobs')
-            await axios.post('https://platform.uipath.com/' + orch.tenantURL + '/odata/Jobs/UiPath.Server.Configuration.OData.StartJobs', axiosStartJobBody, axiosStartJobHeaders)
+            console.log('https://platform.uipath.com/' + orchestratorInfo.tenantURL + '/odata/Jobs/UiPath.Server.Configuration.OData.StartJobs')
+            await axios.post('https://platform.uipath.com/' + orchestratorInfo.tenantURL + '/odata/Jobs/UiPath.Server.Configuration.OData.StartJobs', axiosStartJobBody, axiosStartJobHeaders)
             .then(function(response){
                 console.log("Start Job Request Successful");
                 jobId = response.data.value[0].Id
