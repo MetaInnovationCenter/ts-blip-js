@@ -1,5 +1,6 @@
 const axios = require('axios')
 const emfB = require('./emfB.js')
+const color = require('chalk')
 
 module.exports = {
     getProcessInfo: async (orch, processName) => {
@@ -24,11 +25,11 @@ module.exports = {
             //Authentication Request
             await axios.post('https://account.uipath.com/oauth/token', axiosAuthBody, axiosAuthHeaders)
             .then(function (response) {
-                console.log(emfB.Color('verde') + "Auth Sucessful" + emfB.Color('reset'))
+                console.log(color.green("Auth Sucessful"))
                 accessToken = response.data.access_token;
             })
             .catch(function(err){
-                console.log(emfB.Color('vermelho') + 'Erro na autenticação:' + err)
+                console.log(color.red('Erro na autenticação:'))
                 reject(error)
             });
             //End Auth Request
@@ -45,10 +46,10 @@ module.exports = {
             .then(function(response) {
                 //console.log(response.data)
                 processKey = response.data.value[0].Key
-                console.log(emfB.Color('verde') + "Get Releases Request " + processName  + " Successful" + emfB.Color('reset'))
+                console.log(color.green("Get Releases Request " + processName  + " Successful"))
             })
             .catch(function(error) {
-                console.log(emfB.Color('vermelho') + 'Erro em Get Releases:' + error + emfB.Color('reset'))
+                console.log(color.red('Erro em Get Releases:' + error))
                 reject(error)
             });
             //End Get Releases Request
@@ -109,12 +110,12 @@ module.exports = {
             console.log('https://platform.uipath.com/' + orchestratorInfo.tenantURL + '/odata/Jobs/UiPath.Server.Configuration.OData.StartJobs')
             await axios.post('https://platform.uipath.com/' + orchestratorInfo.tenantURL + '/odata/Jobs/UiPath.Server.Configuration.OData.StartJobs', axiosStartJobBody, axiosStartJobHeaders)
             .then(function(response){
-                console.log("Start Job Request Successful");
+                console.log(color.green("Start Job Request Successful"));
                 jobId = response.data.value[0].Id
                 resolve(jobId)
             })
             .catch(err => {
-                console.log(emfB.Color('vermelho') + 'Erro em Start Job:' + err + emfB.Color('reset'))
+                console.log(color.red('Erro em Start Job:'))
                 reject(err)
             })
         })
