@@ -60,53 +60,57 @@ module.exports = {
         })
     },
     startJob: async(orch, userLogin, processStatus, userEmail) => {
-        //Start Job Request
-        let jobId
-        let inputArguments
-        //console.log(orch)
+        return new Promise(async (resolve, reject) => {
+            let jobId
+            let inputArguments
 
-        if(processStatus == 'confere') {
-            inputArguments = "{\"login\":\"" + userLogin + "\", \"statusProcesso\":\"" + processStatus + "\"}"
-            console.log("status: confere");
-        }
-        else if(processStatus == 'trocaSenha') {
-            inputArguments = "{\"login\":\"" + userLogin + "\", \"statusProcesso\":\"" + processStatus + "\", \"emailInput\":\"" + userEmail + "\"}"
-            console.log("status : trocaSenha");
-        }
-        else if(processStatus == 'init') {
-            inputArguments = "{\"login\":\"" + userLogin + "\", \"statusProcesso\":\"" + processStatus + "\"}"
-            console.log("status: init");
-        }
-
-        let axiosStartJobBody = {
-            startInfo: {
-                "ReleaseKey": orch.processKey,
-                "Strategy": "All",
-                "RobotIds": [],
-                "NoOfRobots": 0,
-                "InputArguments": inputArguments
-                }
-        };
-
-        let axiosStartJobHeaders = {
-            headers: {
-                'Authorization' : "Bearer " + orch.accessToken,
-                'X-UIPATH-TenantName' : orch.tenantLogicalName,
-                'Content-Type': 'application/json'
+            //No robô 1 isso faz o processo inteiro
+            //No robô 2 isso faz o primeiro passo de conferir se o login existe
+            if(processStatus == 'confere') {
+                inputArguments = "{\"login\":\"" + userLogin + "\", \"statusProcesso\":\"" + processStatus + "\"}"
+                console.log("status: confere");
             }
-        }; 
-        console.log('https://platform.uipath.com/' + orch.tenantURL + '/odata/Jobs/UiPath.Server.Configuration.OData.StartJobs')
-        await axios.post('https://platform.uipath.com/' + orch.tenantURL + '/odata/Jobs/UiPath.Server.Configuration.OData.StartJobs', axiosStartJobBody, axiosStartJobHeaders)
-        .then(function(response){
-            console.log("Start Job Request Successful");
-            jobId = response.data.value[0].Id
+            //No robô 1 esse status não existe
+            //No robô 2 isso faz o segundo passo de realmente trocar a senha do usuário
+            else if(processStatus == 'trocaSenha') {
+                inputArguments = "{\"login\":\"" + userLogin + "\", \"statusProcesso\":\"" + processStatus + "\", \"emailInput\":\"" + userEmail + "\"}"
+                console.log("status : trocaSenha");
+            }
+            //status antigo, nenhum robô utiliza
+            else if(processStatus == 'init') {
+                inputArguments = "{\"login\":\"" + userLogin + "\", \"statusProcesso\":\"" + processStatus + "\"}"
+                console.log("status: init");
+            }
+
+            let axiosStartJobBody = {
+                startInfo: {
+                    "ReleaseKey": orch.processKey,
+                    "Strategy": "All",
+                    "RobotIds": [],
+                    "NoOfRobots": 0,
+                    "InputArguments": inputArguments
+                    }
+            };
+
+            let axiosStartJobHeaders = {
+                headers: {
+                    'Authorization' : "Bearer " + orch.accessToken,
+                    'X-UIPATH-TenantName' : orch.tenantLogicalName,
+                    'Content-Type': 'application/json'
+                }
+            }; 
+            console.log('https://platform.uipath.com/' + orch.tenantURL + '/odata/Jobs/UiPath.Server.Configuration.OData.StartJobs')
+            await axios.post('https://platform.uipath.com/' + orch.tenantURL + '/odata/Jobs/UiPath.Server.Configuration.OData.StartJobs', axiosStartJobBody, axiosStartJobHeaders)
+            .then(function(response){
+                console.log("Start Job Request Successful");
+                jobId = response.data.value[0].Id
+                resolve(jobId)
+            })
+            .catch(err => {
+                console.log(emfB.Color('vermelho') + 'Erro em Start Job:' + err + emfB.Color('reset'))
+                reject(err)
+            })
         })
-        .catch(err => {
-            console.log(emfB.Color('vermelho') + 'Erro em Start Job:' + err + emfB.Color('reset'))
-            return err
-        })
-        return jobId
-        //End Start Job Request
     },
     getJobOutput: async(orch, jobId) => {
         let axiosGenericHeaders = {

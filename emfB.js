@@ -166,118 +166,123 @@ module.exports = {
      * @param {Number} dg - Tempo de "Digitando" (dg <= 0 -> sem digitando) (em milisegundos)
     */
     SendOptions: (user, msg, ops, dg) => {
-        try {
-            if (dg > 0) {
-                SendDg(dg, user)
+
+        return new Promise(async (resolve, reject) => {
+                
+            try {
+                if (dg > 0) {
+                    await SendDg(dg, user)
+                }
+                if (ops.length == 1) {
+                    Client.sendMessage({
+                        type: "application/vnd.lime.select+json",
+                        to: user,
+                        content: {
+                            scope:"immediate",
+                            text: msg,
+                            options: [
+                                {
+                                    text: ops[0]
+                                }
+                            ]
+                        }
+                    })
+
+                }
+                if (ops.length == 2) {
+                    Client.sendMessage({
+                        type: "application/vnd.lime.select+json",
+                        to: user,
+                        content: {
+                            scope:"immediate",
+                            text: msg,
+                            options: [
+                                {
+                                    text: ops[0]
+                                },
+                                {
+                                    text: ops[1]
+                                }
+                            ]
+                        }
+                    })
+                }
+                if (ops.length == 3) {
+
+                    Client.sendMessage({
+                        type: "application/vnd.lime.select+json",
+                        to: user,
+                        content: {
+                            scope:"immediate",
+                            text: msg,
+                
+                            options: [
+                                {
+                                    text: ops[0]
+                                },
+                                {
+                                    text: ops[1]
+                                },
+                                {
+                                    text: ops[2]
+                                }
+                            ]
+                        }
+                    })
+                }
+                if (ops.length == 4) {
+                    Client.sendMessage({
+                        type: "application/vnd.lime.select+json",
+                        to: user,
+                        content: {
+                            scope:"immediate",
+                            text: msg,
+                            options: [
+                                {
+                                    text: ops[0]
+                                },
+                                {
+                                    text: ops[1]
+                                },
+                                {
+                                    text: ops[2]
+                                },
+                                {
+                                    text: ops[3]
+                                }
+                            ]
+                        }
+                    })
+                }
+
+                if (ops.length < 1 || ops.length > 4) {
+
+                    console.log(FgBlue+"»»»»»»»»»»»»»»»»EMANUEL MASTER FUNCTIONS BLIP«««««««««««««««««"+Reset)
+                    console.log(FgRed+Bright+"  Onde:"+Reset, FgRed+"SendOptions("+user+","+msg+",["+ops+"],"+dg+")"+Reset)
+                    console.log(FgRed+Bright+"  Erro:"+Reset, FgRed+"Numero de opções < 1 ou > 4"+Reset)
+                    console.log(FgBlue+"»»»»»»»»»»»»»»»»EMANUEL MASTER FUNCTIONS BLIP«««««««««««««««««"+Reset)    
+
+                    return false
+
+                }
+                else {
+
+                    console.log(FgBlue+"»»»»»»»»»»»»»»»»EMANUEL MASTER FUNCTIONS BLIP«««««««««««««««««"+Reset)
+                    console.log(FgYellow+"  Mensagens:"+Reset, Bright+msg+Reset)
+                    console.log(FgYellow+"  Opções:"+Reset, Bright+ops+Reset)
+                    console.log(FgYellow+"  Enviada para:"+Reset, Bright+user+Reset)
+                    console.log(FgYellow+"  Digitando de:"+Reset, Bright+dg, "ms"+Reset)
+                    console.log(FgBlue+"»»»»»»»»»»»»»»»»EMANUEL MASTER FUNCTIONS BLIP«««««««««««««««««"+Reset)    
+
+                }
+
+                resolve(true)
             }
-            if (ops.length == 1) {
-                Client.sendMessage({
-                    type: "application/vnd.lime.select+json",
-                    to: user,
-                    content: {
-                        scope:"immediate",
-                        text: msg,
-                        options: [
-                            {
-                                text: ops[0]
-                            }
-                        ]
-                    }
-                })
-
-            }
-            if (ops.length == 2) {
-                Client.sendMessage({
-                    type: "application/vnd.lime.select+json",
-                    to: user,
-                    content: {
-                        scope:"immediate",
-                        text: msg,
-                        options: [
-                            {
-                                text: ops[0]
-                            },
-                            {
-                                text: ops[1]
-                            }
-                        ]
-                    }
-                })
-            }
-            if (ops.length == 3) {
-
-                Client.sendMessage({
-                    type: "application/vnd.lime.select+json",
-                    to: user,
-                    content: {
-                        scope:"immediate",
-                        text: msg,
-            
-                        options: [
-                            {
-                                text: ops[0]
-                            },
-                            {
-                                text: ops[1]
-                            },
-                            {
-                                text: ops[2]
-                            }
-                        ]
-                    }
-                })
-            }
-            if (ops.length == 4) {
-                Client.sendMessage({
-                    type: "application/vnd.lime.select+json",
-                    to: user,
-                    content: {
-                        scope:"immediate",
-                        text: msg,
-                        options: [
-                            {
-                                text: ops[0]
-                            },
-                            {
-                                text: ops[1]
-                            },
-                            {
-                                text: ops[2]
-                            },
-                            {
-                                text: ops[3]
-                            }
-                        ]
-                    }
-                })
+            catch (e) {
+                reject(false)
             }
 
-            if (ops.length < 1 || ops.length > 4) {
-
-                console.log(FgBlue+"»»»»»»»»»»»»»»»»EMANUEL MASTER FUNCTIONS BLIP«««««««««««««««««"+Reset)
-                console.log(FgRed+Bright+"  Onde:"+Reset, FgRed+"SendOptions("+user+","+msg+",["+ops+"],"+dg+")"+Reset)
-                console.log(FgRed+Bright+"  Erro:"+Reset, FgRed+"Numero de opções < 1 ou > 4"+Reset)
-                console.log(FgBlue+"»»»»»»»»»»»»»»»»EMANUEL MASTER FUNCTIONS BLIP«««««««««««««««««"+Reset)    
-
-                return false
-
-            }
-            else {
-
-                console.log(FgBlue+"»»»»»»»»»»»»»»»»EMANUEL MASTER FUNCTIONS BLIP«««««««««««««««««"+Reset)
-                console.log(FgYellow+"  Mensagens:"+Reset, Bright+msg+Reset)
-                console.log(FgYellow+"  Opções:"+Reset, Bright+ops+Reset)
-                console.log(FgYellow+"  Enviada para:"+Reset, Bright+user+Reset)
-                console.log(FgYellow+"  Digitando de:"+Reset, Bright+dg, "ms"+Reset)
-                console.log(FgBlue+"»»»»»»»»»»»»»»»»EMANUEL MASTER FUNCTIONS BLIP«««««««««««««««««"+Reset)    
-
-            }
-
-            return true
-        }
-        catch (e) {
-            return false
-        }
+        })
     },
 
     /** 
@@ -288,78 +293,84 @@ module.exports = {
      * @param {Number} dg - Tempo de "Digitando" (dg <= 0 -> sem digitando) (em milisegundos)
     */
     SendMul: (user, msgs, dg) => {
-        try {
-            if (dg > 0) {
-                SendDg(dg, user)
+
+        return new Promise(async (resolve, reject) => {
+
+            try {
+                if (dg > 0) {
+                    await SendDg(dg, user)
+                }
+                if (msgs.length == 2) {
+                    Client.sendMessage({
+                        type: "application/vnd.lime.collection+json",
+                        to: user,
+                        content: {
+                            itemType: "text/plain",
+                            items: [
+                                msgs[0],
+                                msgs[1]
+                            ]
+                        }
+                    });
+                }
+                if (msgs.length == 3) {
+                    Client.sendMessage({
+                        type: "application/vnd.lime.collection+json",
+                        to: user,
+                        content: {
+                            itemType: "text/plain",
+                            items: [
+                                msgs[0],
+                                msgs[1],
+                                msgs[2]
+                            ]
+                        }
+                    });
+                }
+                if (msgs.length == 4) {
+                    Client.sendMessage({
+                        type: "application/vnd.lime.collection+json",
+                        to: user,
+                        content: {
+                            itemType: "text/plain",
+                            items: [
+                                msgs[0],
+                                msgs[1],
+                                msgs[2],
+                                msgs[3]
+                            ]
+                        }
+                    });
+                }
+
+                if (msgs.length < 1 || msgs.length > 4) {
+
+                    console.log(FgBlue+"»»»»»»»»»»»»»»»»EMANUEL MASTER FUNCTIONS BLIP«««««««««««««««««"+Reset)
+                    console.log(FgRed+Bright+"  Onde:"+Reset, FgRed+"SendMul("+user+",["+msgs+"],"+dg+")"+Reset)
+                    console.log(FgRed+Bright+"  Erro:"+Reset, FgRed+"Numero de mensagens < 1 ou > 4"+Reset)
+                    console.log(FgBlue+"»»»»»»»»»»»»»»»»EMANUEL MASTER FUNCTIONS BLIP«««««««««««««««««"+Reset)    
+
+                    return false
+
+                }
+                else {
+
+                    console.log(FgBlue+"»»»»»»»»»»»»»»»»EMANUEL MASTER FUNCTIONS BLIP«««««««««««««««««"+Reset)
+                    console.log(FgYellow+"  Mensagens:"+Reset, Bright+msgs+Reset)
+                    console.log(FgYellow+"  Enviadas para:"+Reset, Bright+user+Reset)
+                    console.log(FgYellow+"  Digitando de:"+Reset, Bright+dg, "ms"+Reset)
+                    console.log(FgBlue+"»»»»»»»»»»»»»»»»EMANUEL MASTER FUNCTIONS BLIP«««««««««««««««««"+Reset)    
+
+                }
+
+                resolve(true)
+
             }
-            if (msgs.length == 2) {
-                Client.sendMessage({
-                    type: "application/vnd.lime.collection+json",
-                    to: user,
-                    content: {
-                        itemType: "text/plain",
-                        items: [
-                            msgs[0],
-                            msgs[1]
-                        ]
-                    }
-                });
-            }
-            if (msgs.length == 3) {
-                Client.sendMessage({
-                    type: "application/vnd.lime.collection+json",
-                    to: user,
-                    content: {
-                        itemType: "text/plain",
-                        items: [
-                            msgs[0],
-                            msgs[1],
-                            msgs[2]
-                        ]
-                    }
-                });
-            }
-            if (msgs.length == 4) {
-                Client.sendMessage({
-                    type: "application/vnd.lime.collection+json",
-                    to: user,
-                    content: {
-                        itemType: "text/plain",
-                        items: [
-                            msgs[0],
-                            msgs[1],
-                            msgs[2],
-                            msgs[3]
-                        ]
-                    }
-                });
+            catch (e) {
+                resolve(false)
             }
 
-            if (msgs.length < 1 || msgs.length > 4) {
-
-                console.log(FgBlue+"»»»»»»»»»»»»»»»»EMANUEL MASTER FUNCTIONS BLIP«««««««««««««««««"+Reset)
-                console.log(FgRed+Bright+"  Onde:"+Reset, FgRed+"SendMul("+user+",["+msgs+"],"+dg+")"+Reset)
-                console.log(FgRed+Bright+"  Erro:"+Reset, FgRed+"Numero de mensagens < 1 ou > 4"+Reset)
-                console.log(FgBlue+"»»»»»»»»»»»»»»»»EMANUEL MASTER FUNCTIONS BLIP«««««««««««««««««"+Reset)    
-
-                return false
-
-            }
-            else {
-
-                console.log(FgBlue+"»»»»»»»»»»»»»»»»EMANUEL MASTER FUNCTIONS BLIP«««««««««««««««««"+Reset)
-                console.log(FgYellow+"  Mensagens:"+Reset, Bright+msgs+Reset)
-                console.log(FgYellow+"  Enviadas para:"+Reset, Bright+user+Reset)
-                console.log(FgYellow+"  Digitando de:"+Reset, Bright+dg, "ms"+Reset)
-                console.log(FgBlue+"»»»»»»»»»»»»»»»»EMANUEL MASTER FUNCTIONS BLIP«««««««««««««««««"+Reset)    
-
-            }
-
-            return true
-        }
-        catch (e) {
-            return false
-        }
+        })
     },
 
     /** 
@@ -371,32 +382,38 @@ module.exports = {
      * @param {Number} dg - Tempo de "Digitando" (dg <= 0 -> sem digitando) (em milisegundos)
     */
     SendImg: (user, msg, img, dg) => {
-        try {
-            if (dg > 0) {
-                SendDg(dg, user)
-            }
-            Client.sendMessage({
-                type: "application/vnd.lime.media-link+json",
-                to: user,
-                content: {
-                    text: msg,
-                    type: "image/jpeg",
-                    uri: img
+
+        return new Promise(async (resolve, reject) => {
+
+            try {
+                if (dg > 0) {
+                    await SendDg(dg, user)
                 }
-            });
+                Client.sendMessage({
+                    type: "application/vnd.lime.media-link+json",
+                    to: user,
+                    content: {
+                        text: msg,
+                        type: "image/jpeg",
+                        uri: img
+                    }
+                });
 
-            console.log(FgBlue+"»»»»»»»»»»»»»»»»EMANUEL MASTER FUNCTIONS BLIP«««««««««««««««««"+Reset)
-            console.log(FgYellow+"  Imagem:"+Reset, Bright+img+Reset)
-            console.log(FgYellow+"  Mensagem:"+Reset, Bright+msg+Reset)
-            console.log(FgYellow+"  Enviada para:"+Reset, Bright+user+Reset)
-            console.log(FgYellow+"  Digitando de:"+Reset, Bright+dg, "ms"+Reset)
-            console.log(FgBlue+"»»»»»»»»»»»»»»»»EMANUEL MASTER FUNCTIONS BLIP«««««««««««««««««"+Reset)    
+                console.log(FgBlue+"»»»»»»»»»»»»»»»»EMANUEL MASTER FUNCTIONS BLIP«««««««««««««««««"+Reset)
+                console.log(FgYellow+"  Imagem:"+Reset, Bright+img+Reset)
+                console.log(FgYellow+"  Mensagem:"+Reset, Bright+msg+Reset)
+                console.log(FgYellow+"  Enviada para:"+Reset, Bright+user+Reset)
+                console.log(FgYellow+"  Digitando de:"+Reset, Bright+dg, "ms"+Reset)
+                console.log(FgBlue+"»»»»»»»»»»»»»»»»EMANUEL MASTER FUNCTIONS BLIP«««««««««««««««««"+Reset)    
 
-            return true
-        }
-        catch (e) {
-            return false
-        }
+                resolve(true)
+
+            }
+            catch (e) {
+                reject(false)
+            }
+
+        })
     },
 
     /** 
@@ -407,30 +424,35 @@ module.exports = {
      * @param {Number} dg - Tempo de "Digitando" (dg <= 0 -> sem digitando) (em milisegundos)
     */
     SendVideo: (user, vdo, dg) => {
-        try {
-            if (dg > 0) {
-                SendDg(dg, user)
-            }
-            Client.sendMessage({
-                type: "application/vnd.lime.media-link+json",
-                to: user,
-                content: {
-                type: "video/mp4",
-                uri: vdo,
+
+        return new Promise(async (resolve, reject) => {
+
+            try {
+                if (dg > 0) {
+                    await SendDg(dg, user)
                 }
-            });
+                Client.sendMessage({
+                    type: "application/vnd.lime.media-link+json",
+                    to: user,
+                    content: {
+                    type: "video/mp4",
+                    uri: vdo,
+                    }
+                });
 
-            console.log(FgBlue+"»»»»»»»»»»»»»»»»EMANUEL MASTER FUNCTIONS BLIP«««««««««««««««««"+Reset)
-            console.log(FgYellow+"  Video:"+Reset, Bright+vdo+Reset)
-            console.log(FgYellow+"  Enviada para:"+Reset, Bright+user+Reset)
-            console.log(FgYellow+"  Digitando de:"+Reset, Bright+dg, "ms"+Reset)
-            console.log(FgBlue+"»»»»»»»»»»»»»»»»EMANUEL MASTER FUNCTIONS BLIP«««««««««««««««««"+Reset) 
+                console.log(FgBlue+"»»»»»»»»»»»»»»»»EMANUEL MASTER FUNCTIONS BLIP«««««««««««««««««"+Reset)
+                console.log(FgYellow+"  Video:"+Reset, Bright+vdo+Reset)
+                console.log(FgYellow+"  Enviada para:"+Reset, Bright+user+Reset)
+                console.log(FgYellow+"  Digitando de:"+Reset, Bright+dg, "ms"+Reset)
+                console.log(FgBlue+"»»»»»»»»»»»»»»»»EMANUEL MASTER FUNCTIONS BLIP«««««««««««««««««"+Reset) 
 
-            return true
-        }
-        catch (e) {
-            return false
-        }
+                resolve(true)
+            }
+            catch (e) {
+                reject(false)
+            }
+
+        })
     },
 
      /** 

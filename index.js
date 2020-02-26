@@ -42,7 +42,7 @@ client.connect()
     console.log('Application started. Press Ctrl + c to stop.')
 
     //Receiver de Texto
-    client.addMessageReceiver((message) => message.type === 'text/plain', (message) => {
+    client.addMessageReceiver((message) => message.type === 'text/plain', async (message) => {
         newUserFlag = true
         //Confere se a mensagem atual é de um usuário novo ou um que já está na lista
         userList.forEach(user => {
