@@ -3,7 +3,12 @@ const emfB = require('./emfB.js')
 const color = require('chalk')
 
 module.exports = {
-    getProcessInfo: async (orch, processName) => {
+    /**
+     * Gets an access token and a process key to enable job starting and checking
+     * @param {JSON} orchestratorInfo Orchestrator API access info
+     * @param {String} processName Name of the process you want to get info from
+     */
+    getProcessInfo: async (orchestratorInfo, processName) => {
         return new Promise(async (resolve, reject) => {
             let processKey
             let accessToken
@@ -12,13 +17,13 @@ module.exports = {
             //Authentication Body and Headers
             let axiosAuthBody = {
                 grant_type: "refresh_token",
-                client_id: orch.clientId,
-                refresh_token: orch.userKey
+                client_id: orchestratorInfo.clientId,
+                refresh_token: orchestratorInfo.userKey
             };
             let axiosAuthHeaders = {
                 headers: {
                     'Content-Type' : 'application/json',
-                    'X-UIPATH-TenantName' : orch.tenantLogicalName
+                    'X-UIPATH-TenantName' : orchestratorInfo.tenantLogicalName
                 }
             };
 
@@ -37,12 +42,12 @@ module.exports = {
             let axiosGenericHeaders = {
                 headers: {
                     'Authorization' : "Bearer " + accessToken,
-                    'X-UIPATH-TenantName' : orch.tenantLogicalName
+                    'X-UIPATH-TenantName' : orchestratorInfo.tenantLogicalName
                 }
             }; 
 
             //Get Releases Request
-            await axios.get('https://platform.uipath.com/' + orch.tenantURL +'/odata/Releases?$filter=%20Name%20eq%20%27' + processName + '%27', axiosGenericHeaders) //?$filter=Id%20eq%20' + orch.ProcessId
+            await axios.get('https://platform.uipath.com/' + orchestratorInfo.tenantURL +'/odata/Releases?$filter=%20Name%20eq%20%27' + processName + '%27', axiosGenericHeaders) //?$filter=Id%20eq%20' + orch.ProcessId
             .then(function(response) {
                 //console.log(response.data)
                 processKey = response.data.value[0].Key
@@ -62,10 +67,10 @@ module.exports = {
     },
     /**
      * Adds a job with the given inputs to the orchestrator generic queue
-     * @param {Object} orchestratorInfo orchestrator API access info
+     * @param {JSON} orchestratorInfo Orchestrator API access info
      * @param {String} userLogin SAP Login of user
-     * @param {String} processStatus process status for RPA handling
-     * @param {String} userEmail user email for the RPA robot to send
+     * @param {String} processStatus Process status for RPA handling
+     * @param {String} userEmail User email for the RPA robot to send
      */
     startJob: async(orchestratorInfo, userLogin, processStatus, userEmail) => {
         return new Promise(async (resolve, reject) => {
@@ -120,34 +125,42 @@ module.exports = {
             })
         })
     },
-    getJobOutput: async(orch, jobId) => {
+    /**
+     * Deprecated function, dont use this one
+     */
+    getJobOutput: async(orchestratorInfo, jobId) => {
         let axiosGenericHeaders = {
             headers: {
-                'Authorization' : "Bearer " + orch.accessToken,
-                'X-UIPATH-TenantName' : orch.tenantLogicalName
+                'Authorization' : "Bearer " + orchestratorInfo.accessToken,
+                'X-UIPATH-TenantName' : orchestratorInfo.tenantLogicalName
             }
         }; 
 
         const response = await axios.get('https://platform.uipath.com/' 
-                                            + orch.tenantURL 
+                                            + orchestratorInfo.tenantURL 
                                             +'/odata/Jobs?$filter=Id%20eq%20' 
                                             + jobId, axiosGenericHeaders)
         return response.data.value[0]
         
         
     },
-    didProcessStart: async(orch, jobId) => {
+    /**
+     * Returns a flag when the RPA robot starts processing
+     * @param {JSON} orchestratorInfo Orchestrator API access info
+     * @param {Number} jobId Id of orchestrator job started previously 
+     */
+    didProcessStart: async(orchestratorInfo, jobId) => {
         return new Promise((resolve, reject) => {
             let delayOutput = setInterval(
                 async function getOutput() {
                     let axiosGenericHeaders = {
                         headers: {
-                            'Authorization': "Bearer " + orch.accessToken,
-                            'X-UIPATH-TenantName': orch.tenantLogicalName
+                            'Authorization': "Bearer " + orchestratorInfo.accessToken,
+                            'X-UIPATH-TenantName': orchestratorInfo.tenantLogicalName
                         }
                     }
                     const response = await axios.get('https://platform.uipath.com/'
-                                                        + orch.tenantURL
+                                                        + orchestratorInfo.tenantURL
                                                         + '/odata/Jobs?$filter=Id%20eq%20'
                                                         + jobId, axiosGenericHeaders)
     
@@ -163,26 +176,40 @@ module.exports = {
                 , 1000);
         })
     },
-    didProcessFinish: async(orch, jobId) => {
+    /**
+     * Returns the RPA process output arguments when it finishes
+     * @param {JSON} orchestratorInfo Orchestrator API access info
+     * @param {Number} jobId Id of orchestrator job started previously 
+     */
+    didProcessFinish: async(orchestratorInfo, jobId) => {
         return new Promise((resolve, reject) => {
             let delayOutput = setInterval(
                 async function getOutput() {
                     let axiosGenericHeaders = {
                         headers: {
-                            'Authorization': "Bearer " + orch.accessToken,
-                            'X-UIPATH-TenantName': orch.tenantLogicalName
+                            'Authorization': "Bearer " + orchestratorInfo.accessToken,
+                            'X-UIPATH-TenantName': orchestratorInfo.tenantLogicalName
                         }
                     }
                     const response = await axios.get('https://platform.uipath.com/'
-                                                        + orch.tenantURL
+                                                        + orchestratorInfo.tenantURL
                                                         + '/odata/Jobs?$filter=Id%20eq%20'
                                                         + jobId, axiosGenericHeaders)
-    
-                    if (response.data.value[0].Info == 'Job completed') {
+                    
+                    let jobInfo = response.data.value[0].Info
+
+                    if (jobInfo == 'Job completed') {
                         resolve(JSON.parse(response.data.value[0].OutputArguments))
                     }
+                    else if (jobInfo != 'Job completed' ||
+                            jobInfo != 'Job started running' ||
+                            jobInfo != 'Job started processing' ||
+                            jobInfo != 'Waiting for execution to start...' ||
+                            jobInfo != null) {
+                        reject('Faulted with: ' + jobInfo)
+                    }
                     else {
-                        console.log(response.data.value[0].Info)
+                        console.log(jobInfo)
                     }
                 }
                 , 1000);
