@@ -11,9 +11,8 @@ module.exports = {
 //Bibliotecas
 var BlipSdk = require("blip-sdk")
 var WebSocketTransport = require("lime-transport-websocket")
-var botCheckSAP = require("./Bot/botCheckSAP")
-var botSAP = require('./botSAP')
-var emfB = require("./emfB.js")
+var botSAP = require('./Bots/botSAP')
+var emfB = require("./local_modules/emfB.js")
 
 //Dados do robo no portal.blip.ai
 let IDENTIFIER = 'tssapsdk';
@@ -99,48 +98,48 @@ client.connect()
                     emfB.SendMessage(message.from, "Boa noite, eu sou o Max Assistant 😀, um assistente virtual e estou aqui para te ajudar!")
                 }
                 emfB.SendMenu(message.from,"Com qual dos sistemas eu posso te auxiliar?", ['SAP','Microsoft','TraceGP'],1000)
-                users[current].status = "Escolhe Sistemas"
+                users[current].status = "Choose System"
                 break;
-// ------------------------------------- case confere sistemas ------------------------------------------- //
-                case "Escolhe Sistemas":
-                console.log("Switch on case:confere sistemas")
+// ------------------------------------- case Escolhe Sistemas ------------------------------------------- //
+                case "Choose System":
+                console.log("Switch on case:Choose System")
                 if (message.content.toLowerCase().includes('sap'))
                 {
-                    emfB.SendMenu(message.from, "O que você precisa?", ['Reset de Senha','FOLHA TOTVS','FOLHA MS','Solução Fiscal','GRC In/Outbound'], 1000)
-                    
+                    botSAP.startSAP(message)
                 }
                 else if (message.content.toLowerCase().includes('microsoft'))
                 {
                     emfB.SendMenu(message.from, "Desculpe, não entendi, pois sou um bot em treinamento, no momento posso te ajudar com os seguintes sistemas", ['SAP'],1000)
-                    users[current].status = "confere sistemas"
+                    users[current].status = "Choose System"
                 }
                 else if (message.content.toLowerCase().includes('tracegp'))
                 {
                     emfB.SendMenu(message.from, "Desculpe, não entendi, pois sou um bot em treinamento, no momento posso te ajudar com os seguintes sistemas:", ['SAP'],1000)
-                    users[current].status = "confere sistemas"
+                    users[current].status = "Choose System"
                 }
-                else 
+                else
                 {
                     emfB.SendMenu(message.from, "Desculpe, não entendi, pois sou um bot em treinamento, no momento posso te ajudar com os seguintes sistemas:", ['SAP'],1000)
-                    users[current].status = "confere sistemas"
+                    users[current].status = "Choose System"
                 }
             break;
+
 // -------------------------------------- case atividades SAP -------------------------------------------- //
-            
-            
-            /*case "Bot SAP HANA 1":
+            case "Bot SAP HANA 1":
                 botSAP.start(client, message, 'hana')
                 break;
-            case "Bot SAP HANA 2":
-                botCheckSAP.start(client, message, 'hana')
-                break;
+           
             case "Bot SAP ECC 1":
                 botSAP.start(client, message, 'ecc')
                 break;
+            /*
+            case "Bot SAP HANA 2":
+                botCheckSAP.start(client, message, 'hana')
+                break;
             case "Bot SAP ECC 2":
                 botCheckSAP.start(client, message, 'ecc')
-                break;*/
-
+                break;
+            */
             case "Saiu":
                 users[current].status = "Boas Vindas"
                 break;

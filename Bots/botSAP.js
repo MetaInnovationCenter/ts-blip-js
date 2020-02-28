@@ -1,140 +1,85 @@
 //Bibliotecas
-var emfB = require("./emfB.js")
+var emfB = require("../local_modules/emfB.js")
 const axios = require('axios');
-const indexModule = require('./index.js')
-const maestro = require('./maestro.js')
+const indexModule = require('../index.js')
+const maestro = require('../local_modules/maestro.js')
+var botCheckSAP = require("./botResetSAP")
+var botCheckSAP = require("./botResetCheckSAP")
 
-//Variáveis para controle de multiplos usuários
-let newUserFlag
-let users = []
+let status
 
 module.exports = {
-    start: async (client, message, sapVersion) => {
-        newUserFlag = true
-        //Confere se a mensagem atual é de um usuário novo ou um que já está na lista
-        users.forEach(user => {
-            console.log(user)
-            //Se o usuário está na lista
-            if(user.id == message.from) {
-                console.log("User already on botSAP list")
-                newUserFlag = false
-                current = users.indexOf(user)
+    startSAP: async (message) => {
+
+    switch (key) {
+        case "atividades SAP":
+            console.log("Switch on case:sistema SAP")
+            if(message.content.toLowerCase().includes('reset'))
+            {
+                emfB.SendMenu(message.from,"Posso te ajudar a resetar a senha do SAP em duas versões, qual você deseja?", ['SAP ECC', 'SAP S/4 HANA '], 1000)
+                users[current].status = "Versões SAP"
             }
-        });
-        //Se o usuário não está na lista
-        if(newUserFlag == true) {
-            console.log("New user added to botSAP list");
-            users.push(new Object)
-            current = users.length - 1 //Novo usuário sempre é adicionado no fim do array
-
-            //Dados padrão de um novo usuário
-            users[current].id = message.from
-            users[current].status = 'Qual login?'
-            users[current].processStatus = 'confere'
-            users[current].sapVersion = sapVersion
-
-            //Info do orchestrator do server maçã
-            users[current].maestro = {
-                clientId: '8DEv1AMNXczW3y4U15LL3jYf62jK93n5',
-                userKey: '67sFvQ61tTh8MQQg59rEef2Bcgcw-Lsef2XU4IMwJLhdM',
-                tenantLogicalName: 'InovTeamDefszqw301979',
-                tenantURL: 'inovteam/InovCenter'
+            else 
+            {
+                emfB.SendMenu(message.from, "Desculpe, não entendi, pois sou um bot em treinamento, no momento posso te ajudar com as seguintes atividades:", ['Reset de Senha'], 1000)
+                users[current].status = "atividades SAP"
             }
-
-            //Adquire informações específicas de cada processo ECC/HANA
-            if(sapVersion == 'hana') {
-                await maestro.getProcessInfo(users[current].maestro, 'SRVC_ResetS4_1_Mestre')
-                .then((response) => {
-                    users[current].maestro.processKey = response.processKey
-                    users[current].maestro.accessToken = response.accessToken
-                    users[current].maestro.ready = true
-                })
-                .catch((error) => {
-                    let regexError = /\b(5)(\d{2})\b/i
-                    console.log(error.match(regexError))
-                    console.log(error)
-                });
-            } 
+        break;
+// --------------------------------------- case versões SAP --------------------------------------------- //
+        case "Versões SAP":
+            console.log('Switch on case versões sap')
+            if(message.content.toLowerCase().includes('ecc')) 
+            {
+                emfB.SendOptions(message.from, "Ok, Você sabe a sua senha atual?", ['Sim', 'Não'], 1000)
+                users[current].status = "senha ecc"
+            }
+            else if(message.content.toLowerCase().includes('hana')) {
+                emfB.SendOptions(message.from, "Ok, Você sabe a sua senha atual?", ['Sim', 'Não'], 1000)
+                users[current].status = "senha hana"
+            }
             
-            else if(sapVersion == 'ecc') {
-                await maestro.getProcessInfo(users[current].maestro, 'SRVC_ResetECC_1_Mestre')
-                .then((response) => {
-                    users[current].maestro.processKey = response.processKey
-                    users[current].maestro.accessToken = response.accessToken
-                })
-                .catch((error) => {
-                    let regexError = /\b(5)(\d{2})\b/i
-                    console.log(error.match(regexError))
-                    console.log(error)
-                });
+            else {
+                console.log("Nenhum sistema detectado");
+                emfB.SendOptions(message.from, "Desculpe, não entendi. Posso trocar sua senha nos sistemas SAP S/4 HANA e SAP ECC, qual deles você utiliza?", ['SAP ECC', 'S/4 HANA'], 2000)
+                users[current].status = "Versões SAP"
             }
-        }
-    
-        switch(users[current].status) {
-            case "Qual login?":
-                emfB.SendMessage(users[current].id, "Para isso, preciso que você me diga qual o seu login no sistema!",2000)
-                users[current].status = "Aviso Processando"
-                break;
-
-            case "Aviso Processando":
-                emfB.SendMessage(users[current].id, "Adicionei seu pedido a fila de processos, aguarde.", 2000)
-                users[current].userLogin = message.content
-                users[current].status = "Start Job Confere"
-
-                //Start Job 
-                orchJobId = await maestro.startJob(users[current].maestro, 
-                                                users[current].userLogin,
-                                                users[current].processStatus)
-                console.log('orchJobId: ' + orchJobId)
-
-                //Resolves when rpa starts processing
-                await maestro.didProcessStart(users[current].maestro, orchJobId)
-                .then(() => {
-                    emfB.SendMessage(users[current].id, "Agora estou processando, só mais um pouquinho!", 2000)
-                })
-
-                //Resolves when rpa finishes processing
-                await maestro.didProcessFinish(users[current].maestro, orchJobId)
-                .then((outputArguments) => {
-                    if(outputArguments.statusEmail == 'enviado') {
-                        emfB.SendMessage(users[current].id, "Senha trocada com sucesso 😊,\
-                                                                te enviei sua senha temporária por e-mail,\
-                                                                até a próxima", 2000)
-                        //Deletes user from the list
-                        indexModule.spliceUser(users[current].id)
-                        users.splice(current, 1)
-                    }
-                    else if(outputArguments.statusLogin == 'inexistente') {
-                        users[current].status = "Login Errado"
-                        emfB.SendMessage(users[current].id, 'Esse usuário não existe no sistema, deseja tentar novamente?', 2000)
-                    }
-                    console.log(outputArguments)
-                })
-                .catch((error) => {
-                    console.log(error)
-                    emfB.SendMessage(message.from, 'falha RPA', 2000)
-                })
-                break;
-
-            case "Login Errado":
-                console.log("Switch on Status: Login Errado");
-                if(message.content.toLowerCase() == 'sim') {
-                    users[current].status = "Aviso Processando"
-                    users[current].processStatus = 'confere'
-                    emfB.SendMessage(users[current].id, "Insira o seu login nesse sistema.",2000)
-                }
-                else if(message.content.toLowerCase().includes('nao') ||
-                        message.content.toLowerCase().includes('não')) {
-
-                    emfB.SendMessage(users[current].id ,"Certo, te vejo na próxima então", 2000)
-                    //Deletes user from the list
-                    indexModule.spliceUser(users[current].id)
-                    users.splice(current, 1) 
-                }
-                else {
-                    emfB.SendMessage(users[current].id ,"Desculpe, não entendi. Você deseja tentar novamente?", 2000)
-                }
-                break;
-        }
+        break;
+// ----------------------------------------- case senha ecc ----------------------------------------------- //
+        case "senha ecc":
+            if(message.content.toLowerCase().includes('nao')) 
+            {
+                botSAP.start(client, message, 'ecc')
+            }
+            else if (message.content.toLowerCase().includes('sim')) 
+            {
+                emfB.SendMessage(message.from, "Dessa forma, irei te dar algumas informações para que você possa realizar este reset.")
+                emfB.SendImg(message.from, "Primeiro você precisa abrir o SAP na versão que você deseja e entrar no ambiente desejado como mostra figura acima:", "https://i.ibb.co/Vwx5wh8/ecc.jpg",50)
+                console.log("GET IN")
+                //emfB.SendImg(message.from, "Após entrar no ambiente você será direcionado para uma página semelhante a esta:","http://ti.meta.com.br/MAIN_LOGO.png",100)
+            }
+            else
+            {
+                emfB.SendOptions(message.from, "Desculpe, não entendi. Você sabe a sua senha atual?", ['Sim', 'Não'], 1000)
+                users[current].status = "ecc"
+            }
+        break;
+// ----------------------------------------- case senha ecc ----------------------------------------------- //
+        case "senha hana":
+            if(message.content.toLowerCase().includes('nao')) 
+            {
+                botSAP.start(client, message, 'hana')
+            }
+            else if (message.content.toLowerCase().includes('sim')) 
+            {
+            
+            }
+            else
+            {
+                emfB.SendOptions(message.from, "Desculpe, não entendi. Você sabe a sua senha atual?", ['Sim', 'Não'], 1000)
+                users[current].status = "senha hana"
+            }
+        break;
+    }
+        
     }
 }

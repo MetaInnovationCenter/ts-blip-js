@@ -1,8 +1,8 @@
 //Bibliotecas
-var emfB = require("./emfB.js")
+var emfB = require("../local_modules/emfB.js")
 const axios = require('axios');
 const indexModule = require('../index.js')
-const maestro = require('./maestro.js')
+const maestro = require('../local_modules/maestro.js')
 
 //Variáveis para controle de multiplos usuários
 let newUserFlag
