@@ -1,7 +1,7 @@
 //Bibliotecas
 var emfB = require("./emfB.js")
 const axios = require('axios');
-const indexModule = require('./index.js')
+const indexModule = require('../index.js')
 const maestro = require('./maestro.js')
 
 //Variáveis para controle de multiplos usuários

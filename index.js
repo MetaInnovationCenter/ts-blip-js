@@ -11,7 +11,7 @@ module.exports = {
 //Bibliotecas
 var BlipSdk = require("blip-sdk")
 var WebSocketTransport = require("lime-transport-websocket")
-var botCheckSAP = require("./botCheckSAP")
+var botCheckSAP = require("./Bot/botCheckSAP")
 var botSAP = require('./botSAP')
 var emfB = require("./emfB.js")
 
@@ -185,7 +185,7 @@ client.connect()
                 }
                 else if (message.content.toLowerCase().includes('sim')) 
                 {
-                    
+                
                 }
                 else
                 {
@@ -193,7 +193,7 @@ client.connect()
                     users[current].status = "senha hana"
                 }
             break;
-
+            
             /*case "Bot SAP HANA 1":
                 botSAP.start(client, message, 'hana')
                 break;
