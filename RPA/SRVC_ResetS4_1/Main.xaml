@@ -466,7 +466,7 @@
                       <av:Size x:Key="ShapeSize">200,66</av:Size>
                     </scg:Dictionary>
                   </sap:WorkflowViewStateService.ViewState>
-                  <Sequence DisplayName="Sequence - Envia nova senha" sap:VirtualizedContainerService.HintSize="200,66" sap2010:WorkflowViewState.IdRef="Sequence_22">
+                  <Sequence DisplayName="Sequence - Envia nova senha" sap:VirtualizedContainerService.HintSize="242,688" sap2010:WorkflowViewState.IdRef="Sequence_22">
                     <Sequence.Variables>
                       <Variable x:TypeArguments="x:String" Default="Hello World" Name="senha" />
                       <Variable x:TypeArguments="x:Boolean" Name="lasterror" />
@@ -595,14 +595,19 @@
                         </ui:SendHotkey.Target>
                       </ui:SendHotkey>
                     </Sequence>
-                    <Sequence DisplayName="Sequence - Envia email" sap:VirtualizedContainerService.HintSize="200,66" sap2010:WorkflowViewState.IdRef="Sequence_19">
+                    <Sequence DisplayName="Sequence - Envia email" sap:VirtualizedContainerService.HintSize="376,337" sap2010:WorkflowViewState.IdRef="Sequence_19">
+                      <Sequence.Variables>
+                        <Variable x:TypeArguments="x:String" Default="&lt;!DOCTYPE html&gt;&#xD;&#xA;&lt;html lang='en'&gt;&#xD;&#xA;&lt;head&gt;&#xD;&#xA;    &lt;meta charset='UTF-8'&gt;&#xD;&#xA;    &lt;meta name='viewport' content='width=device-width, initial-scale=1.0'&gt;&#xD;&#xA;    &lt;title&gt;Email top&lt;/title&gt;     &#xD;&#xA;&lt;/head&gt;&#xD;&#xA;&lt;body style='background-color: rgb(216, 216, 216); height: 90%;'&gt;&#xD;&#xA;    &lt;div style='background-color: #1067b8; height: 15px; width:60%;margin-left: auto; margin-right: auto'&gt;&lt;/div&gt;&#xD;&#xA;    &lt;div style='background-color:#1067b8; width: 60%; margin-left: auto; margin-right: auto;'&gt;&#xD;&#xA;        &lt;div style='background-color:#1067b8; height:45px; width:100%'&gt;&#xD;&#xA;            &lt;a href='http://www.meta.com.br/?lang=en'&gt;&lt;img data-imagetype='External' src='http://ti.meta.com.br/MAIN_LOGO.png' style='display:block; margin-left:auto; margin-right:auto; width:300px; height:46px; position: relative;top: 15px;' alt = 'Meta Logo'&gt;&lt;/a&gt;&#xD;&#xA;        &lt;/div&gt;&#xD;&#xA;        &lt;div style='background-color:#fafbfc; height:450px'&gt;&#xD;&#xA;        &lt;h1 style='text-align:center; padding-top:30px; margin-bottom:30px; font-style:italic;'&gt;Reset sua senha SAP&lt;/h2&gt;&#xD;&#xA;        &lt;hr style='color:#1067b8'&gt;&#xD;&#xA;        &lt;h2 style='text-align:center'&gt;Olá, " Name="StringHTML1" />
+                        <Variable x:TypeArguments="x:String" Default="!&lt;/h2&gt;&#xD;&#xA;        &lt;h4 style='text-align:center; font-weight:500; font-size:large'&gt;Essa é a sua nova senha provisoria SAP:&lt;/h4&gt;&#xD;&#xA;       &#xD;&#xA;        &lt;h1 style='text-align:center;font-family: Arial'&gt;" Name="StringHTML2" />
+                        <Variable x:TypeArguments="x:String" Default=" &lt;/h2&gt;&#xD;&#xA;&#xD;&#xA;     &#xD;&#xA;        &lt;h4 style='text-align:center; font-weight:200; font-size:medium'&gt;Se você não fez essa alteração, NÃO desconsidere este e-mail e entre em contato com o suporte técnico. &#xD;&#xA;        &lt;/p&gt;Não responda a este email automático.&lt;/h4&gt;&#xD;&#xA;        &lt;br&gt;&#xD;&#xA;        &lt;/div&gt;&#xD;&#xA;        &lt;h5 style='text-align:center; position: relative; bottom:14px;color:white; font-weight:normal; font-size:medium'&gt;&#xD;&#xA;        © 2020 Meta Todos os direitos reservados&lt;/h5&gt;&#xD;&#xA;                               &lt;div style='background-color: #1067b8; height: 0.02px; weight: 60%; margin-left: auto; margin-right: auto;'&gt;&lt;/div&gt;&#xD;&#xA;    &lt;/div&gt;&#xD;&#xA;&#xD;&#xA;&lt;/body&gt;&#xD;&#xA;&lt;/html&gt;&#xD;&#xA;" Name="StringHTML3" />
+                      </Sequence.Variables>
                       <sap:WorkflowViewStateService.ViewState>
                         <scg:Dictionary x:TypeArguments="x:String, x:Object">
                           <x:Boolean x:Key="IsExpanded">False</x:Boolean>
                           <x:Boolean x:Key="IsPinned">False</x:Boolean>
                         </scg:Dictionary>
                       </sap:WorkflowViewStateService.ViewState>
-                      <ui:SendMail Bcc="{x:Null}" Cc="{x:Null}" From="{x:Null}" MailMessage="{x:Null}" Name="{x:Null}" TimeoutMS="{x:Null}" Body="[&quot;Olá,&quot; + login + &quot;!&quot; + Environment.NewLine+ Environment.NewLine+&#xA;&quot;Você solicitou uma alteração de senha do SAP. A nova senha de &quot; + login + &quot; é: &quot; + Environment.NewLine + senha]" DisplayName="Send SMTP Mail Message" Email="maksine.baldin@meta.com.br" EnableSSL="True" sap:VirtualizedContainerService.HintSize="334,145" sap2010:WorkflowViewState.IdRef="SendMail_1" IsBodyHtml="False" Password="975310mak" Port="587" SecureConnection="Auto" Server="smtp.live.com" Subject="SAP S/4 HANA - Alteração de senha" To="[email]">
+                      <ui:SendMail Bcc="{x:Null}" Cc="{x:Null}" From="{x:Null}" MailMessage="{x:Null}" Name="{x:Null}" TimeoutMS="{x:Null}" Body="[StringHTML1+login.ToString+StringHTML2+senha.ToString+StringHTML3]" DisplayName="Send SMTP Mail Message" Email="maksine.baldin@meta.com.br" EnableSSL="True" sap:VirtualizedContainerService.HintSize="334,145" sap2010:WorkflowViewState.IdRef="SendMail_1" IsBodyHtml="True" Password="975310mak" Port="587" SecureConnection="Auto" Server="smtp.live.com" Subject="SAP S/4 HANA - Alteração de senha" To="[email]">
                         <ui:SendMail.Files>
                           <scg:List x:TypeArguments="InArgument(x:String)" Capacity="0" />
                         </ui:SendMail.Files>
@@ -1056,7 +1061,7 @@
             <av:PointCollection x:Key="ConnectorLocation">140,282 140,314</av:PointCollection>
           </scg:Dictionary>
         </sap:WorkflowViewStateService.ViewState>
-        <Sequence DisplayName="Seleciona login e acessa conta" sap:VirtualizedContainerService.HintSize="346,594" sap2010:WorkflowViewState.IdRef="Sequence_31">
+        <Sequence DisplayName="Seleciona login e acessa conta" sap:VirtualizedContainerService.HintSize="200,66" sap2010:WorkflowViewState.IdRef="Sequence_31">
           <sap:WorkflowViewStateService.ViewState>
             <scg:Dictionary x:TypeArguments="x:String, x:Object">
               <x:Boolean x:Key="IsExpanded">True</x:Boolean>

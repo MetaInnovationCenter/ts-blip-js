@@ -101,7 +101,7 @@ client.connect()
                 emfB.SendMenu(message.from,"Com qual dos sistemas eu posso te auxiliar?", ['SAP','Microsoft','TraceGP'],1000)
                 users[current].status = "confere sistemas"
                 break;
-
+// ------------------------------------- case confere sistemas ------------------------------------------- //
                 case "confere sistemas":
                 console.log("Switch on case:confere sistemas")
                 if (message.content.toLowerCase().includes('sap'))
@@ -125,7 +125,7 @@ client.connect()
                     users[current].status = "confere sistemas"
                 }
             break;
-
+// -------------------------------------- case atividades SAP -------------------------------------------- //
             case "atividades SAP":
                 console.log("Switch on case:sistema SAP")
                 if(message.content.toLowerCase().includes('reset'))
@@ -139,7 +139,7 @@ client.connect()
                     users[current].status = "atividades SAP"
                 }
             break;
-
+// --------------------------------------- case versões SAP --------------------------------------------- //
             case "Versões SAP":
                 console.log('Switch on case versões sap')
                 if(message.content.toLowerCase().includes('ecc')) 
@@ -158,7 +158,7 @@ client.connect()
                     users[current].status = "Versões SAP"
                 }
             break;
-            
+// ----------------------------------------- case senha ecc ----------------------------------------------- //
             case "senha ecc":
                 if(message.content.toLowerCase().includes('nao')) 
                 {
@@ -167,7 +167,7 @@ client.connect()
                 else if (message.content.toLowerCase().includes('sim')) 
                 {
                     emfB.SendMessage(message.from, "Dessa forma, irei te dar algumas informações para que você possa realizar este reset.")
-                    emfB.SendImg(message.from, "Primeiro você precisa abrir o SAP na versão que você deseja e entrar no ambiente desejado como mostra figura acima:", https://imgur.com/j329zeT)
+                    emfB.SendImg(message.from, "Primeiro você precisa abrir o SAP na versão que você deseja e entrar no ambiente desejado como mostra figura acima:", "")
                    // emfB.SendImg()
                    // emfB.SendMessage(message.from, "Após entrar no ambiente você será direcionado para uma página semelhante a esta:")
                     emfB.SendImg(message.from, "Após entrar no ambiente você será direcionado para uma página semelhante a esta:")
@@ -178,8 +178,8 @@ client.connect()
                     users[current].status = "ecc"
                 }
             break;
-
-            case "senha hana":
+// ----------------------------------------- case senha ecc ----------------------------------------------- //
+            case "senha ecc":
                 if(message.content.toLowerCase().includes('nao')) 
                 {
                     botSAP.start(client, message, 'hana')
