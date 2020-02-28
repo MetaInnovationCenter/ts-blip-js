@@ -17,7 +17,7 @@ const bayes = require('bayes')
 //Chatbots
 
 //Local libraries
-const emfB = require("./emfB.js")
+const emfB = require("../local_modules/emfB.js")
 const smtalk = require('./small-talk')
 
 //Chatbot API Auth Info

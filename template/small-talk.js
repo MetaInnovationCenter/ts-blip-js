@@ -1,5 +1,5 @@
 const bayes = require('bayes')
-const emfB = require("./emfB.js")
+const emfB = require("../local_modules/emfB.js")
 
 module.exports = {
     talk: (message) => {
