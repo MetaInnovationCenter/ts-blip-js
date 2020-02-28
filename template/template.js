@@ -47,7 +47,6 @@ client.connect()
     //Plaintext receiver
     client.addMessageReceiver((message) => message.type === 'text/plain', async (message) => {
 
-        /*------------------------User Handling------------------------ */
         newUserFlag = true
         //Confere se a mensagem atual é de um usuário novo ou um que já está na lista
         users.forEach(user => {

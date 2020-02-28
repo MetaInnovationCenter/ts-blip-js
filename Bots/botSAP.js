@@ -6,12 +6,31 @@ const maestro = require('../local_modules/maestro.js')
 var botCheckSAP = require("./botResetSAP")
 var botCheckSAP = require("./botResetCheckSAP")
 
-let status
+//Variáveis para controle de multiplos usuários
+let users = []
+let newUserFlag = true
+let current
+
+//Variável status inicial
+let status = "atividades SAP"
 
 module.exports = {
     startSAP: async (message) => {
 
-    switch (key) {
+    newUserFlag = true
+    //Confere se a mensagem atual é de um usuário novo ou um que já está na lista
+    users.forEach(user => {
+        console.log(user)
+        //Se o usuário está na lista
+        if(user.id == message.from) {
+            console.log("User already on index list");
+            newUserFlag = false
+            current = users.indexOf(user)
+        }
+    });
+    
+
+    switch (status) {
         case "atividades SAP":
             console.log("Switch on case:sistema SAP")
             if(message.content.toLowerCase().includes('reset'))

@@ -22,6 +22,8 @@ let ACCESS_KEY = 'b3RPRjhGbDhxYUNQY0gzZGJ2cjY=';
 let users = []
 let newUserFlag = true
 let current
+
+//Variáveis para controle de tempo
 let time = new Date();
 let hour = time.getHours();
 
@@ -98,41 +100,43 @@ client.connect()
                     emfB.SendMessage(message.from, "Boa noite, eu sou o Max Assistant 😀, um assistente virtual e estou aqui para te ajudar!")
                 }
                 emfB.SendMenu(message.from,"Com qual dos sistemas eu posso te auxiliar?", ['SAP','Microsoft','TraceGP'],1000)
-                users[current].status = "Choose System"
+                users[current].status = "Escolha de Sistemas"
                 break;
 // ------------------------------------- case Escolhe Sistemas ------------------------------------------- //
-                case "Choose System":
-                console.log("Switch on case:Choose System")
+                case "Escolha de Sistemas":
+                console.log("Switch on case:Escolha de Sistemas")
                 if (message.content.toLowerCase().includes('sap'))
                 {
-                    botSAP.startSAP(message)
+                    users[current].status = "BotSAP"
                 }
                 else if (message.content.toLowerCase().includes('microsoft'))
                 {
                     emfB.SendMenu(message.from, "Desculpe, não entendi, pois sou um bot em treinamento, no momento posso te ajudar com os seguintes sistemas", ['SAP'],1000)
-                    users[current].status = "Choose System"
+                    users[current].status = "Escolha de Sistemas"
                 }
                 else if (message.content.toLowerCase().includes('tracegp'))
                 {
                     emfB.SendMenu(message.from, "Desculpe, não entendi, pois sou um bot em treinamento, no momento posso te ajudar com os seguintes sistemas:", ['SAP'],1000)
-                    users[current].status = "Choose System"
+                    users[current].status = "Escolha de Sistemas"
                 }
                 else
                 {
                     emfB.SendMenu(message.from, "Desculpe, não entendi, pois sou um bot em treinamento, no momento posso te ajudar com os seguintes sistemas:", ['SAP'],1000)
-                    users[current].status = "Choose System"
+                    users[current].status = "Escolha de Sistemas"
                 }
             break;
+// ------------------------------------- atividades para startar ------------------------------------------- //
+            case "BotSAP":
+                botSAP.startSAP(message)
+                break;
 
-// -------------------------------------- case atividades SAP -------------------------------------------- //
+            /*
             case "Bot SAP HANA 1":
                 botSAP.start(client, message, 'hana')
                 break;
-           
             case "Bot SAP ECC 1":
                 botSAP.start(client, message, 'ecc')
                 break;
-            /*
             case "Bot SAP HANA 2":
                 botCheckSAP.start(client, message, 'hana')
                 break;
