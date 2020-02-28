@@ -1,28 +1,5 @@
 var bayes = require('bayes')
 
-// let jsonTest = {
-//     cat1 : [1, 2, 3],
-//     cat2 : [2, 3, 4]
-// }
-
-// for (item in jsonTest) {
-//     console.log(jsonTest[item])
-// }
-
-// /**
-//  * Learn multiple phrases from a json
-//  * @param {String} defaultCategory Called when no other category is matched
-//  * @param {Array} phrases Phrases to be learned
-//  * @param {String} category Category to train in
-//  */
-// multilearn = async (defaultCategory, category, phrases) => {
-//     await classifier.learn('', defaultCategory)
-
-//     phrases.forEach(phrase => {
-//         classifier.learn(phrase, category)
-//     });
-// }
-
 /**
  * Classifies an input phrase based on the categories and training phrases provided in a JavaScript Object format
  * @param {JSON} catsAndPhrases JavaScript Object containing the categories and phrases that will be classified  
@@ -50,40 +27,10 @@ const classifyMessage = async (message, catsAndPhrases) => {
 }
 
 app = async () => {
-
     classifyMessage('Ok', {Certo: ['Beleza', 'Tranquilo', 'Ok']})
     .then((response) => {
         console.log(response)
     })
-
-    // multilearn(
-    //     'Não entendi',
-    //     'Reset de Senha',
-    //     [
-    //         'trocar minha senha',
-    //         'resetar minha senha',
-    //         'senha nova',
-    //         'esqueci',
-    //         'não consigo abrir'
-    //     ])
-    // await classifier.categorize('joão')
-    // .then((response) => {
-    //     console.log(response)
-    // })
-
-    // multilearn(
-    //     'Não entendi',
-    //     'Sim',
-    //     [
-    //         'sim',
-    //         'certo',
-    //         'ok',
-    //         'beleza'
-    //     ])
-    // await classifier.categorize('certo')
-    // .then((response) => {
-    //     console.log(response)
-    // })
 }
 
 app()
