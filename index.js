@@ -92,11 +92,11 @@ client.connect()
                 hour = time.getHours()
             
                 if ( hour>5 & hour<12) {  
-                    emfB.SendMessage(message.from, "Bom dia, eu sou o Max Assistant 😀, um assistente virtual que irá te ajudar!")   
+                    emfB.SendMessage(message.from, "Bom dia, eu sou o Max Assistant 😀, um assistente virtual e estou aqui para te ajudar!")   
                 } else if(hour>12 & hour<18) {
-                    emfB.SendMessage(message.from, "Boa tarde, eu sou o Max Assistant 😀, um assistente virtual que irá te ajudar!")
+                    emfB.SendMessage(message.from, "Boa tarde, eu sou o Max Assistant 😀, um assistente virtual e estou aqui para te ajudar!")
                 } else if(hour>18 & hour<5) {
-                    emfB.SendMessage(message.from, "Boa noite, eu sou o Max Assistant 😀, um assistente virtual que irá te ajudar!")
+                    emfB.SendMessage(message.from, "Boa noite, eu sou o Max Assistant 😀, um assistente virtual e estou aqui para te ajudar!")
                 }
                 emfB.SendMenu(message.from,"Com qual dos sistemas eu posso te auxiliar?", ['SAP','Microsoft','TraceGP'],1000)
                 users[current].status = "confere sistemas"
@@ -167,10 +167,9 @@ client.connect()
                 else if (message.content.toLowerCase().includes('sim')) 
                 {
                     emfB.SendMessage(message.from, "Dessa forma, irei te dar algumas informações para que você possa realizar este reset.")
-                    emfB.SendImg(message.from, "Primeiro você precisa abrir o SAP na versão que você deseja e entrar no ambiente desejado como mostra figura acima:", "")
-                   // emfB.SendImg()
-                   // emfB.SendMessage(message.from, "Após entrar no ambiente você será direcionado para uma página semelhante a esta:")
-                    emfB.SendImg(message.from, "Após entrar no ambiente você será direcionado para uma página semelhante a esta:")
+                    emfB.SendImg(message.from, "Primeiro você precisa abrir o SAP na versão que você deseja e entrar no ambiente desejado como mostra figura acima:", "https://i.ibb.co/Vwx5wh8/ecc.jpg",50)
+                    console.log("GET IN")
+                    //emfB.SendImg(message.from, "Após entrar no ambiente você será direcionado para uma página semelhante a esta:","http://ti.meta.com.br/MAIN_LOGO.png",100)
                 }
                 else
                 {
@@ -179,7 +178,7 @@ client.connect()
                 }
             break;
 // ----------------------------------------- case senha ecc ----------------------------------------------- //
-            case "senha ecc":
+            case "senha hana":
                 if(message.content.toLowerCase().includes('nao')) 
                 {
                     botSAP.start(client, message, 'hana')

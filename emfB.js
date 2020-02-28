@@ -287,9 +287,9 @@ module.exports = {
     /** 
      * Manda uma mensagem com 1 imagem.
      * Retorna true quando tudo certo, false quando não
-     * @param {String} user - Id do Usuario
-     * @param {String} msg - Mensagen que fica embaixo da imagem ("" -> sem mensagem)
-     * @param {String} img - Link da imagem (com .jpeg)
+     * @param {String} user - "Id do Usuario"
+     * @param {String} msg - "Mensagen que fica embaixo da imagem" // ("" -> sem mensagem)
+     * @param {String} img - "Link da imagem.png"
      * @param {Number} dg - Tempo de "Digitando" (dg <= 0 -> sem digitando) (em milisegundos)
     */
     SendImg: (user, msg, img, dg) => {
