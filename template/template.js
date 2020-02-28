@@ -28,7 +28,6 @@ const ACCESS_KEY = 'QjhPdmxZMzlxWGJUaVg1MlBUdjc=';
 let users = []
 let newUserFlag = true
 let current
-let flagMessageNotSent
 
 //Establish websocket connection to blip
 let client = new BlipSdk.ClientBuilder()
