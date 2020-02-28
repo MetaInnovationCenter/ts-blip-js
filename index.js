@@ -105,7 +105,7 @@ client.connect()
                 console.log("Switch on case:Choose System")
                 if (message.content.toLowerCase().includes('sap'))
                 {
-                    botSAP.startSAP(message)
+                    users[current].status = "BotSAP"
                 }
                 else if (message.content.toLowerCase().includes('microsoft'))
                 {
@@ -123,16 +123,18 @@ client.connect()
                     users[current].status = "Choose System"
                 }
             break;
-
 // -------------------------------------- case atividades SAP -------------------------------------------- //
+            case "BotSAP":
+                botSAP.startSAP(message)
+                break;
+
+            /*
             case "Bot SAP HANA 1":
                 botSAP.start(client, message, 'hana')
                 break;
-           
             case "Bot SAP ECC 1":
                 botSAP.start(client, message, 'ecc')
                 break;
-            /*
             case "Bot SAP HANA 2":
                 botCheckSAP.start(client, message, 'hana')
                 break;
