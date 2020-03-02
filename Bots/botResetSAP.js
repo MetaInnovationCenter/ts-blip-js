@@ -1,6 +1,5 @@
 //Bibliotecas
 var emfB = require("../local_modules/emfB.js")
-const axios = require('axios');
 const indexModule = require('../index.js')
 const maestro = require('../local_modules/maestro.js')
 
