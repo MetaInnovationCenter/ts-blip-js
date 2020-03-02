@@ -6,6 +6,7 @@ const maestro = require('../local_modules/maestro.js')
 //Variáveis para controle de multiplos usuários
 let newUserFlag
 let users = []
+let current
 
 module.exports = {
     start: async (message, sapVersion) => {
@@ -31,6 +32,7 @@ module.exports = {
             users[current].status = 'Qual login?'
             users[current].processStatus = 'confere'
             users[current].sapVersion = sapVersion
+            users[current].try = 0
 
             //Info do orchestrator do server maçã
             users[current].maestro = {
@@ -40,7 +42,7 @@ module.exports = {
                 tenantURL: 'inovteam/InovCenter'
             }
 
-            //Adquire informações específicas de cada processo ECC/HANA
+            //Adquire informações específicas de cada processo ECC/HANA e atribui a propriedades de users[current]
             if(sapVersion == 'hana') {
                 console.log("sapVersion == hana");
                 await maestro.getProcessInfo(users[current].maestro, 'SRVC_ResetS4_1_Mestre')
@@ -73,7 +75,7 @@ module.exports = {
 
         switch(users[current].status) {
             case "Qual login?":
-                emfB.SendMessage(users[current].id, "Para isso, preciso que você me diga qual o seu login no sistema!",2000)
+                emfB.SendMessage(users[current].id, "Para isso, preciso que você me diga qual o seu login no sistema.",2000)
                 users[current].status = "Aviso Processando"
                 break;
 
@@ -83,9 +85,9 @@ module.exports = {
                 users[current].status = "Start Job Confere"
 
                 //Start Job 
-                orchJobId = await maestro.startJob(users[current].maestro, 
-                                                users[current].userLogin,
-                                                users[current].processStatus)
+                let orchJobId = await maestro.startJob(users[current].maestro, 
+                                                       users[current].userLogin,
+                                                       users[current].processStatus)
                 console.log('orchJobId: ' + orchJobId)
 
                 //Resolves when rpa starts processing
@@ -100,14 +102,14 @@ module.exports = {
                     if(outputArguments.statusEmail == 'enviado') {
                         emfB.SendMessage(users[current].id, "Senha trocada com sucesso 😊,\
                                                                 te enviei sua senha temporária por e-mail,\
-                                                                até a próxima", 2000)
+                                                                até a próxima!", 2000)
                         //Deletes user from the list
                         indexModule.spliceUser(users[current].id)
                         users.splice(current, 1)
                     }
                     else if(outputArguments.statusLogin == 'inexistente') {
                         users[current].status = "Login Errado"
-                        emfB.SendMessage(users[current].id, 'Esse usuário não existe no sistema, deseja tentar novamente?', 2000)
+                        emfB.SendOptions(users[current].id, 'Esse usuário não existe no sistema, deseja tentar novamente?', ['Sim', 'Não'], 2000)
                     }
                     console.log(outputArguments)
                 })
@@ -119,21 +121,23 @@ module.exports = {
 
             case "Login Errado":
                 console.log("Switch on Status: Login Errado");
-                if(message.content.toLowerCase() == 'sim') {
+                if(users[current].try == 2){
+                    emfB.SendMessage(users[current].id, "Você excedeu o número de tentativas!", 2000)
+                }
+                else if(message.content.toLowerCase() == 'sim') {
+                    users[current].try = users[current].try + 1
                     users[current].status = "Aviso Processando"
                     users[current].processStatus = 'confere'
                     emfB.SendMessage(users[current].id, "Insira o seu login nesse sistema.",2000)
                 }
-                else if(message.content.toLowerCase().includes('nao') ||
-                        message.content.toLowerCase().includes('não')) {
-
+                else if(message.content.toLowerCase().includes('nao')||message.content.toLowerCase().includes('não')) {
                     emfB.SendMessage(users[current].id ,"Certo, te vejo na próxima então", 2000)
                     //Deletes user from the list
                     indexModule.spliceUser(users[current].id)
                     users.splice(current, 1) 
                 }
                 else {
-                    emfB.SendMessage(users[current].id ,"Desculpe, não entendi. Você deseja tentar novamente?", 2000)
+                    emfB.SendOptions(users[current].id ,"Desculpe, não entendi. Você deseja tentar novamente?",['Sim','Não'], 2000)
                 }
                 break;
         }
