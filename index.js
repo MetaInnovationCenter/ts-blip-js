@@ -39,7 +39,7 @@ client.connect()
 .then(async function(session) {
     console.log('Application started. Press Ctrl + c to stop.')
 
-    console.log(client.ArtificialIntelligence.ArtificialIntelligenceExtension)
+    console.log(client.ArtificialIntelligence.ArtificialIntelligenceExtension) 
 
     //Receiver de Texto
     client.addMessageReceiver((message) => message.type === 'text/plain', async (message) => {

@@ -100,9 +100,9 @@ module.exports = {
                 await maestro.didProcessFinish(users[current].maestro, orchJobId)
                 .then((outputArguments) => {
                     if(outputArguments.statusEmail == 'enviado') {
-                        emfB.SendMessage(users[current].id, "Senha trocada com sucesso 😊,\
+                        emfB.SendOptions(users[current].id, "Senha trocada com sucesso 😊,\
                                                                 te enviei sua senha temporária por e-mail,\
-                                                                até a próxima!", 2000)
+                                                                você recebeu este email?", ['Sim', 'Não'],2000)
                         //Deletes user from the list
                         indexModule.spliceUser(users[current].id)
                         users.splice(current, 1)
@@ -121,7 +121,7 @@ module.exports = {
 
             case "Login Errado":
                 console.log("Switch on Status: Login Errado");
-                if(users[current].try == 2){
+                if(users[current].try == 2) {
                     emfB.SendMessage(users[current].id, "Você excedeu o número de tentativas!", 2000)
                     //Deletes user from the list
                     indexModule.spliceUser(users[current].id)
