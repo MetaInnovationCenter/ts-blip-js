@@ -130,7 +130,7 @@ module.exports = {
                 emfB.SendImg(message.from, "Após inserir esses dados você deve clicar onde diz Nova Senha, conforme imagem acima:", "https://i.ibb.co/mhtx35w/ecc-senha.jpg",2000)
                 emfB.SendImg(message.from, "Após isso aparecerá uma tela semelhante a essa tela.", "https://i.ibb.co/x1PB6jB/novasenha-ecc.jpg", 2500)
                 emfB.SendMessage(message.from, "Agora você precisa digitar a sua nova senha, ela precisa ser maior que 6 digitos, após a criação da nova senha você deve confirmar o processo.",3000)
-                emfB.SendOptions(message.from, "Essas informações te ajudaram a resetar a sua senha?", ['Sim', 'Nao'], 3500)
+                emfB.SendOptions(message.from, "Essas informações te ajudaram a trocar a sua senha?", ['Sim', 'Nao'], 3500)
                 users[current].status = "Senha trocada ecc"
             }
             else {
