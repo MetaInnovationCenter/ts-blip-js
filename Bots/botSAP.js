@@ -128,6 +128,19 @@ module.exports = {
                 users[current].status = "Versões SAP"
             }
         break;*/
+         // --------------------------------------- case Prossiga ecc - Instruções --------------------------------------------- //
+        case "Prossiga ecc":
+            console.log('Switch on case: versões sap')
+            if(message.content.toLowerCase().includes('prossiga')) 
+            {
+               
+            }
+            else {
+                console.log("Usuario não apertou o botão de prosseguir");
+                emfB.SendOptions(message.from, "Desculpe, não entendi. Aperte aqui para continuarmos:", ['Prosseguir'], 2000)
+                users[current].status = "Versões SAP"
+            }
+        break;    
         
         }
    
