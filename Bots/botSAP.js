@@ -89,16 +89,10 @@ module.exports = {
                 emfB.SendImg(message.from, "Após entrar no ambiente você será direcionado para uma página semelhante a esta.", "https://i.ibb.co/YyxJ07t/hana-inicial-1.jpg",1000)
                 emfB.SendOptions(message.from, "Você deve preencher os campos solicitados, mandante,usuário e senha como se fosse logar no sistema.",['Prosseguir'], 1500)
                 users[current].status = "Prossiga hana"
-
-               // emfB.SendImg(message.from, "Após isso você deve clicar onde diz Nova Senha, conforme imagem acima:", "https://i.ibb.co/4sbT4Gz/hana-senha.jpg",50)
-              //  emfB.SendImg(message.from, "Após clicar neste botão irá aparecer a seguinte tela:", "https://i.ibb.co/Tm3FN8f/nova-senha-hana.jpg",50)
-              //  emfB.SendMessage(message.from, "Agora você precisa digitar a sua nova senha, ela precisa ser maior que 6 digitos, após a criação da nova senha você deve confirmar o processo.")
-               // emfB.SendOptions(message.from, "Essas informações te ajudaram a trocar a sua senha?", ['Sim', 'Não'], 1000)
-                // users[current].status = "senha trocada hana"
             }
             else
             {
-                //emfB.SendOptions(message.from, "Desculpe, não entendi. Você sabe a sua senha atual?", ['Sim', 'Não'], 1000)
+                emfB.SendOptions(message.from, "Desculpe, não entendi. Posso te ajudar a trocar a senha do SAP em duas versões, qual você deseja?", ['SAP ECC', 'SAP S/4 HANA '], 1000)
                 //users[current].status = "senha hana"
             }
         break;
@@ -125,7 +119,7 @@ module.exports = {
          // --------------------------------------- case Prossiga -Instruções --------------------------------------------- //
         case "Prossiga ecc":
             console.log('Switch on case: prossiga ecc')
-            if(message.content.toLowerCase().includes('prosseguir')) 
+            if(message.content.toLowerCase().includes('prosseguir')||message.content.toLowerCase().includes('prossiga')) 
             {
                 emfB.SendImg(message.from, "Após inserir esses dados você deve clicar onde diz Nova Senha, conforme imagem acima:", "https://i.ibb.co/mhtx35w/ecc-senha.jpg",2000)
                 emfB.SendImg(message.from, "Após isso aparecerá uma tela semelhante a essa tela.", "https://i.ibb.co/x1PB6jB/novasenha-ecc.jpg", 2500)
