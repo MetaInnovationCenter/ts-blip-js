@@ -68,24 +68,28 @@ module.exports = {
                 emfB.SendOptions(message.from, "Desculpe, não entendi. Posso trocar sua senha nos sistemas SAP S/4 HANA e SAP ECC, qual deles você utiliza?", ['SAP ECC', 'S/4 HANA'], 2000)
                 users[current].status = "Inicia botResetSAP"
             }
-            break;
+        break;
 // ----------------------------------------- case senha ecc ----------------------------------------------- //
         case "tutorial":
-            
+            console.log('ENTROU NO TUTORIAL')
             if (message.content.toLowerCase().includes('ecc')) 
             {
-              /*  emfB.SendMessage(message.from, "Dessa forma, irei te dar algumas informações para que você possa realizar este reset.")
+            /*  emfB.SendMessage(message.from, "Dessa forma, irei te dar algumas informações para que você possa realizar este reset.")
                 emfB.SendImg(message.from, "Primeiro você precisa abrir o SAP na versão que você deseja e entrar no ambiente desejado como mostra figura acima:", "https://i.ibb.co/Vwx5wh8/ecc.jpg",50)
                 console.log("GET IN")*/
                 //emfB.SendImg(message.from, "Após entrar no ambiente você será direcionado para uma página semelhante a esta:","http://ti.meta.com.br/MAIN_LOGO.png",100)
                 emfB.SendMessage(message.from, "Dessa forma, irei te dar algumas informações para que você possa realizar este reset.")
                 emfB.SendImg(message.from, "Primeiro você precisa abrir o SAP na versão que você deseja e entrar no ambiente desejado como mostra figura acima:", "https://i.ibb.co/6nm4GjC/ambiente.jpg",500)
+            //  emfB.SendOptions(message.from, "Clique aqui para continuar", ['Prosseguir'],1000)
+            //  users[current].status = "Prossiga"
                 emfB.SendImg(message.from, "Após entrar no ambiente você será direcionado para uma página semelhante a esta.", "https://i.ibb.co/9cZPgfk/ecc-inicial.jpg",1000)
-                emfB.SendMessage(message.from, "Você deve preencher os campos solicitados, mandante,usuário e senha como se fosse logar no sistema.",1500)
-                emfB.SendImg(message.from, "Após isso você deve clicar onde diz Nova Senha, conforme imagem acima:", "https://i.ibb.co/mhtx35w/ecc-senha.jpg",2000)
-                emfB.SendImg(message.from, "Após clicar neste botão irá aparecer a seguinte tela:", "https://i.ibb.co/x1PB6jB/novasenha-ecc.jpg", 2500)
-                emfB.SendMessage(message.from, "Agora você precisa digitar a sua nova senha, ela precisa ser maior que 6 digitos, após a criação da nova senha você deve confirmar o processo.",3000)
-                emfB.SendOptions(message.from, "Essas informações te ajudaram a resetar a sua senha?", ['Sim', 'Não'], 3500)
+                emfB.SendOptions(message.from, "Você deve preencher os campos solicitados, mandante,usuário e senha como se fosse logar no sistema.",['Prosseguir'], 1500)
+                users[current].status = "Prossiga ecc"
+
+            // emfB.SendImg(message.from, "Após isso você deve clicar onde diz Nova Senha, conforme imagem acima:", "https://i.ibb.co/mhtx35w/ecc-senha.jpg",2000)
+            // emfB.SendImg(message.from, "Após clicar neste botão irá aparecer a seguinte tela:", "https://i.ibb.co/x1PB6jB/novasenha-ecc.jpg", 2500)
+            // emfB.SendMessage(message.from, "Agora você precisa digitar a sua nova senha, ela precisa ser maior que 6 digitos, após a criação da nova senha você deve confirmar o processo.",3000)
+            //  emfB.SendOptions(message.from, "Essas informações te ajudaram a resetar a sua senha?", ['Sim', 'Não'], 3500)
             } else if (message.content.toLowerCase().includes('hana')) 
             {
                 emfB.SendMessage(message.from, "Dessa forma, irei te dar algumas informações para que você possa realizar esta troca.")
