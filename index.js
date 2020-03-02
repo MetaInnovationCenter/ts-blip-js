@@ -8,7 +8,7 @@ module.exports = {
         users.splice(current, 1)
     }
 }
-//Bibliotecas
+//Libraries
 var BlipSdk = require("blip-sdk")
 var WebSocketTransport = require("lime-transport-websocket")
 var botSAP = require('./Bots/botSAP')
@@ -63,26 +63,24 @@ client.connect()
             users[current].status = 'Boas Vindas'
         }
 
-        if(message.content.toLowerCase().includes('tchau')){        // caso o usuário deseja sair do sistema
+        // Caso o usuário deseja sair do sistema
+        if(message.content.toLowerCase().includes('tchau')){ 
             emfB.SendMessage(message.from, "Até a próxima, tchau!")
             users[current].status = "Saiu"
         }
-        else if(message.content.toLowerCase().includes('valeu'))
-        {
+        else if(message.content.toLowerCase().includes('valeu')){
             emfB.SendMessage(message.from, "Até mais!")
             users[current].status = "Saiu"
         }
-        else if(message.content.toLowerCase().includes('bye'))
-        {
+        else if(message.content.toLowerCase().includes('bye')){
             emfB.SendMessage(message.from, "See you!")
             users[current].status = "Saiu"
         }
-        else if(message.content.toLowerCase().includes('oi'))
-        {
+        // Boas Vindas
+        else if(message.content.toLowerCase().includes('oi')){
             users[current].status = "Boas Vindas"
         }
-        else if(message.content.toLowerCase().includes('ola'))
-        {
+        else if(message.content.toLowerCase().includes('ola')){
             users[current].status = "Boas Vindas"
         }
 

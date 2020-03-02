@@ -123,6 +123,9 @@ module.exports = {
                 console.log("Switch on Status: Login Errado");
                 if(users[current].try == 2){
                     emfB.SendMessage(users[current].id, "Você excedeu o número de tentativas!", 2000)
+                    //Deletes user from the list
+                    indexModule.spliceUser(users[current].id)
+                    users.splice(current, 1) 
                 }
                 else if(message.content.toLowerCase() == 'sim') {
                     users[current].try = users[current].try + 1
