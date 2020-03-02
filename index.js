@@ -107,7 +107,7 @@ client.connect()
                 console.log("Switch on case:Escolha de Sistemas")
                 if (message.content.toLowerCase().includes('sap'))
                 {
-                    emfB.SendOptions(message.from, "O que você precisa?", ['Reset de Senha','Preciso trocar minha senha'], 1000)
+                    emfB.SendOptions(message.from, "O que você precisa?", ['Esqueci minha senha.','Lembro minha senha e quero alterá-la'], 1000)
                     users[current].status = "BotSAP"
                 }
                 else if (message.content.toLowerCase().includes('microsoft'))
