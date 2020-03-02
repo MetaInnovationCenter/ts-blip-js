@@ -3,7 +3,7 @@ var emfB = require("../local_modules/emfB.js")
 const axios = require('axios');
 const indexModule = require('../index.js')
 const maestro = require('../local_modules/maestro.js')
-var botCheckSAP = require("./botResetSAP.js")
+var botResetSAP = require("./botResetSAP.js")
 var botCheckSAP = require("./botResetCheckSAP.js")
 
 //Variáveis para controle de multiplos usuários
@@ -57,16 +57,16 @@ module.exports = {
             console.log('Switch on case: Inicia botResetSAP')
             if(message.content.toLowerCase().includes('ecc')) 
             {
-                botResetSAP.start(message, 'ecc')
+                botResetSAP.start(message, "ecc")
             }
             else if(message.content.toLowerCase().includes('hana')) 
             {
-                botResetSAP.start(message, 'hana')
+                botResetSAP.start(message, "hana")
             }
             else
             {
                 emfB.SendOptions(message.from, "Desculpe, não entendi. Posso trocar sua senha nos sistemas SAP S/4 HANA e SAP ECC, qual deles você utiliza?", ['SAP ECC', 'S/4 HANA'], 2000)
-                //users[current].status = "tipos"
+                users[current].status = "Inicia botResetSAP"
             }
             break;
 // ----------------------------------------- case senha ecc ----------------------------------------------- //

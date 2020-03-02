@@ -43,6 +43,7 @@ module.exports = {
 
             //Adquire informações específicas de cada processo ECC/HANA
             if(sapVersion == 'hana') {
+                console.log("sapVersion == hana");
                 await maestro.getProcessInfo(users[current].maestro, 'SRVC_ResetS4_1_Mestre')
                 .then((response) => {
                     users[current].maestro.processKey = response.processKey
@@ -57,6 +58,7 @@ module.exports = {
             } 
             
             else if(sapVersion == 'ecc') {
+                console.log("sapVersion == ecc");
                 await maestro.getProcessInfo(users[current].maestro, 'SRVC_ResetECC_1_Mestre')
                 .then((response) => {
                     users[current].maestro.processKey = response.processKey
@@ -69,7 +71,6 @@ module.exports = {
                 });
             }
         }
-        emfB.SendMessage(message.from, "lala", 100)
 
         switch(users[current].status) {
             case "Qual login?":
