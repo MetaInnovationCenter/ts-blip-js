@@ -40,7 +40,7 @@ module.exports = {
             console.log("Switch on case: Versões SAP")
             if(message.content.toLowerCase().includes('reset'))
             {
-                emfB.SendOptions(message.from,"Posso te ajudar a resetar a senha do SAP em duas versões, qual você deseja?", ['SAP ECC', 'SAP S/4 HANA '], 1000)
+                emfB.SendOptions(message.from,"Posso resetar sua senha do SAP em duas versões, qual você deseja?", ['SAP ECC', 'SAP S/4 HANA '], 1000)
                 users[current].status = "Inicia botResetSAP"
             } else if (message.content.toLowerCase().includes('trocar')) {
                 emfB.SendOptions(message.from,"Posso te ajudar a trocar a senha do SAP em duas versões, qual você deseja?", ['SAP ECC', 'SAP S/4 HANA '], 1000)
