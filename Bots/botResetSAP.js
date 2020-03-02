@@ -9,7 +9,7 @@ let newUserFlag
 let users = []
 
 module.exports = {
-    start: async (client, message, sapVersion) => {
+    start: async (message, sapVersion) => {
         newUserFlag = true
         //Confere se a mensagem atual é de um usuário novo ou um que já está na lista
         users.forEach(user => {
@@ -69,7 +69,8 @@ module.exports = {
                 });
             }
         }
-    
+        emfB.SendMessage(message.from, "lala", 100)
+
         switch(users[current].status) {
             case "Qual login?":
                 emfB.SendMessage(users[current].id, "Para isso, preciso que você me diga qual o seu login no sistema!",2000)

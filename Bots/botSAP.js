@@ -57,16 +57,16 @@ module.exports = {
             console.log('Switch on case: Inicia botResetSAP')
             if(message.content.toLowerCase().includes('ecc')) 
             {
-                botResetSAP.start(client, message, 'ecc')
+                botResetSAP.start(message, 'ecc')
             }
             else if(message.content.toLowerCase().includes('hana')) 
             {
-                botResetSAP.start(client, message, 'hana')
+                botResetSAP.start(message, 'hana')
             }
             else
             {
                 emfB.SendOptions(message.from, "Desculpe, não entendi. Posso trocar sua senha nos sistemas SAP S/4 HANA e SAP ECC, qual deles você utiliza?", ['SAP ECC', 'S/4 HANA'], 2000)
-                users[current].status = "tipos"
+                //users[current].status = "tipos"
             }
             break;
 // ----------------------------------------- case senha ecc ----------------------------------------------- //
