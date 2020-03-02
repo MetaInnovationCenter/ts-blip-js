@@ -92,8 +92,8 @@ client.connect()
                 time = new Date();      
                 hour = time.getHours()
             
-                if ( hour>5 & hour<12) {  
-                    emfB.SendMessage(message.from,  "Bom dia, eu sou o Max Assistant e estou aqui para te ajudar! 😀")   
+                if (hour>5 & hour<12) {  
+                    emfB.SendMessage(message.from,"Bom dia, eu sou o Max Assistant e estou aqui para te ajudar! 😀")   
                 } else if(hour>12 & hour<18) {
                     emfB.SendMessage(message.from,"Boa tarde, eu sou o Max Assistant e estou aqui para te ajudar! 😀")
                 } else if(hour>18 & hour<5) {
