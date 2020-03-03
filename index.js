@@ -93,13 +93,13 @@ client.connect()
                 hour = time.getHours()
             
                 if ( hour>5 & hour<12) {  
-                    emfB.SendMessage(message.from,  "Bom dia, eu sou o Max Assistant e estou aqui para te ajudar! 😀")   
+                    emfB.SendMessage(message.from,  "Bom dia, eu sou o Max, seu assistente virtual! 😀")   
                 } else if(hour>12 & hour<18) {
-                    emfB.SendMessage(message.from,"Boa tarde, eu sou o Max Assistant e estou aqui para te ajudar! 😀")
+                    emfB.SendMessage(message.from,"Boa tarde, eu sou o Max, seu assistente virtual! 😀")
                 } else if(hour>18 & hour<5) {
-                    emfB.SendMessage(message.from,"Boa noite, eu sou o Max Assistant e estou aqui para te ajudar! 😀")
+                    emfB.SendMessage(message.from,"Boa noite, eu sou o Max, seu assistente virtual! 😀")
                 }
-                emfB.SendOptions(message.from,"Com qual dos sistemas eu posso te auxiliar?", ['SAP','Microsoft','TraceGP'],1000)
+                emfB.SendOptions(message.from,"Com qual dos sistemas posso te ajudar?", ['SAP','Microsoft','TraceGP'],1000)
                 users[current].status = "Escolha de Sistemas"
                 break;
 // ------------------------------------- case Escolhe Sistemas ------------------------------------------- //
