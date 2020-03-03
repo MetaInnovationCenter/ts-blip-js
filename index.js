@@ -37,9 +37,7 @@ let client = new BlipSdk.ClientBuilder()
 //Inicia a conexão entre o server node e o blip
 client.connect() 
 .then(async function(session) {
-    console.log('Application started. Press Ctrl + c to stop.')
-
-    console.log(client.ArtificialIntelligence.ArtificialIntelligenceExtension) 
+    console.log('Application started. Press Ctrl + c to stop.') 
 
     //Receiver de Texto
     client.addMessageReceiver((message) => message.type === 'text/plain', async (message) => {
@@ -94,9 +92,15 @@ client.connect()
                 console.log("Switch on case:Boas Vindas")
                 time = new Date();      
                 hour = time.getHours()
+<<<<<<< HEAD
+            
+                if (hour>5 & hour<12) {  
+                    emfB.SendMessage(message.from,"Bom dia, eu sou o Max Assistant e estou aqui para te ajudar! 😀")   
+=======
                 console.log(hour);
                 if ( hour>5 & hour<=12) {  
                     emfB.SendMessage(message.from,  "Bom dia, eu sou o Max, seu assistente virtual! 😀")   
+>>>>>>> 81e89b42b3c4a0417c019ff0d8dbbad6e3ed55fd
                 } else if(hour>12 & hour<18) {
                     emfB.SendMessage(message.from,"Boa tarde, eu sou o Max, seu assistente virtual! 😀")
                 } else if(hour>18 & hour<5) {
@@ -110,7 +114,11 @@ client.connect()
                 console.log("Switch on case:Escolha de Sistemas")
                 if (message.content.toLowerCase().includes('sap'))
                 {
+<<<<<<< HEAD
+                    emfB.SendOptions(message.from, "O que você precisa?", ['Esqueci minha senha.','Lembro minha senha, quero mudá-la.'], 1000)
+=======
                     emfB.SendMenu(message.from, "Selecione uma das seguintes opções:", ['Esqueci minha senha.','Lembro minha senha e preciso trocar.'], 1000)
+>>>>>>> 81e89b42b3c4a0417c019ff0d8dbbad6e3ed55fd
                     users[current].status = "BotSAP"
                 }
                 else
