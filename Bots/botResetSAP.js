@@ -102,7 +102,8 @@ module.exports = {
                     if(outputArguments.statusEmail == 'enviado') {
                         emfB.SendOptions(users[current].id, "Senha trocada com sucesso 😊,\
                                                                 te enviei sua senha temporária por e-mail,\
-                                                                você recebeu este email?", ['Sim', 'Não'],2000)
+                                                                você recebeu este e-mail?", ['Sim', 'Não'],2000)
+                                                                users[current].status = "Email enviado"
                         //Deletes user from the list
                         indexModule.spliceUser(users[current].id)
                         users.splice(current, 1)
@@ -141,6 +142,19 @@ module.exports = {
                 }
                 else {
                     emfB.SendOptions(users[current].id ,"Desculpe, não entendi. Você deseja tentar novamente?",['Sim','Não'], 2000)
+                }
+                break;
+                case "Email enviado":
+                console.log("Switch on Status: Email Enviado");
+                if(message.content.toLowerCase().includes('nao') || message.content.toLowerCase().includes('não')) {
+                    emfB.SendMessage(message.from, "Essa parte não tem essa parte ainda")
+                }
+                else if(message.content.toLowerCase() == 'sim') {
+                    emfB.SendMessage(message.from, "Fico feliz por ter te ajudado!! Até a próxima.")
+                }
+                else {
+                    emfB.SendOptions(users[current].id ,"Desculpe, não entendi. Você recebeu o e-mail?",['Sim','Não'], 2000)
+                    users[current].status = "Email enviado"
                 }
                 break;
         }
