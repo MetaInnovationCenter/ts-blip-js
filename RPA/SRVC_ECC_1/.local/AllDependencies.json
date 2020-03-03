@@ -1620,15 +1620,15 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\leonardo.brum\\.nuget\\packages\\": {}
+    "C:\\Users\\emanu\\.nuget\\packages\\": {}
   },
   "project": {
     "restore": {
       "projectUniqueName": "SRVC_ResetECC_1",
       "projectName": "SRVC_ResetECC_1",
-      "projectPath": "C:\\Users\\leonardo.brum\\Documents\\Github\\ts-blip-js\\RPA\\SRVC_ECC_1\\.local",
-      "packagesPath": "C:\\Users\\leonardo.brum\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\leonardo.brum\\Documents\\Github\\ts-blip-js\\RPA\\SRVC_ECC_1\\.local"
+      "projectPath": "C:\\Users\\emanu\\Documents\\ts-blip-js\\RPA\\SRVC_ECC_1\\.local",
+      "packagesPath": "C:\\Users\\emanu\\.nuget\\packages\\",
+      "outputPath": "C:\\Users\\emanu\\Documents\\ts-blip-js\\RPA\\SRVC_ECC_1\\.local"
     },
     "frameworks": {
       "net461": {
