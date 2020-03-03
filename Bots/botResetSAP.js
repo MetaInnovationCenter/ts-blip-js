@@ -7,6 +7,7 @@ const maestro = require('../local_modules/maestro.js')
 let newUserFlag
 let users = []
 let current
+let outputArguments
 
 module.exports = {
     start: async (message, sapVersion) => {
@@ -75,12 +76,12 @@ module.exports = {
 
         switch(users[current].status) {
             case "Qual login?":
-                emfB.SendMessage(users[current].id, "Para isso, preciso que você me diga qual o seu login no sistema.",2000)
+                emfB.SendMessage(users[current].id, "Para isso, preciso que você me diga qual o seu login no sistema.",1200)
                 users[current].status = "Aviso Processando"
                 break;
 
             case "Aviso Processando":
-                emfB.SendMessage(users[current].id, "Adicionei seu pedido a fila de processos, aguarde.", 2000)
+                emfB.SendMessage(users[current].id, "Adicionei seu pedido a fila de processos, aguarde.", 1200)
                 users[current].userLogin = message.content
                 users[current].status = "Start Job Confere"
 
@@ -93,10 +94,10 @@ module.exports = {
                 //Resolves when rpa starts processing
                 await maestro.didProcessStart(users[current].maestro, orchJobId)
                 .then(() => {
-                    emfB.SendMessage(users[current].id, "Agora estou processando, só mais um pouquinho!", 2000)
+                    emfB.SendMessage(users[current].id, "Agora estou processando, só mais um pouquinho!", 1200)
                 })
 
-                //Resolves when rpa finishes processing
+                //Resolves the promise when rpa finishes processing
                 await maestro.didProcessFinish(users[current].maestro, orchJobId)
                 .then((outputArguments) => {
                     if(outputArguments.statusEmail == 'enviado') {
@@ -116,7 +117,8 @@ module.exports = {
                 })
                 .catch((error) => {
                     console.log(error)
-                    emfB.SendMessage(message.from, 'falha RPA', 2000)
+                    emfB.SendMessage(message.from, 'error', 1200)
+                    console.log(outputArguments);
                 })
                 break;
 

@@ -83,6 +83,9 @@ client.connect()
         else if(message.content.toLowerCase().includes('ola')){
             users[current].status = "Boas Vindas"
         }
+        else if(message.content.toLowerCase().includes('olá')){
+            users[current].status = "Boas Vindas"
+        }
 
 // ----------------------------------------------------------------------------------------------------------//
         switch (users[current].status) {
@@ -91,8 +94,8 @@ client.connect()
                 console.log("Switch on case:Boas Vindas")
                 time = new Date();      
                 hour = time.getHours()
-            
-                if ( hour>5 & hour<12) {  
+                console.log(hour);
+                if ( hour>5 & hour<=12) {  
                     emfB.SendMessage(message.from,  "Bom dia, eu sou o Max, seu assistente virtual! 😀")   
                 } else if(hour>12 & hour<18) {
                     emfB.SendMessage(message.from,"Boa tarde, eu sou o Max, seu assistente virtual! 😀")
