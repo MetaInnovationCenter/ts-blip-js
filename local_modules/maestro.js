@@ -191,25 +191,26 @@ module.exports = {
                             'X-UIPATH-TenantName': orchestratorInfo.tenantLogicalName
                         }
                     }
+
                     const response = await axios.get('https://platform.uipath.com/'
                                                         + orchestratorInfo.tenantURL
                                                         + '/odata/Jobs?$filter=Id%20eq%20'
                                                         + jobId, axiosGenericHeaders)
                     
                     let jobInfo = response.data.value[0].Info
-
-                    if (jobInfo == 'Job completed') {
+                    console.log("jobInfo: " + jobInfo);
+                    if (jobInfo == 'Job completed' || jobInfo == 'Tarefa concluída') {
                         resolve(JSON.parse(response.data.value[0].OutputArguments))
+                        console.log("Job completed");
                     }
-                    else if (jobInfo != 'Job completed' ||
-                            jobInfo != 'Job started running' ||
-                            jobInfo != 'Job started processing' ||
-                            jobInfo != 'Waiting for execution to start...' ||
-                            jobInfo != null) {
-                        reject('Faulted with: ' + jobInfo)
+                    else if (jobInfo != 'Processamento de tarefa iniciado' && jobInfo != 'Job started running' &&
+                             jobInfo != null) 
+                    {
+                         
+                         reject('Faulted with: ' + jobInfo)
                     }
                     else {
-                        console.log(jobInfo)
+                        console.log(" fica printando " + jobInfo)
                     }
                 }
                 , 1000);

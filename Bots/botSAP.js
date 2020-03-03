@@ -39,13 +39,13 @@ module.exports = {
             case "Versões SAP":
                 console.log("Switch on case: Versões SAP")
                 if(message.content.toLowerCase().includes('esqueci')){
-                    emfB.SendOptions(message.from,"Posso resetar sua senha do SAP em duas versões, qual você deseja?", ['SAP ECC', 'SAP S/4 HANA '], 1000)
+                    emfB.SendOptions(message.from,"Posso resetar sua senha do SAP nas seguintes versões, qual você deseja?", ['SAP ECC', 'SAP S/4 HANA '], 1000)
                     users[current].status = "Inicia botResetSAP"
-                } else if (message.content.toLowerCase().includes('quero')){
-                    emfB.SendOptions(message.from,"Posso te ajudar a trocar a senha do SAP em duas versões, qual você deseja?", ['SAP ECC', 'SAP S/4 HANA '], 1000)
+                } else if (message.content.toLowerCase().includes('trocar')){
+                    emfB.SendOptions(message.from,"Posso te ajudar a trocar sua senha do SAP nas seguintes versões, qual você deseja?", ['SAP ECC', 'SAP S/4 HANA '], 1000)
                     users[current].status = "tutorial"
                 } else {
-                    emfB.SendOptions(message.from, "Desculpe, não entendi, pois sou um bot em treinamento, no momento posso te ajudar com as seguintes versões:", ['SAP ECC', 'SAP S/4 HANA '], 1000)
+                    emfB.SendOptions(message.from, "Desculpe, não entendi, pois sou um bot em treinamento, no momento posso te ajudar com os seguintes itens:", ['Esqueci minha senha.','Lembro minha senha, quero alterá-la'], 1000)
                     users[current].status = "Versões SAP"
                 }
             break;
@@ -68,7 +68,7 @@ module.exports = {
                 console.log('ENTROU NO TUTORIAL')
                 if (message.content.toLowerCase().includes('ecc')) {
                     emfB.SendMessage(message.from, "Dessa forma, irei te dar algumas informações para que você possa realizar este troca.")
-                    emfB.SendImg(message.from, "Primeiro você precisa abrir o SAP na versão que você deseja e entrar no ambiente desejado como mostra figura acima:", "https://i.ibb.co/6nm4GjC/ambiente.jpg",500)
+                    emfB.SendImg(message.from, "Primeiro você precisa abrir o SAP na versão que você deseja e entrar no ambiente desejado como mostra figura acima:", "https://i.ibb.co/6nm4GjC/ambiente.jpg",1000)
                     emfB.SendImg(message.from, "Após entrar no ambiente você será direcionado para uma página semelhante a esta.", "https://i.ibb.co/9cZPgfk/ecc-inicial.jpg",1000)
                     emfB.SendOptions(message.from, "Você deve preencher os campos solicitados, mandante,usuário e senha como se fosse logar no sistema.",['Prosseguir'], 1500)
                     users[current].status = "Prossiga ecc"

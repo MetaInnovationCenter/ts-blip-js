@@ -7,6 +7,7 @@ const maestro = require('../local_modules/maestro.js')
 let newUserFlag
 let users = []
 let current
+let outputArguments
 
 module.exports = {
     start: async (message, sapVersion) => {
@@ -75,12 +76,12 @@ module.exports = {
 
         switch(users[current].status) {
             case "Qual login?":
-                emfB.SendMessage(users[current].id, "Para isso, preciso que você me diga qual o seu login no sistema.",2000)
+                emfB.SendMessage(users[current].id, "Para isso, preciso que você me diga qual o seu login no sistema.",1200)
                 users[current].status = "Aviso Processando"
                 break;
 
             case "Aviso Processando":
-                emfB.SendMessage(users[current].id, "Adicionei seu pedido a fila de processos, aguarde.", 2000)
+                emfB.SendMessage(users[current].id, "Adicionei seu pedido a fila de processos, aguarde.", 1200)
                 users[current].userLogin = message.content
                 users[current].status = "Start Job Confere"
 
@@ -93,16 +94,17 @@ module.exports = {
                 //Resolves when rpa starts processing
                 await maestro.didProcessStart(users[current].maestro, orchJobId)
                 .then(() => {
-                    emfB.SendMessage(users[current].id, "Agora estou processando, só mais um pouquinho!", 2000)
+                    emfB.SendMessage(users[current].id, "Agora estou processando, só mais um pouquinho!", 1200)
                 })
 
-                //Resolves when rpa finishes processing
+                //Resolves the promise when rpa finishes processing
                 await maestro.didProcessFinish(users[current].maestro, orchJobId)
                 .then((outputArguments) => {
                     if(outputArguments.statusEmail == 'enviado') {
                         emfB.SendOptions(users[current].id, "Senha trocada com sucesso 😊,\
                                                                 te enviei sua senha temporária por e-mail,\
-                                                                você recebeu este email?", ['Sim', 'Não'],2000)
+                                                                você recebeu este e-mail?", ['Sim', 'Não'],2000)
+                                                                users[current].status = "Email enviado"
                         //Deletes user from the list
                         indexModule.spliceUser(users[current].id)
                         users.splice(current, 1)
@@ -115,7 +117,8 @@ module.exports = {
                 })
                 .catch((error) => {
                     console.log(error)
-                    emfB.SendMessage(message.from, 'falha RPA', 2000)
+                    emfB.SendMessage(message.from, 'error', 1200)
+                    console.log(outputArguments);
                 })
                 break;
 
@@ -141,6 +144,19 @@ module.exports = {
                 }
                 else {
                     emfB.SendOptions(users[current].id ,"Desculpe, não entendi. Você deseja tentar novamente?",['Sim','Não'], 2000)
+                }
+                break;
+                case "Email enviado":
+                console.log("Switch on Status: Email Enviado");
+                if(message.content.toLowerCase().includes('nao') || message.content.toLowerCase().includes('não')) {
+                    emfB.SendMessage(message.from, "Essa parte não tem essa parte ainda")
+                }
+                else if(message.content.toLowerCase() == 'sim') {
+                    emfB.SendMessage(message.from, "Fico feliz por ter te ajudado!! Até a próxima.")
+                }
+                else {
+                    emfB.SendOptions(users[current].id ,"Desculpe, não entendi. Você recebeu o e-mail?",['Sim','Não'], 2000)
+                    users[current].status = "Email enviado"
                 }
                 break;
         }

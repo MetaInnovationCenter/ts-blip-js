@@ -37,9 +37,7 @@ let client = new BlipSdk.ClientBuilder()
 //Inicia a conexão entre o server node e o blip
 client.connect() 
 .then(async function(session) {
-    console.log('Application started. Press Ctrl + c to stop.')
-
-    console.log(client.ArtificialIntelligence.ArtificialIntelligenceExtension) 
+    console.log('Application started. Press Ctrl + c to stop.') 
 
     //Receiver de Texto
     client.addMessageReceiver((message) => message.type === 'text/plain', async (message) => {
@@ -83,6 +81,9 @@ client.connect()
         else if(message.content.toLowerCase().includes('ola')){
             users[current].status = "Boas Vindas"
         }
+        else if(message.content.toLowerCase().includes('olá')){
+            users[current].status = "Boas Vindas"
+        }
 
 // ----------------------------------------------------------------------------------------------------------//
         switch (users[current].status) {
@@ -91,15 +92,21 @@ client.connect()
                 console.log("Switch on case:Boas Vindas")
                 time = new Date();      
                 hour = time.getHours()
+<<<<<<< HEAD
             
                 if (hour>5 & hour<12) {  
                     emfB.SendMessage(message.from,"Bom dia, eu sou o Max Assistant e estou aqui para te ajudar! 😀")   
+=======
+                console.log(hour);
+                if ( hour>5 & hour<=12) {  
+                    emfB.SendMessage(message.from,  "Bom dia, eu sou o Max, seu assistente virtual! 😀")   
+>>>>>>> 81e89b42b3c4a0417c019ff0d8dbbad6e3ed55fd
                 } else if(hour>12 & hour<18) {
-                    emfB.SendMessage(message.from,"Boa tarde, eu sou o Max Assistant e estou aqui para te ajudar! 😀")
+                    emfB.SendMessage(message.from,"Boa tarde, eu sou o Max, seu assistente virtual! 😀")
                 } else if(hour>18 & hour<5) {
-                    emfB.SendMessage(message.from,"Boa noite, eu sou o Max Assistant e estou aqui para te ajudar! 😀")
+                    emfB.SendMessage(message.from,"Boa noite, eu sou o Max, seu assistente virtual! 😀")
                 }
-                emfB.SendOptions(message.from,"Com qual dos sistemas eu posso te auxiliar?", ['SAP','Microsoft','TraceGP'],1000)
+                emfB.SendOptions(message.from,"Com qual dos sistemas posso te ajudar?", ['SAP'],1000)
                 users[current].status = "Escolha de Sistemas"
                 break;
 // ------------------------------------- case Escolhe Sistemas ------------------------------------------- //
@@ -107,18 +114,12 @@ client.connect()
                 console.log("Switch on case:Escolha de Sistemas")
                 if (message.content.toLowerCase().includes('sap'))
                 {
+<<<<<<< HEAD
                     emfB.SendOptions(message.from, "O que você precisa?", ['Esqueci minha senha.','Lembro minha senha, quero mudá-la.'], 1000)
+=======
+                    emfB.SendMenu(message.from, "Selecione uma das seguintes opções:", ['Esqueci minha senha.','Lembro minha senha e preciso trocar.'], 1000)
+>>>>>>> 81e89b42b3c4a0417c019ff0d8dbbad6e3ed55fd
                     users[current].status = "BotSAP"
-                }
-                else if (message.content.toLowerCase().includes('microsoft'))
-                {
-                    emfB.SendOptions(message.from, "Desculpe, não entendi, pois sou um bot em treinamento, no momento posso te ajudar com os seguintes sistemas", ['SAP'],1000)
-                    users[current].status = "Escolha de Sistemas"
-                }
-                else if (message.content.toLowerCase().includes('tracegp'))
-                {
-                    emfB.SendOptions(message.from, "Desculpe, não entendi, pois sou um bot em treinamento, no momento posso te ajudar com os seguintes sistemas:", ['SAP'],1000)
-                    users[current].status = "Escolha de Sistemas"
                 }
                 else
                 {
