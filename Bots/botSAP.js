@@ -45,7 +45,7 @@ module.exports = {
                     emfB.SendOptions(message.from,"Posso te ajudar a trocar sua senha do SAP nas seguintes versões, qual você deseja?", ['SAP ECC', 'SAP S/4 HANA '], 1000)
                     users[current].status = "tutorial"
                 } else {
-                    emfB.SendOptions(message.from, "Desculpe, não entendi, pois sou um bot em treinamento, no momento posso te ajudar com os seguintes itens:", ['Esqueci minha senha.','Lembro minha senha, quero alterá-la'], 1000)
+                    emfB.SendMenu(message.from, "Desculpe, não entendi, pois sou um bot em treinamento, no momento posso te ajudar com os seguintes itens:", ['Esqueci minha senha.','Lembro minha senha e preciso trocar.'], 1000)
                     users[current].status = "Versões SAP"
                 }
             break;
