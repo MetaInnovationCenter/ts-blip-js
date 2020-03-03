@@ -41,8 +41,8 @@ module.exports = {
                 if(message.content.toLowerCase().includes('esqueci')){
                     emfB.SendOptions(message.from,"Posso resetar sua senha do SAP nas seguintes versões, qual você deseja?", ['SAP ECC', 'SAP S/4 HANA '], 1000)
                     users[current].status = "Inicia botResetSAP"
-                } else if (message.content.toLowerCase().includes('quero')){
-                    emfB.SendOptions(message.from,"Posso te ajudar a trocar a senha do SAP em duas versões, qual você deseja?", ['SAP ECC', 'SAP S/4 HANA '], 1000)
+                } else if (message.content.toLowerCase().includes('trocar')){
+                    emfB.SendOptions(message.from,"Posso te ajudar a trocar sua senha do SAP nas seguintes versões, qual você deseja?", ['SAP ECC', 'SAP S/4 HANA '], 1000)
                     users[current].status = "tutorial"
                 } else {
                     emfB.SendOptions(message.from, "Desculpe, não entendi, pois sou um bot em treinamento, no momento posso te ajudar com os seguintes itens:", ['Esqueci minha senha.','Lembro minha senha, quero alterá-la'], 1000)

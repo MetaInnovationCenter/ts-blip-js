@@ -99,7 +99,7 @@ client.connect()
                 } else if(hour>18 & hour<5) {
                     emfB.SendMessage(message.from,"Boa noite, eu sou o Max, seu assistente virtual! 😀")
                 }
-                emfB.SendOptions(message.from,"Com qual dos sistemas posso te ajudar?", ['SAP','Microsoft','TraceGP'],1000)
+                emfB.SendOptions(message.from,"Com qual dos sistemas posso te ajudar?", ['SAP'],1000)
                 users[current].status = "Escolha de Sistemas"
                 break;
 // ------------------------------------- case Escolhe Sistemas ------------------------------------------- //
@@ -107,18 +107,8 @@ client.connect()
                 console.log("Switch on case:Escolha de Sistemas")
                 if (message.content.toLowerCase().includes('sap'))
                 {
-                    emfB.SendOptions(message.from, "O que você precisa?", ['Esqueci minha senha.','Lembro minha senha, quero alterá-la'], 1000)
+                    emfB.SendMenu(message.from, "Selecione uma das seguintes opções:", ['Esqueci minha senha.','Lembro minha senha e preciso trocar.'], 1000)
                     users[current].status = "BotSAP"
-                }
-                else if (message.content.toLowerCase().includes('microsoft'))
-                {
-                    emfB.SendOptions(message.from, "Desculpe, não entendi, pois sou um bot em treinamento, no momento posso te ajudar com os seguintes sistemas", ['SAP'],1000)
-                    users[current].status = "Escolha de Sistemas"
-                }
-                else if (message.content.toLowerCase().includes('tracegp'))
-                {
-                    emfB.SendOptions(message.from, "Desculpe, não entendi, pois sou um bot em treinamento, no momento posso te ajudar com os seguintes sistemas:", ['SAP'],1000)
-                    users[current].status = "Escolha de Sistemas"
                 }
                 else
                 {
