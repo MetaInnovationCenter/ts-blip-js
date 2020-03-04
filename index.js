@@ -8,6 +8,7 @@ module.exports = {
         users.splice(current, 1)
     }
 }
+
 //Libraries
 var BlipSdk = require("blip-sdk")
 var WebSocketTransport = require("lime-transport-websocket")

@@ -1,3 +1,14 @@
+//Módulos para manipulação de variáveis por outro arquivo
+module.exports = {
+    spliceUser: (userId) => {
+        users.forEach(user => {
+            if (user.id == userId)
+                current = users.indexOf(user)
+        });
+        users.splice(current, 1)
+    }
+}
+
 //Bibliotecas
 var emfB = require("../local_modules/emfB.js")
 const axios = require('axios');
