@@ -95,7 +95,7 @@ client.connect()
                     console.log("Switch on case:Boas Vindas")
                     time = new Date();
                     hour = time.getHours()
-                    console.log(hour);
+                    console.log(emfB.Color('verde') + "---------- Agora são "+ hour + " horas ----------"+ emfB.Color("reset"));
                     if (hour > 5 & hour <= 12) {
                         emfB.SendMessage(message.from, "Bom dia, eu sou o Max, seu assistente virtual! 😀")
                     } else if (hour > 12 & hour < 18) {
