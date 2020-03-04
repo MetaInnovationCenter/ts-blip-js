@@ -21,6 +21,7 @@ module.exports = {
                 current = users.indexOf(user)
             }
         });
+        
         //Se o usuário não está na lista
         if(newUserFlag == true) {
             console.log("New user added to botCheckSAP list");
@@ -65,6 +66,7 @@ module.exports = {
                 emfB.SendMessage(users[current].id, "Para isso, preciso que você me diga qual o seu login no sistema.", 2000)
                 users[current].status = "Conferindo Login"
                 break;
+
             case "Conferindo Login":
                 emfB.SendMessage(users[current].id, "Vou conferir se seu login está correto!", 2000)
                 users[current].userLogin = message.content
@@ -107,6 +109,7 @@ module.exports = {
                     emfB.SendMessage(message.from, 'Falhou rpa, porra leo', 2000)
                 })
                 break;
+
             case 'Login Existe':
                 if(message.content == users[current].codeBlip) {
                     emfB.SendMessage(users[current].id, 'O código foi inserido corretamente, \
@@ -155,6 +158,7 @@ module.exports = {
                     emfB.SendMessage(users[current].id, 'Código inserido incorretamente, por favor tente novamente', 2000)
                 }
                 break;
+
             case "Login Errado":
                 console.log("Switch on Status: Login Errado");
                 if(message.content.toLowerCase() == 'sim') {

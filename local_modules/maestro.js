@@ -198,10 +198,10 @@ module.exports = {
                                                         + jobId, axiosGenericHeaders)
                     
                     let jobInfo = response.data.value[0].Info
-                    console.log("jobInfo: " + jobInfo);
+                   
                     if (jobInfo == 'Job completed' || jobInfo == 'Tarefa concluída') {
                         resolve(JSON.parse(response.data.value[0].OutputArguments))
-                        console.log("Job completed");
+                        
                     }
                     else if (jobInfo != 'Processamento de tarefa iniciado' && jobInfo != 'Job started running' &&
                              jobInfo != null) 
@@ -210,7 +210,7 @@ module.exports = {
                          reject('Faulted with: ' + jobInfo)
                     }
                     else {
-                        console.log(" fica printando " + jobInfo)
+               
                     }
                 }
                 , 1000);
