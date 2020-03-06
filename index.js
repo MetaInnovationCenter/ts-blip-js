@@ -28,42 +28,47 @@ let current
 let time = new Date();
 let hour = time.getHours();
 
+//print
+const print = (print) => {
+    console.log(print);
+}
+
 // Cliente websocket para conexão entre o node e o blip
 let client = new BlipSdk.ClientBuilder()
     .withIdentifier(IDENTIFIER)
     .withAccessKey(ACCESS_KEY)
     .withTransportFactory(() => new WebSocketTransport())
     .build();
-
+    
 //Inicia a conexão entre o server node e o blip
 client.connect()
     .then(async function (session) {
-        console.log('Application started. Press Ctrl + c to stop.')
+        print('Application started. Press Ctrl + c to stop.')
 
-        console.log(client.ArtificialIntelligence.ArtificialIntelligenceExtension)
+        print(client.ArtificialIntelligence.ArtificialIntelligenceExtension)
 
         //Receiver de Texto
         client.addMessageReceiver((message) => message.type === 'text/plain', async (message) => {
             newUserFlag = true
             //Confere se a mensagem atual é de um usuário novo ou um que já está na lista
             users.forEach(user => {
-                console.log(user)
+                print(user)
                 //Se o usuário está na lista
                 if (user.id == message.from) {
-                    console.log("User already on index list");
+                    print("User already on index list");
                     newUserFlag = false
                     current = users.indexOf(user)
                 }
             });
             //Se o usuário não está na lista
             if (newUserFlag == true) {
-                console.log("New user added to index list");
+                print("New user added to index list");
                 users.push(new Object)
                 current = users.length - 1
                 users[current].id = message.from
                 users[current].status = 'Boas Vindas'
             }
-
+            
             // Caso o usuário deseja sair do sistema
             if (message.content.toLowerCase().includes('tchau')) {
                 emfB.SendMessage(message.from, "Até a próxima, tchau!")
@@ -87,15 +92,15 @@ client.connect()
             else if (message.content.toLowerCase().includes('olá')) {
                 users[current].status = "Boas Vindas"
             }
-
+            
             // ----------------------------------------------------------------------------------------------------------//
             switch (users[current].status) {
                 case "Boas Vindas":
                     emfB.SetClient(client) //Seta o cliente para o emf ter acesso
-                    console.log("Switch on case:Boas Vindas")
+                    print("Switch on case:Boas Vindas")
                     time = new Date();
                     hour = time.getHours()
-                    console.log(emfB.Color('verde') + "---------- Agora são "+ hour + " horas ----------"+ emfB.Color("reset"));
+                    print(emfB.Color('verde') + "---------- Agora são "+ hour + " horas ----------"+ emfB.Color("reset"));
                     if (hour > 5 & hour <= 12) {
                         emfB.SendMessage(message.from, "Bom dia, eu sou o Max, seu assistente virtual! 😀")
                     } else if (hour > 12 & hour < 18) {
@@ -108,7 +113,7 @@ client.connect()
                     break;
                 // ------------------------------------- case Escolhe Sistemas ------------------------------------------- //
                 case "Escolha de Sistemas":
-                    console.log("Switch on case:Escolha de Sistemas")
+                    print("Switch on case:Escolha de Sistemas")
                     if (message.content.toLowerCase().includes('sap')) {
                         emfB.SendMenu(message.from, "Selecione uma das seguintes opções:", ['Esqueci minha senha.', 'Lembro minha senha e preciso trocar.'], 1000)
                         users[current].status = "BotSAP"
@@ -141,7 +146,7 @@ client.connect()
                     users[current].status = "Boas Vindas"
                     break;
             }
-            console.log("User Input:" + message.content)
+            print("User Input:" + message.content)
         });
     })
-    .catch(function (err) { console.log("Falha na conexão, erro: " + err) });
+    .catch(function (err) { print("Falha na conexão, erro: " + err) });
