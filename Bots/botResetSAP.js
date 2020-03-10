@@ -1,6 +1,7 @@
 //Bibliotecas
 var emfB = require("../local_modules/emfB.js")
 const indexModule = require('../index.js')
+const botSAPModule = require('./botSAP')
 const maestro = require('../local_modules/maestro.js')
 
 //Variáveis para controle de multiplos usuários
@@ -94,7 +95,7 @@ module.exports = {
                 //Resolves when rpa starts processing
                 await maestro.didProcessStart(users[current].maestro, orchJobId)
                 .then(() => {
-                    emfB.SendMessage(users[current].id, "Agora estou processando, só mais um pouquinho!", 1200)
+                    emfB.SendMessage(users[current].id, "Agora estou processando...", 1200)
                 })
 
                 //Resolves the promise when rpa finishes processing
@@ -125,6 +126,7 @@ module.exports = {
                     emfB.SendMessage(users[current].id, "Você excedeu o número de tentativas!", 2000)
                     //Deletes user from the list
                     indexModule.spliceUser(users[current].id)
+                    botSAPModule.spliceUser(users[current].id)
                     users.splice(current, 1) 
                 }
                 else if(message.content.toLowerCase() == 'sim') {
@@ -137,6 +139,7 @@ module.exports = {
                     emfB.SendMessage(users[current].id ,"Certo, te vejo na próxima então", 2000)
                     //Deletes user from the list
                     indexModule.spliceUser(users[current].id)
+                    botSAPModule.spliceUser(users[current].id)
                     users.splice(current, 1) 
                 }
                 else {
@@ -153,6 +156,7 @@ module.exports = {
                     emfB.SendMessage(message.from, "Fico feliz por ter te ajudado!! Até a próxima.")
                       //Deletes user from the list
                       indexModule.spliceUser(users[current].id)
+                      botSAPModule.spliceUser(users[current].id)
                       users.splice(current, 1)
                 }
                 else {
