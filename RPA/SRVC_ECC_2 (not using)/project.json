@@ -12,7 +12,7 @@
   "webServices": [],
   "schemaVersion": "4.0",
   "studioVersion": "19.12.0.61",
-  "projectVersion": "1.0.10",
+  "projectVersion": "1.1.1",
   "runtimeOptions": {
     "autoDispose": false,
     "isPausable": true,
@@ -31,7 +31,7 @@
       "includeOriginalXaml": false,
       "privateWorkflows": []
     },
-    "fileInfos": []
+    "fileInfoCollection": []
   },
   "arguments": {
     "input": [
@@ -39,13 +39,13 @@
         "name": "login",
         "type": "System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089",
         "required": false,
-        "hasDefault": true
+        "hasDefault": false
       },
       {
         "name": "statusProcesso",
         "type": "System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089",
         "required": false,
-        "hasDefault": true
+        "hasDefault": false
       },
       {
         "name": "emailInput",
