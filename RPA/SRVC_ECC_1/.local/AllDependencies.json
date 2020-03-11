@@ -1620,15 +1620,15 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\emanu\\.nuget\\packages\\": {}
+    "C:\\Users\\MAKSINE.BALDIN\\.nuget\\packages\\": {}
   },
   "project": {
     "restore": {
       "projectUniqueName": "SRVC_ResetECC_1",
       "projectName": "SRVC_ResetECC_1",
-      "projectPath": "C:\\Users\\emanu\\Documents\\ts-blip-js\\RPA\\SRVC_ECC_1\\.local",
-      "packagesPath": "C:\\Users\\emanu\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\emanu\\Documents\\ts-blip-js\\RPA\\SRVC_ECC_1\\.local"
+      "projectPath": "C:\\Users\\MAKSINE.BALDIN\\Documents\\ts-blip-js\\RPA\\SRVC_ECC_1\\.local",
+      "packagesPath": "C:\\Users\\MAKSINE.BALDIN\\.nuget\\packages\\",
+      "outputPath": "C:\\Users\\MAKSINE.BALDIN\\Documents\\ts-blip-js\\RPA\\SRVC_ECC_1\\.local"
     },
     "frameworks": {
       "net461": {

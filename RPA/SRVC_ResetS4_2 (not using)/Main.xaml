@@ -1,4 +1,4 @@
-<Activity mc:Ignorable="sap sap2010" x:Class="Main" this:Main.statusProcesso="confere" this:Main.login="JOZIAS" xmlns="http://schemas.microsoft.com/netfx/2009/xaml/activities" xmlns:av="http://schemas.microsoft.com/winfx/2006/xaml/presentation" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" xmlns:mva="clr-namespace:Microsoft.VisualBasic.Activities;assembly=System.Activities" xmlns:sap="http://schemas.microsoft.com/netfx/2009/xaml/activities/presentation" xmlns:sap2010="http://schemas.microsoft.com/netfx/2010/xaml/activities/presentation" xmlns:scg="clr-namespace:System.Collections.Generic;assembly=mscorlib" xmlns:sco="clr-namespace:System.Collections.ObjectModel;assembly=mscorlib" xmlns:sd="clr-namespace:System.Diagnostics;assembly=System" xmlns:this="clr-namespace:" xmlns:uga="clr-namespace:UiPathTeam.GenerateRandomPassword.Activities;assembly=UiPathTeam.GenerateRandomPassword.Activities" xmlns:ui="http://schemas.uipath.com/workflow/activities" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+<Activity mc:Ignorable="sap sap2010" x:Class="Main" this:Main.statusProcesso="trocaSenha" this:Main.login="JOZIAS" this:Main.emailInput="inovuserpublico@gmail.com" xmlns="http://schemas.microsoft.com/netfx/2009/xaml/activities" xmlns:av="http://schemas.microsoft.com/winfx/2006/xaml/presentation" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" xmlns:mva="clr-namespace:Microsoft.VisualBasic.Activities;assembly=System.Activities" xmlns:sap="http://schemas.microsoft.com/netfx/2009/xaml/activities/presentation" xmlns:sap2010="http://schemas.microsoft.com/netfx/2010/xaml/activities/presentation" xmlns:scg="clr-namespace:System.Collections.Generic;assembly=mscorlib" xmlns:sco="clr-namespace:System.Collections.ObjectModel;assembly=mscorlib" xmlns:sd="clr-namespace:System.Diagnostics;assembly=System" xmlns:this="clr-namespace:" xmlns:uga="clr-namespace:UiPathTeam.GenerateRandomPassword.Activities;assembly=UiPathTeam.GenerateRandomPassword.Activities" xmlns:ui="http://schemas.uipath.com/workflow/activities" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
   <x:Members>
     <x:Property Name="statusProcesso" Type="InArgument(x:String)" />
     <x:Property Name="statusLogin" Type="OutArgument(x:String)" />
@@ -61,10 +61,14 @@
   </TextExpression.ReferencesForImplementation>
   <Flowchart sap:VirtualizedContainerService.HintSize="984,1190" sap2010:WorkflowViewState.IdRef="Flowchart_2">
     <Flowchart.Variables>
-      <Variable x:TypeArguments="x:String" Name="email" />
+      <Variable x:TypeArguments="x:String" Default="inovuserpublico@gmail.com" Name="email" />
       <Variable x:TypeArguments="x:Boolean" Name="userInexistente" />
       <Variable x:TypeArguments="x:Boolean" Default="False" Name="pulaProcesso" />
       <Variable x:TypeArguments="x:String" Name="confereUsuario" />
+      <Variable x:TypeArguments="x:String" Default="&lt;!DOCTYPE html&gt;&#xD;&#xA;&lt;html lang='en'&gt;&#xD;&#xA;&lt;head&gt;&#xD;&#xA;    &lt;meta charset='UTF-8'&gt;&#xD;&#xA;    &lt;meta name='viewport' content='width=device-width, initial-scale=1.0'&gt;&#xD;&#xA;    &lt;title&gt;Email top&lt;/title&gt;     &#xD;&#xA;&lt;/head&gt;&#xD;&#xA;&lt;body style='background-color: rgb(216, 216, 216); height: 90%;'&gt;&#xD;&#xA;    &lt;div style='background-color: #1067b8; height: 15px; width:60%;margin-left: auto; margin-right: auto'&gt;&lt;/div&gt;&#xD;&#xA;    &lt;div style='background-color:#1067b8; width: 60%; margin-left: auto; margin-right: auto;'&gt;&#xD;&#xA;        &lt;div style='background-color:#1067b8; height:45px; width:100%'&gt;&#xD;&#xA;            &lt;a href='http://www.meta.com.br/?lang=en'&gt;&lt;img data-imagetype='External' src='http://ti.meta.com.br/MAIN_LOGO.png' style='display:block; margin-left:auto; margin-right:auto; width:300px; height:46px; position: relative;top: 15px;' alt = 'Meta Logo'&gt;&lt;/a&gt;&#xD;&#xA;        &lt;/div&gt;&#xD;&#xA;        &lt;div style='background-color:#fafbfc; height:450px'&gt;&#xD;&#xA;        &lt;h1 style='text-align:center; padding-top:30px; margin-bottom:30px; font-style:italic;'&gt;Reset sua senha SAP&lt;/h2&gt;&#xD;&#xA;        &lt;hr style='color:#1067b8'&gt;&#xD;&#xA;        &lt;h2 style='text-align:center'&gt;Olá, " Name="StringHTML1" />
+      <Variable x:TypeArguments="x:String" Default=" &lt;/h2&gt;&#xD;&#xA;&#xD;&#xA;     &#xD;&#xA;        &lt;h4 style='text-align:center; font-weight:200; font-size:medium'&gt;Se você não fez essa solicitação, entre em contato com o suporte técnico. &#xD;&#xA;        &lt;/p&gt;Não responda a este email automático.&lt;/h4&gt;&#xD;&#xA;        &lt;br&gt;&#xD;&#xA;        &lt;/div&gt;&#xD;&#xA;        &lt;h5 style='text-align:center; position: relative; bottom:14px;color:white; font-weight:normal; font-size:medium'&gt;&#xD;&#xA;        © 2020 Meta Todos os direitos reservados&lt;/h5&gt;&#xD;&#xA;                               &lt;div style='background-color: #1067b8; height: 0.02px; weight: 60%; margin-left: auto; margin-right: auto;'&gt;&lt;/div&gt;&#xD;&#xA;    &lt;/div&gt;&#xD;&#xA;&#xD;&#xA;&lt;/body&gt;&#xD;&#xA;&lt;/html&gt;&#xD;&#xA;" Name="StringHTML3" />
+      <Variable x:TypeArguments="x:String" Default="!&lt;/h2&gt;&#xD;&#xA;        &lt;h4 style='text-align:center; font-weight:500; font-size:large'&gt;Essa é o seu código de autenticação:&lt;/h4&gt;&#xD;&#xA;       &#xD;&#xA;        &lt;h1 style='text-align:center;font-family: Arial'&gt;" Name="StringHTML2" />
+      <Variable x:TypeArguments="x:String" Default="!&lt;/h2&gt;&#xD;&#xA;        &lt;h4 style='text-align:center; font-weight:500; font-size:large'&gt;Essa é a sua nova senha provisoria SAP:&lt;/h4&gt;&#xD;&#xA;       &#xD;&#xA;        &lt;h1 style='text-align:center;font-family: Arial'&gt;" Name="StringHTML2email" />
     </Flowchart.Variables>
     <sap:WorkflowViewStateService.ViewState>
       <scg:Dictionary x:TypeArguments="x:String, x:Object">
@@ -77,17 +81,17 @@
       </scg:Dictionary>
     </sap:WorkflowViewStateService.ViewState>
     <Flowchart.StartNode>
-      <x:Reference>__ReferenceID11</x:Reference>
+      <x:Reference>__ReferenceID12</x:Reference>
     </Flowchart.StartNode>
     <FlowStep x:Name="__ReferenceID5">
       <sap:WorkflowViewStateService.ViewState>
         <scg:Dictionary x:TypeArguments="x:String, x:Object">
           <av:Point x:Key="ShapeLocation">40,396</av:Point>
-          <av:Size x:Key="ShapeSize">200,66</av:Size>
-          <av:PointCollection x:Key="ConnectorLocation">140,462 140,492 280,492 280,526.5</av:PointCollection>
+          <av:Size x:Key="ShapeSize">200,68</av:Size>
+          <av:PointCollection x:Key="ConnectorLocation">140,464 140,494 280,494 280,526.5</av:PointCollection>
         </scg:Dictionary>
       </sap:WorkflowViewStateService.ViewState>
-      <Sequence DisplayName="Sequence - Inserindo o login" sap:VirtualizedContainerService.HintSize="200,66" sap2010:WorkflowViewState.IdRef="Sequence_7">
+      <Sequence DisplayName="Sequence - Inserindo o login" sap:VirtualizedContainerService.HintSize="200,68" sap2010:WorkflowViewState.IdRef="Sequence_7">
         <Sequence.Variables>
           <Variable x:TypeArguments="x:Boolean" Name="naosaiainda" />
         </Sequence.Variables>
@@ -96,138 +100,83 @@
             <x:Boolean x:Key="IsExpanded">True</x:Boolean>
           </scg:Dictionary>
         </sap:WorkflowViewStateService.ViewState>
-        <ui:WindowScope ApplicationWindow="{x:Null}" SearchScope="{x:Null}" TimeoutMS="{x:Null}" Window="{x:Null}" DisplayName="Attach Window login" sap:VirtualizedContainerService.HintSize="756,51" sap2010:WorkflowViewState.IdRef="WindowScope_4" InformativeScreenshot="864453d29cae911ef16cd84a2c045cb4" Selector="&lt;wnd app='saplogon.exe' cls='SAP_FRONTEND_SESSION' title='Atualização de usuário: 1ª tela' /&gt;">
-          <ui:WindowScope.Body>
-            <ActivityAction x:TypeArguments="x:Object">
-              <ActivityAction.Argument>
-                <DelegateInArgument x:TypeArguments="x:Object" Name="ContextTarget" />
-              </ActivityAction.Argument>
-              <Sequence DisplayName="Do" sap:VirtualizedContainerService.HintSize="376,226" sap2010:WorkflowViewState.IdRef="Sequence_6">
-                <sap:WorkflowViewStateService.ViewState>
-                  <scg:Dictionary x:TypeArguments="x:String, x:Object">
-                    <x:Boolean x:Key="IsExpanded">True</x:Boolean>
-                  </scg:Dictionary>
-                </sap:WorkflowViewStateService.ViewState>
-                <ui:TypeInto ClickBeforeTyping="{x:Null}" DelayBefore="{x:Null}" DelayBetweenKeys="{x:Null}" DelayMS="{x:Null}" Activate="True" DisplayName="Type Into login" EmptyField="True" sap:VirtualizedContainerService.HintSize="334,134" sap2010:WorkflowViewState.IdRef="TypeInto_1" SendWindowMessages="False" SimulateType="False" Text="[login + &quot;[k(enter)]&quot;]">
-                  <ui:TypeInto.Target>
-                    <ui:Target ClippingRegion="{x:Null}" Element="{x:Null}" InformativeScreenshot="223d2285c7fa7f95c5185a52b9b71063" Selector="&lt;wnd cls='Afx:*' idx='5' /&gt;">
-                      <ui:Target.TimeoutMS>
-                        <InArgument x:TypeArguments="x:Int32" />
-                      </ui:Target.TimeoutMS>
-                      <ui:Target.WaitForReady>
-                        <InArgument x:TypeArguments="ui:WaitForReady" />
-                      </ui:Target.WaitForReady>
-                    </ui:Target>
-                  </ui:TypeInto.Target>
-                </ui:TypeInto>
-              </Sequence>
-            </ActivityAction>
-          </ui:WindowScope.Body>
+        <Sequence DisplayName="Sequence - Inserindo o login" sap:VirtualizedContainerService.HintSize="376,339" sap2010:WorkflowViewState.IdRef="Sequence_105">
           <sap:WorkflowViewStateService.ViewState>
             <scg:Dictionary x:TypeArguments="x:String, x:Object">
-              <x:Boolean x:Key="IsExpanded">False</x:Boolean>
-              <x:Boolean x:Key="IsPinned">False</x:Boolean>
+              <x:Boolean x:Key="IsExpanded">True</x:Boolean>
             </scg:Dictionary>
           </sap:WorkflowViewStateService.ViewState>
-        </ui:WindowScope>
-        <ui:SendHotkey ClickBeforeTyping="{x:Null}" DelayBefore="{x:Null}" DelayBetweenKeys="{x:Null}" DelayMS="{x:Null}" EmptyField="{x:Null}" SendWindowMessages="{x:Null}" Activate="True" DisplayName="Send Hotkey - F7" sap:VirtualizedContainerService.HintSize="756,51" sap2010:WorkflowViewState.IdRef="SendHotkey_22" Key="f7" KeyModifiers="None" SpecialKey="True">
-          <ui:SendHotkey.Target>
-            <ui:Target ClippingRegion="{x:Null}" Element="{x:Null}" InformativeScreenshot="d1e3529bc81db8f33f451652898891ba" Selector="&lt;wnd app='saplogon.exe' cls='SAP_FRONTEND_SESSION' title='Atualização de usuário: 1ª tela' /&gt;&lt;wnd cls='Afx:*' title='AppToolbar' /&gt;">
-              <ui:Target.TimeoutMS>
-                <InArgument x:TypeArguments="x:Int32" />
-              </ui:Target.TimeoutMS>
-              <ui:Target.WaitForReady>
-                <InArgument x:TypeArguments="ui:WaitForReady" />
-              </ui:Target.WaitForReady>
-            </ui:Target>
-          </ui:SendHotkey.Target>
-          <sap:WorkflowViewStateService.ViewState>
-            <scg:Dictionary x:TypeArguments="x:String, x:Object">
-              <x:Boolean x:Key="IsExpanded">False</x:Boolean>
-              <x:Boolean x:Key="IsPinned">False</x:Boolean>
-            </scg:Dictionary>
-          </sap:WorkflowViewStateService.ViewState>
-        </ui:SendHotkey>
-        <ui:ImageFound DisplayName="Image Exists 'saplogon.exe Atualização'" Found="[naosaiainda]" sap:VirtualizedContainerService.HintSize="756,106" sap2010:WorkflowViewState.IdRef="ImageFound_9">
+          <ui:WindowScope ApplicationWindow="{x:Null}" SearchScope="{x:Null}" TimeoutMS="{x:Null}" Window="{x:Null}" DisplayName="Attach Window login" sap:VirtualizedContainerService.HintSize="334,52" sap2010:WorkflowViewState.IdRef="WindowScope_4" InformativeScreenshot="864453d29cae911ef16cd84a2c045cb4" Selector="&lt;wnd app='saplogon.exe' cls='SAP_FRONTEND_SESSION' title='Atualização de usuário: 1ª tela' /&gt;">
+            <ui:WindowScope.Body>
+              <ActivityAction x:TypeArguments="x:Object">
+                <ActivityAction.Argument>
+                  <DelegateInArgument x:TypeArguments="x:Object" Name="ContextTarget" />
+                </ActivityAction.Argument>
+                <Sequence DisplayName="Do" sap:VirtualizedContainerService.HintSize="376,226" sap2010:WorkflowViewState.IdRef="Sequence_6">
+                  <sap:WorkflowViewStateService.ViewState>
+                    <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                      <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                    </scg:Dictionary>
+                  </sap:WorkflowViewStateService.ViewState>
+                  <ui:TypeInto ClickBeforeTyping="{x:Null}" DelayBefore="{x:Null}" DelayBetweenKeys="{x:Null}" DelayMS="{x:Null}" Activate="True" DisplayName="Type Into login" EmptyField="True" sap:VirtualizedContainerService.HintSize="334,134" sap2010:WorkflowViewState.IdRef="TypeInto_1" SendWindowMessages="False" SimulateType="False" Text="[login + &quot;[k(enter)]&quot;]">
+                    <ui:TypeInto.Target>
+                      <ui:Target ClippingRegion="{x:Null}" Element="{x:Null}" InformativeScreenshot="223d2285c7fa7f95c5185a52b9b71063" Selector="&lt;wnd cls='Afx:*' idx='5' /&gt;">
+                        <ui:Target.TimeoutMS>
+                          <InArgument x:TypeArguments="x:Int32" />
+                        </ui:Target.TimeoutMS>
+                        <ui:Target.WaitForReady>
+                          <InArgument x:TypeArguments="ui:WaitForReady" />
+                        </ui:Target.WaitForReady>
+                      </ui:Target>
+                    </ui:TypeInto.Target>
+                  </ui:TypeInto>
+                </Sequence>
+              </ActivityAction>
+            </ui:WindowScope.Body>
+            <sap:WorkflowViewStateService.ViewState>
+              <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                <x:Boolean x:Key="IsExpanded">False</x:Boolean>
+                <x:Boolean x:Key="IsPinned">False</x:Boolean>
+              </scg:Dictionary>
+            </sap:WorkflowViewStateService.ViewState>
+          </ui:WindowScope>
+          <ui:SendHotkey ClickBeforeTyping="{x:Null}" DelayBefore="{x:Null}" DelayBetweenKeys="{x:Null}" DelayMS="{x:Null}" EmptyField="{x:Null}" SendWindowMessages="{x:Null}" Activate="True" DisplayName="Send Hotkey - F7" sap:VirtualizedContainerService.HintSize="334,155" sap2010:WorkflowViewState.IdRef="SendHotkey_22" Key="f7" KeyModifiers="None" SpecialKey="True">
+            <ui:SendHotkey.Target>
+              <ui:Target ClippingRegion="{x:Null}" Element="{x:Null}" InformativeScreenshot="d1e3529bc81db8f33f451652898891ba" Selector="&lt;wnd app='saplogon.exe' cls='SAP_FRONTEND_SESSION' title='Atualização de usuário: 1ª tela' /&gt;&lt;wnd cls='Afx:*' title='AppToolbar' /&gt;">
+                <ui:Target.TimeoutMS>
+                  <InArgument x:TypeArguments="x:Int32" />
+                </ui:Target.TimeoutMS>
+                <ui:Target.WaitForReady>
+                  <InArgument x:TypeArguments="ui:WaitForReady" />
+                </ui:Target.WaitForReady>
+              </ui:Target>
+            </ui:SendHotkey.Target>
+            <sap:WorkflowViewStateService.ViewState>
+              <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                <x:Boolean x:Key="IsPinned">False</x:Boolean>
+              </scg:Dictionary>
+            </sap:WorkflowViewStateService.ViewState>
+          </ui:SendHotkey>
+        </Sequence>
+        <ui:ImageFound DisplayName="Image Exists - Usuário" Found="[userInexistente]" sap:VirtualizedContainerService.HintSize="376,106" sap2010:WorkflowViewState.IdRef="ImageFound_11">
           <ui:ImageFound.Image>
-            <ui:ImageTarget Image="{x:Null}" Accuracy="0.8" Profile="Basic" TargetImageBase64="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" />
+            <ui:ImageTarget Image="{x:Null}" Accuracy="0.8" Profile="Basic" TargetImageBase64="iVBORw0KGgoAAAANSUhEUgAAAFcAAAAfCAYAAACSw1FtAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAKtSURBVGhD7Zo9bsIwFIBzkZyhLNk4QAVbJSSkDsDK0oGsXYpUJLaeoAsLC2dAYkDiFK0qTtADvPrFNrGf7cSEuK0iW/qG+O+Rj+dHoE3u+vcQCUOUGxBD7tPDI3wvXwBWr0HAvTEGjdtFDLkhxUowBo3bRQy5NhkhoHG7SJQbkCg3IFFuQBrIXcB5mkGepjBKEkEKeTaAU26bb4fG7SLXyc0n8JYmQuRCGUPhAzE2gbO6xgGN+5f0lkfA9rGZW8eb4i83H0DOMnQ3VaVSFnDKWBang1rBNC6l11/DHr7gfUb6Z1v4gCM8K3238nwA2C/tYyqu1+TCU+4Cdiwr36Z6/3mIpYEJJ+WgEDysehP+j9xefw5jT1nX4ieX1dgRO+60/5Txmkulw4qVjySDk9anQ+NSfOWON1/FkeatnM/X6xnJj3+5lu+lNzkfpb9/sv02vGTwvfXXxOeIYWyfWxiLvREvuZiJNDsRnrk2uVy8rV9C41J85BqylOs6ubZxLA/luBCnCFNf02X8sNbXK/O95Lqy0FUWCvCJoqI00LiUJnK1eTVy1bm2cSlP/ZDT5FrKE415k9yiXFSNWUqJhMaleMklx1IT6SlXziubvre5p5CLe5EyQN+Q2+Sy2robOgT+Quaq/fxIYxM3XyNXlSpl2DI3uFxXza3i9ppr3lzRb7mpy5hyc7VybXKukdtWWXA+LYiaG+JpAeFPAuUN0MxQZRTXxQ3LzOVz5QfO5VqVa6zFpq93yiX7I40+0FzPuZjRNrltPOdKyuPOmxTrGjdlyMakLPVs09dif5l5dXL5tXzDRCMnwVMuQ35DqywP/BvaqIVvaF3AXy7S0d8WQnGd3IL4q5gvDeS2A43bRaLcgES5ATHkxj+tt4chN/5TSHsYciPtEeUGJMoNxj38AKEPbOA3H3DfAAAAAElFTkSuQmCC" />
           </ui:ImageFound.Image>
           <ui:ImageFound.Target>
-            <ui:Target ClippingRegion="{x:Null}" Element="{x:Null}" Selector="&lt;wnd app='saplogon.exe' cls='SAP_FRONTEND_SESSION' title='Atualização de usuário: 1ª tela' /&gt;" TimeoutMS="1200">
+            <ui:Target ClippingRegion="{x:Null}" Element="{x:Null}" Selector="&lt;wnd app='saplogon.exe' cls='SAP_FRONTEND_SESSION' title='Atualização de usuário: 1ª tela' /&gt;" TimeoutMS="2500">
               <ui:Target.WaitForReady>
                 <InArgument x:TypeArguments="ui:WaitForReady" />
               </ui:Target.WaitForReady>
             </ui:Target>
           </ui:ImageFound.Target>
+          <sap:WorkflowViewStateService.ViewState>
+            <scg:Dictionary x:TypeArguments="x:String, x:Object">
+              <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+              <x:Boolean x:Key="IsPinned">False</x:Boolean>
+            </scg:Dictionary>
+          </sap:WorkflowViewStateService.ViewState>
         </ui:ImageFound>
-        <If Condition="[naosaiainda.Equals(true)]" sap:VirtualizedContainerService.HintSize="756,924" sap2010:WorkflowViewState.IdRef="If_8">
-          <If.Then>
-            <Sequence sap:VirtualizedContainerService.HintSize="611,776" sap2010:WorkflowViewState.IdRef="Sequence_89">
-              <sap:WorkflowViewStateService.ViewState>
-                <scg:Dictionary x:TypeArguments="x:String, x:Object">
-                  <x:Boolean x:Key="IsExpanded">True</x:Boolean>
-                </scg:Dictionary>
-              </sap:WorkflowViewStateService.ViewState>
-              <Sequence sap:VirtualizedContainerService.HintSize="569,436" sap2010:WorkflowViewState.IdRef="Sequence_88">
-                <sap:WorkflowViewStateService.ViewState>
-                  <scg:Dictionary x:TypeArguments="x:String, x:Object">
-                    <x:Boolean x:Key="IsExpanded">True</x:Boolean>
-                  </scg:Dictionary>
-                </sap:WorkflowViewStateService.ViewState>
-                <ui:WindowScope ApplicationWindow="{x:Null}" SearchScope="{x:Null}" TimeoutMS="{x:Null}" Window="{x:Null}" DisplayName="Attach Window 'saplogon.exe Atualização'" sap:VirtualizedContainerService.HintSize="434,344" sap2010:WorkflowViewState.IdRef="WindowScope_36" InformativeScreenshot="fb9bec1f97b8b651dc50103d515c1e2d" Selector="&lt;wnd app='saplogon.exe' cls='SAP_FRONTEND_SESSION' title='Atualização de usuário: 1ª tela' /&gt;">
-                  <ui:WindowScope.Body>
-                    <ActivityAction x:TypeArguments="x:Object">
-                      <ActivityAction.Argument>
-                        <DelegateInArgument x:TypeArguments="x:Object" Name="ContextTarget" />
-                      </ActivityAction.Argument>
-                      <Sequence DisplayName="Do" sap:VirtualizedContainerService.HintSize="376,198" sap2010:WorkflowViewState.IdRef="Sequence_87">
-                        <sap:WorkflowViewStateService.ViewState>
-                          <scg:Dictionary x:TypeArguments="x:String, x:Object">
-                            <x:Boolean x:Key="IsExpanded">True</x:Boolean>
-                          </scg:Dictionary>
-                        </sap:WorkflowViewStateService.ViewState>
-                        <ui:GetVisibleText FormattedText="{x:Null}" WordsInfo="{x:Null}" DisplayName="Get Visible Text 'Edit'" sap:VirtualizedContainerService.HintSize="334,106" sap2010:WorkflowViewState.IdRef="GetVisibleText_13">
-                          <ui:GetVisibleText.Target>
-                            <ui:Target ClippingRegion="{x:Null}" Element="{x:Null}" InformativeScreenshot="682a793c867deffa67447423bb346ec6" Selector="&lt;wnd cls='Afx:*' title='Footer' /&gt;" TimeoutMS="1200">
-                              <ui:Target.WaitForReady>
-                                <InArgument x:TypeArguments="ui:WaitForReady" />
-                              </ui:Target.WaitForReady>
-                            </ui:Target>
-                          </ui:GetVisibleText.Target>
-                          <ui:GetVisibleText.Text>
-                            <OutArgument x:TypeArguments="x:String">[confereUsuario]</OutArgument>
-                          </ui:GetVisibleText.Text>
-                        </ui:GetVisibleText>
-                      </Sequence>
-                    </ActivityAction>
-                  </ui:WindowScope.Body>
-                </ui:WindowScope>
-              </Sequence>
-              <If Condition="[confereUsuario.Contains(&quot;não existe&quot;)]" sap:VirtualizedContainerService.HintSize="569,208" sap2010:WorkflowViewState.IdRef="If_7">
-                <If.Then>
-                  <Assign sap:VirtualizedContainerService.HintSize="262,60" sap2010:WorkflowViewState.IdRef="Assign_24">
-                    <Assign.To>
-                      <OutArgument x:TypeArguments="x:Boolean">[userInexistente]</OutArgument>
-                    </Assign.To>
-                    <Assign.Value>
-                      <InArgument x:TypeArguments="x:Boolean">True</InArgument>
-                    </Assign.Value>
-                  </Assign>
-                </If.Then>
-                <If.Else>
-                  <Assign sap:VirtualizedContainerService.HintSize="262,60" sap2010:WorkflowViewState.IdRef="Assign_25">
-                    <Assign.To>
-                      <OutArgument x:TypeArguments="x:Boolean">[userInexistente]</OutArgument>
-                    </Assign.To>
-                    <Assign.Value>
-                      <InArgument x:TypeArguments="x:Boolean">False</InArgument>
-                    </Assign.Value>
-                  </Assign>
-                </If.Else>
-              </If>
-            </Sequence>
-          </If.Then>
-        </If>
       </Sequence>
       <FlowStep.Next>
         <FlowDecision x:Name="__ReferenceID0" Condition="[userInexistente]" DisplayName="Flow Decision" sap:VirtualizedContainerService.HintSize="79,87" sap2010:WorkflowViewState.IdRef="FlowDecision_1">
@@ -245,10 +194,10 @@
               <sap:WorkflowViewStateService.ViewState>
                 <scg:Dictionary x:TypeArguments="x:String, x:Object">
                   <av:Point x:Key="ShapeLocation">10,606</av:Point>
-                  <av:Size x:Key="ShapeSize">200,66</av:Size>
+                  <av:Size x:Key="ShapeSize">200,68</av:Size>
                 </scg:Dictionary>
               </sap:WorkflowViewStateService.ViewState>
-              <Sequence DisplayName="Sequence - Manda status ao Orc" sap:VirtualizedContainerService.HintSize="200,66" sap2010:WorkflowViewState.IdRef="Sequence_8">
+              <Sequence DisplayName="Sequence - Manda status ao Orc" sap:VirtualizedContainerService.HintSize="200,68" sap2010:WorkflowViewState.IdRef="Sequence_8">
                 <sap:WorkflowViewStateService.ViewState>
                   <scg:Dictionary x:TypeArguments="x:String, x:Object">
                     <x:Boolean x:Key="IsExpanded">True</x:Boolean>
@@ -270,14 +219,14 @@
                     <InArgument x:TypeArguments="x:String">naoEnviado</InArgument>
                   </Assign.Value>
                 </Assign>
-                <Sequence DisplayName="Fecha SAP" sap:VirtualizedContainerService.HintSize="262,66" sap2010:WorkflowViewState.IdRef="Sequence_103">
+                <Sequence DisplayName="Fecha SAP" sap:VirtualizedContainerService.HintSize="262,68" sap2010:WorkflowViewState.IdRef="Sequence_103">
                   <sap:WorkflowViewStateService.ViewState>
                     <scg:Dictionary x:TypeArguments="x:String, x:Object">
                       <x:Boolean x:Key="IsExpanded">False</x:Boolean>
                       <x:Boolean x:Key="IsPinned">False</x:Boolean>
                     </scg:Dictionary>
                   </sap:WorkflowViewStateService.ViewState>
-                  <ui:SendHotkey ClickBeforeTyping="{x:Null}" DelayBefore="{x:Null}" DelayBetweenKeys="{x:Null}" DelayMS="{x:Null}" EmptyField="{x:Null}" SendWindowMessages="{x:Null}" Activate="True" DisplayName="Send Hotkey - Alt + F4" sap:VirtualizedContainerService.HintSize="200,51" sap2010:WorkflowViewState.IdRef="SendHotkey_33" Key="f4" KeyModifiers="Alt" SpecialKey="True">
+                  <ui:SendHotkey ClickBeforeTyping="{x:Null}" DelayBefore="{x:Null}" DelayBetweenKeys="{x:Null}" DelayMS="{x:Null}" EmptyField="{x:Null}" SendWindowMessages="{x:Null}" Activate="True" DisplayName="Send Hotkey - Alt + F4" sap:VirtualizedContainerService.HintSize="200,52" sap2010:WorkflowViewState.IdRef="SendHotkey_33" Key="f4" KeyModifiers="Alt" SpecialKey="True">
                     <ui:SendHotkey.Target>
                       <ui:Target ClippingRegion="{x:Null}" Element="{x:Null}" InformativeScreenshot="4682757ae1ce5028635ea83757a62f36" Selector="&lt;wnd app='saplogon.exe' cls='SAP_FRONTEND_SESSION' title='Atualização de usuário: 1ª tela' /&gt;">
                         <ui:Target.TimeoutMS>
@@ -295,7 +244,7 @@
                       </scg:Dictionary>
                     </sap:WorkflowViewStateService.ViewState>
                   </ui:SendHotkey>
-                  <ui:WindowScope ApplicationWindow="{x:Null}" SearchScope="{x:Null}" TimeoutMS="{x:Null}" Window="{x:Null}" DisplayName="Attach Window 'saplogon.exe Atualização'" sap:VirtualizedContainerService.HintSize="200,51" sap2010:WorkflowViewState.IdRef="WindowScope_44" InformativeScreenshot="b464a0cca8dbb86c0c356707ced126f3" Selector="&lt;wnd app='saplogon.exe' cls='#32770' title='Efetuar logoff' /&gt;">
+                  <ui:WindowScope ApplicationWindow="{x:Null}" SearchScope="{x:Null}" TimeoutMS="{x:Null}" Window="{x:Null}" DisplayName="Attach Window 'saplogon.exe Atualização'" sap:VirtualizedContainerService.HintSize="200,52" sap2010:WorkflowViewState.IdRef="WindowScope_44" InformativeScreenshot="b464a0cca8dbb86c0c356707ced126f3" Selector="&lt;wnd app='saplogon.exe' cls='#32770' title='Efetuar logoff' /&gt;">
                     <ui:WindowScope.Body>
                       <ActivityAction x:TypeArguments="x:Object">
                         <ActivityAction.Argument>
@@ -338,14 +287,13 @@
               <sap:WorkflowViewStateService.ViewState>
                 <scg:Dictionary x:TypeArguments="x:String, x:Object">
                   <av:Point x:Key="ShapeLocation">369.5,606</av:Point>
-                  <av:Size x:Key="ShapeSize">200,66</av:Size>
+                  <av:Size x:Key="ShapeSize">200,68</av:Size>
+                  <av:PointCollection x:Key="ConnectorLocation">569.5,640 590,640</av:PointCollection>
                 </scg:Dictionary>
               </sap:WorkflowViewStateService.ViewState>
-              <Sequence DisplayName="Sequence - Pega email e manda código" sap:VirtualizedContainerService.HintSize="376,705" sap2010:WorkflowViewState.IdRef="Sequence_60">
+              <Sequence DisplayName="Sequence - Pega email e manda código" sap:VirtualizedContainerService.HintSize="200,68" sap2010:WorkflowViewState.IdRef="Sequence_60">
                 <Sequence.Variables>
-                  <Variable x:TypeArguments="x:String" Default="&lt;!DOCTYPE html&gt;&#xD;&#xA;&lt;html lang='en'&gt;&#xD;&#xA;&lt;head&gt;&#xD;&#xA;    &lt;meta charset='UTF-8'&gt;&#xD;&#xA;    &lt;meta name='viewport' content='width=device-width, initial-scale=1.0'&gt;&#xD;&#xA;    &lt;title&gt;Email top&lt;/title&gt;     &#xD;&#xA;&lt;/head&gt;&#xD;&#xA;&lt;body style='background-color: rgb(216, 216, 216); height: 90%;'&gt;&#xD;&#xA;    &lt;div style='background-color: #1067b8; height: 15px; width:60%;margin-left: auto; margin-right: auto'&gt;&lt;/div&gt;&#xD;&#xA;    &lt;div style='background-color:#1067b8; width: 60%; margin-left: auto; margin-right: auto;'&gt;&#xD;&#xA;        &lt;div style='background-color:#1067b8; height:45px; width:100%'&gt;&#xD;&#xA;            &lt;a href='http://www.meta.com.br/?lang=en'&gt;&lt;img data-imagetype='External' src='http://ti.meta.com.br/MAIN_LOGO.png' style='display:block; margin-left:auto; margin-right:auto; width:300px; height:46px; position: relative;top: 15px;' alt = 'Meta Logo'&gt;&lt;/a&gt;&#xD;&#xA;        &lt;/div&gt;&#xD;&#xA;        &lt;div style='background-color:#fafbfc; height:450px'&gt;&#xD;&#xA;        &lt;h1 style='text-align:center; padding-top:30px; margin-bottom:30px; font-style:italic;'&gt;Reset sua senha SAP&lt;/h2&gt;&#xD;&#xA;        &lt;hr style='color:#1067b8'&gt;&#xD;&#xA;        &lt;h2 style='text-align:center'&gt;Olá,&#xD;&#xA;" Name="StringHTM1" />
-                  <Variable x:TypeArguments="x:String" Default="!&lt;/h2&gt;&#xD;&#xA;        &lt;h4 style='text-align:center; font-weight:500; font-size:large'&gt;Volte ao Max-Assistant e digite este código de 6 dígitos para redefinir sua senha.&lt;/h4&gt;&#xD;&#xA;       &#xD;&#xA;        &lt;h1 style='text-align:center;font-family: Arial'&gt;&#xD;&#xA;" Name="StringHTML2" />
-                  <Variable x:TypeArguments="x:String" Default="&lt;/h2&gt;&#xD;&#xA;&#xD;&#xA;     &#xD;&#xA;        &lt;h4 style='text-align:center; font-weight:200; font-size:medium'&gt;Se você não fez essa alteração, desconsidere este e-mail e entre em contato com o suporte técnico. &#xD;&#xA;        &lt;/p&gt;Não responda a este email automático.&lt;/h4&gt;&#xD;&#xA;        &lt;br&gt;&#xD;&#xA;        &lt;/div&gt;&#xD;&#xA;        &lt;h5 style='text-align:center; position: relative; bottom:14px;color:white; font-weight:normal; font-size:medium'&gt;&#xD;&#xA;        © 2020 Meta Todos os direitos reservados&lt;/h5&gt;&#xD;&#xA;&#x9;&#x9;&lt;div style='background-color: #1067b8; height: 0.02px; weight: 60%; margin-left: auto; margin-right: auto;'&gt;&lt;/div&gt;&#xD;&#xA;    &lt;/div&gt;&#xD;&#xA;&#xD;&#xA;&lt;/body&gt;&#xD;&#xA;&lt;/html&gt;&#xD;&#xA;" Name="StringHTML3" />
+                  <Variable x:TypeArguments="x:String" Name="codigo" />
                 </Sequence.Variables>
                 <sap:WorkflowViewStateService.ViewState>
                   <scg:Dictionary x:TypeArguments="x:String, x:Object">
@@ -368,14 +316,14 @@
                     <InArgument x:TypeArguments="x:String">envieiCodigo</InArgument>
                   </Assign.Value>
                 </Assign>
-                <Sequence DisplayName="Sequence - Coletando email do usuário" sap:VirtualizedContainerService.HintSize="334,66" sap2010:WorkflowViewState.IdRef="Sequence_64">
+                <Sequence DisplayName="Sequence - Coletando email do usuário" sap:VirtualizedContainerService.HintSize="334,68" sap2010:WorkflowViewState.IdRef="Sequence_64">
                   <sap:WorkflowViewStateService.ViewState>
                     <scg:Dictionary x:TypeArguments="x:String, x:Object">
                       <x:Boolean x:Key="IsExpanded">False</x:Boolean>
                       <x:Boolean x:Key="IsPinned">False</x:Boolean>
                     </scg:Dictionary>
                   </sap:WorkflowViewStateService.ViewState>
-                  <ui:WindowScope ApplicationWindow="{x:Null}" SearchScope="{x:Null}" TimeoutMS="{x:Null}" Window="{x:Null}" DisplayName="Attach Window - dados" sap:VirtualizedContainerService.HintSize="200,51" sap2010:WorkflowViewState.IdRef="WindowScope_34" InformativeScreenshot="7563a1fba94e183580b835f60ddeef87" Selector="&lt;wnd app='saplogon.exe' cls='SAP_FRONTEND_SESSION' title='Exibir usuários' /&gt;">
+                  <ui:WindowScope ApplicationWindow="{x:Null}" SearchScope="{x:Null}" TimeoutMS="{x:Null}" Window="{x:Null}" DisplayName="Attach Window - dados" sap:VirtualizedContainerService.HintSize="434,372" sap2010:WorkflowViewState.IdRef="WindowScope_34" InformativeScreenshot="7563a1fba94e183580b835f60ddeef87" Selector="&lt;wnd app='saplogon.exe' cls='SAP_FRONTEND_SESSION' title='Exibir usuários' /&gt;">
                     <ui:WindowScope.Body>
                       <ActivityAction x:TypeArguments="x:Object">
                         <ActivityAction.Argument>
@@ -404,12 +352,12 @@
                     </ui:WindowScope.Body>
                     <sap:WorkflowViewStateService.ViewState>
                       <scg:Dictionary x:TypeArguments="x:String, x:Object">
-                        <x:Boolean x:Key="IsExpanded">False</x:Boolean>
+                        <x:Boolean x:Key="IsExpanded">True</x:Boolean>
                         <x:Boolean x:Key="IsPinned">False</x:Boolean>
                       </scg:Dictionary>
                     </sap:WorkflowViewStateService.ViewState>
                   </ui:WindowScope>
-                  <ui:WindowScope ApplicationWindow="{x:Null}" SearchScope="{x:Null}" TimeoutMS="{x:Null}" Window="{x:Null}" DisplayName="Attach Window email" sap:VirtualizedContainerService.HintSize="200,51" sap2010:WorkflowViewState.IdRef="WindowScope_41" InformativeScreenshot="618eb1268e9469f68465bff363438005" Selector="&lt;wnd app='saplogon.exe' cls='#32770' title='Exibir endereços mail Internet' /&gt;">
+                  <ui:WindowScope ApplicationWindow="{x:Null}" SearchScope="{x:Null}" TimeoutMS="{x:Null}" Window="{x:Null}" DisplayName="Attach Window email" sap:VirtualizedContainerService.HintSize="434,344" sap2010:WorkflowViewState.IdRef="WindowScope_41" InformativeScreenshot="618eb1268e9469f68465bff363438005" Selector="&lt;wnd app='saplogon.exe' cls='#32770' title='Exibir endereços mail Internet' /&gt;">
                     <ui:WindowScope.Body>
                       <ActivityAction x:TypeArguments="x:Object">
                         <ActivityAction.Argument>
@@ -441,12 +389,12 @@
                     </ui:WindowScope.Body>
                     <sap:WorkflowViewStateService.ViewState>
                       <scg:Dictionary x:TypeArguments="x:String, x:Object">
-                        <x:Boolean x:Key="IsExpanded">False</x:Boolean>
+                        <x:Boolean x:Key="IsExpanded">True</x:Boolean>
                         <x:Boolean x:Key="IsPinned">False</x:Boolean>
                       </scg:Dictionary>
                     </sap:WorkflowViewStateService.ViewState>
                   </ui:WindowScope>
-                  <ui:SendHotkey ClickBeforeTyping="{x:Null}" DelayBefore="{x:Null}" DelayBetweenKeys="{x:Null}" DelayMS="{x:Null}" EmptyField="{x:Null}" SendWindowMessages="{x:Null}" Activate="True" DisplayName="Send Hotkey - confirma " sap:VirtualizedContainerService.HintSize="200,51" sap2010:WorkflowViewState.IdRef="SendHotkey_17" Key="enter" KeyModifiers="None" SpecialKey="True">
+                  <ui:SendHotkey ClickBeforeTyping="{x:Null}" DelayBefore="{x:Null}" DelayBetweenKeys="{x:Null}" DelayMS="{x:Null}" EmptyField="{x:Null}" SendWindowMessages="{x:Null}" Activate="True" DisplayName="Send Hotkey - confirma " sap:VirtualizedContainerService.HintSize="434,52" sap2010:WorkflowViewState.IdRef="SendHotkey_17" Key="enter" KeyModifiers="None" SpecialKey="True">
                     <ui:SendHotkey.Target>
                       <ui:Target ClippingRegion="{x:Null}" Element="{x:Null}" InformativeScreenshot="d8d74f8de8612d0201590fc24a1d0d57" Selector="&lt;wnd app='saplogon.exe' cls='#32770' title='Exibir endereços mail Internet' /&gt;">
                         <ui:Target.TimeoutMS>
@@ -464,7 +412,7 @@
                       </scg:Dictionary>
                     </sap:WorkflowViewStateService.ViewState>
                   </ui:SendHotkey>
-                  <ui:SendHotkey ClickBeforeTyping="{x:Null}" DelayBefore="{x:Null}" DelayBetweenKeys="{x:Null}" DelayMS="{x:Null}" EmptyField="{x:Null}" SendWindowMessages="{x:Null}" Activate="True" sap2010:Annotation.AnnotationText="Volta para o menu principal esperando a liberação da troca de senha" DisplayName="Send Hotkey - sai " sap:VirtualizedContainerService.HintSize="200,108" sap2010:WorkflowViewState.IdRef="SendHotkey_18" Key="f3" KeyModifiers="None" SpecialKey="True">
+                  <ui:SendHotkey ClickBeforeTyping="{x:Null}" DelayBefore="{x:Null}" DelayBetweenKeys="{x:Null}" DelayMS="{x:Null}" EmptyField="{x:Null}" SendWindowMessages="{x:Null}" Activate="True" sap2010:Annotation.AnnotationText="Volta para o menu principal esperando a liberação da troca de senha" DisplayName="Send Hotkey - sai " sap:VirtualizedContainerService.HintSize="434,112" sap2010:WorkflowViewState.IdRef="SendHotkey_18" Key="f3" KeyModifiers="None" SpecialKey="True">
                     <ui:SendHotkey.Target>
                       <ui:Target ClippingRegion="{x:Null}" Element="{x:Null}" InformativeScreenshot="9106f3ff2e2f8d0a26c9d6a774be275b" Selector="&lt;wnd app='saplogon.exe' cls='SAP_FRONTEND_SESSION' title='Exibir usuários' /&gt;">
                         <ui:Target.TimeoutMS>
@@ -484,7 +432,15 @@
                     </sap:WorkflowViewStateService.ViewState>
                   </ui:SendHotkey>
                 </Sequence>
-                <uga:GenerateRandomPassword RequiredDigits="{x:Null}" RequiredUpperCaseLetters="{x:Null}" AllowedSpecialChars="*#@&amp;" DisplayName="Generate Random Password" sap:VirtualizedContainerService.HintSize="334,22" sap2010:WorkflowViewState.IdRef="GenerateRandomPassword_1" MaxLength="8" MinLength="8" Password="[codeBlip]" RequiredLowerCaseLetters="1" RequiredSpecialChars="0" />
+                <uga:GenerateRandomPassword RequiredDigits="{x:Null}" RequiredUpperCaseLetters="{x:Null}" AllowedSpecialChars="*#@&amp;" DisplayName="Generate Random Password" sap:VirtualizedContainerService.HintSize="334,22" sap2010:WorkflowViewState.IdRef="GenerateRandomPassword_1" MaxLength="8" MinLength="8" Password="[codigo]" RequiredLowerCaseLetters="1" RequiredSpecialChars="0" />
+                <Assign sap:VirtualizedContainerService.HintSize="334,60" sap2010:WorkflowViewState.IdRef="Assign_29">
+                  <Assign.To>
+                    <OutArgument x:TypeArguments="x:String">[codeBlip]</OutArgument>
+                  </Assign.To>
+                  <Assign.Value>
+                    <InArgument x:TypeArguments="x:String">[codigo]</InArgument>
+                  </Assign.Value>
+                </Assign>
                 <Assign sap:VirtualizedContainerService.HintSize="334,60" sap2010:WorkflowViewState.IdRef="Assign_23">
                   <Assign.To>
                     <OutArgument x:TypeArguments="x:String">[emailOutput]</OutArgument>
@@ -493,12 +449,100 @@
                     <InArgument x:TypeArguments="x:String">[email]</InArgument>
                   </Assign.Value>
                 </Assign>
-                <ui:SendMail Bcc="{x:Null}" Cc="{x:Null}" From="{x:Null}" MailMessage="{x:Null}" Name="{x:Null}" TimeoutMS="{x:Null}" Body="[StringHTM1+login.ToString+StringHTML2+codeBlip.ToString+StringHTML3]" DisplayName="Send SMTP Mail Message" Email="maksine.baldin@meta.com.br" EnableSSL="True" sap:VirtualizedContainerService.HintSize="334,145" sap2010:WorkflowViewState.IdRef="SendMail_2" IsBodyHtml="True" Password="975310mak" Port="587" SecureConnection="Auto" Server="smtp.live.com" Subject="SAP S/4 HANA - Código para liberação da troca de senha" To="[email]">
+                <ui:SendMail Bcc="{x:Null}" Cc="{x:Null}" From="{x:Null}" MailMessage="{x:Null}" Name="{x:Null}" TimeoutMS="{x:Null}" Body="[StringHTML1+login.ToString+StringHTML2+codeBlip.ToString+StringHTML3]" DisplayName="Send SMTP Mail Message" Email="maksine.baldin@meta.com.br" EnableSSL="True" sap:VirtualizedContainerService.HintSize="334,147" sap2010:WorkflowViewState.IdRef="SendMail_2" IsBodyHtml="True" Password="975310mak" Port="587" SecureConnection="Auto" Server="smtp.live.com" Subject="SAP S/4 HANA - Código para liberação da troca de senha" To="[email]">
                   <ui:SendMail.Files>
                     <scg:List x:TypeArguments="InArgument(x:String)" Capacity="0" />
                   </ui:SendMail.Files>
                 </ui:SendMail>
               </Sequence>
+              <FlowStep.Next>
+                <FlowStep x:Name="__ReferenceID11">
+                  <sap:WorkflowViewStateService.ViewState>
+                    <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                      <av:Point x:Key="ShapeLocation">590,606</av:Point>
+                      <av:Size x:Key="ShapeSize">200,68</av:Size>
+                    </scg:Dictionary>
+                  </sap:WorkflowViewStateService.ViewState>
+                  <Sequence DisplayName="Fecha SAP" sap:VirtualizedContainerService.HintSize="200,68" sap2010:WorkflowViewState.IdRef="Sequence_107">
+                    <sap:WorkflowViewStateService.ViewState>
+                      <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                        <x:Boolean x:Key="IsExpanded">False</x:Boolean>
+                        <x:Boolean x:Key="IsPinned">False</x:Boolean>
+                      </scg:Dictionary>
+                    </sap:WorkflowViewStateService.ViewState>
+                    <ui:SendHotkey ClickBeforeTyping="{x:Null}" DelayBefore="{x:Null}" DelayBetweenKeys="{x:Null}" DelayMS="{x:Null}" EmptyField="{x:Null}" SendWindowMessages="{x:Null}" Activate="True" DisplayName="Send Hotkey - Alt + F4" sap:VirtualizedContainerService.HintSize="200,52" sap2010:WorkflowViewState.IdRef="SendHotkey_34" Key="f4" KeyModifiers="Alt" SpecialKey="True">
+                      <ui:SendHotkey.Target>
+                        <ui:Target ClippingRegion="{x:Null}" Element="{x:Null}" InformativeScreenshot="2ae049eef7ef64ec8b28f1930f84b013" Selector="&lt;wnd app='saplogon.exe' cls='SAP_FRONTEND_SESSION' title='Atualização de usuário: 1ª tela' /&gt;">
+                          <ui:Target.TimeoutMS>
+                            <InArgument x:TypeArguments="x:Int32" />
+                          </ui:Target.TimeoutMS>
+                          <ui:Target.WaitForReady>
+                            <InArgument x:TypeArguments="ui:WaitForReady" />
+                          </ui:Target.WaitForReady>
+                        </ui:Target>
+                      </ui:SendHotkey.Target>
+                      <sap:WorkflowViewStateService.ViewState>
+                        <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                          <x:Boolean x:Key="IsExpanded">False</x:Boolean>
+                          <x:Boolean x:Key="IsPinned">False</x:Boolean>
+                        </scg:Dictionary>
+                      </sap:WorkflowViewStateService.ViewState>
+                    </ui:SendHotkey>
+                    <ui:WindowScope ApplicationWindow="{x:Null}" SearchScope="{x:Null}" TimeoutMS="{x:Null}" Window="{x:Null}" DisplayName="Attach Window 'saplogon.exe Atualização'" sap:VirtualizedContainerService.HintSize="200,52" sap2010:WorkflowViewState.IdRef="WindowScope_45" InformativeScreenshot="463bb9226cb568043febbbe47de64da5" Selector="&lt;wnd app='saplogon.exe' cls='#32770' title='Efetuar logoff' /&gt;">
+                      <ui:WindowScope.Body>
+                        <ActivityAction x:TypeArguments="x:Object">
+                          <ActivityAction.Argument>
+                            <DelegateInArgument x:TypeArguments="x:Object" Name="ContextTarget" />
+                          </ActivityAction.Argument>
+                          <Sequence DisplayName="Do" sap:VirtualizedContainerService.HintSize="376,226" sap2010:WorkflowViewState.IdRef="Sequence_106">
+                            <sap:WorkflowViewStateService.ViewState>
+                              <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                                <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                              </scg:Dictionary>
+                            </sap:WorkflowViewStateService.ViewState>
+                            <ui:TypeInto ClickBeforeTyping="{x:Null}" DelayBefore="{x:Null}" DelayBetweenKeys="{x:Null}" DelayMS="{x:Null}" EmptyField="{x:Null}" SendWindowMessages="{x:Null}" SimulateType="{x:Null}" Activate="True" DisplayName="Type Into 'saplogon.exe Efetuar'" sap:VirtualizedContainerService.HintSize="334,134" sap2010:WorkflowViewState.IdRef="TypeInto_19" Text="%[k(tab)][k(enter)]">
+                              <ui:TypeInto.Target>
+                                <ui:Target ClippingRegion="{x:Null}" Element="{x:Null}" InformativeScreenshot="3f3a78192ae887dce18b22c170097c7b" Selector="&lt;wnd ctrlid='101' /&gt;">
+                                  <ui:Target.TimeoutMS>
+                                    <InArgument x:TypeArguments="x:Int32" />
+                                  </ui:Target.TimeoutMS>
+                                  <ui:Target.WaitForReady>
+                                    <InArgument x:TypeArguments="ui:WaitForReady" />
+                                  </ui:Target.WaitForReady>
+                                </ui:Target>
+                              </ui:TypeInto.Target>
+                            </ui:TypeInto>
+                          </Sequence>
+                        </ActivityAction>
+                      </ui:WindowScope.Body>
+                      <sap:WorkflowViewStateService.ViewState>
+                        <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                          <x:Boolean x:Key="IsExpanded">False</x:Boolean>
+                          <x:Boolean x:Key="IsPinned">False</x:Boolean>
+                        </scg:Dictionary>
+                      </sap:WorkflowViewStateService.ViewState>
+                    </ui:WindowScope>
+                    <ui:SendHotkey ClickBeforeTyping="{x:Null}" DelayBefore="{x:Null}" DelayBetweenKeys="{x:Null}" DelayMS="{x:Null}" EmptyField="{x:Null}" SendWindowMessages="{x:Null}" Activate="True" DisplayName="Send Hotkey - Alt+ F4" sap:VirtualizedContainerService.HintSize="200,52" sap2010:WorkflowViewState.IdRef="SendHotkey_35" Key="f4" KeyModifiers="Alt" SpecialKey="True">
+                      <ui:SendHotkey.Target>
+                        <ui:Target ClippingRegion="{x:Null}" Element="{x:Null}" InformativeScreenshot="4f16e928ef2faa1322b23d1768b1b29f" Selector="&lt;wnd app='saplogon.exe' cls='#32770' title='SAP Logon 750' /&gt;">
+                          <ui:Target.TimeoutMS>
+                            <InArgument x:TypeArguments="x:Int32" />
+                          </ui:Target.TimeoutMS>
+                          <ui:Target.WaitForReady>
+                            <InArgument x:TypeArguments="ui:WaitForReady" />
+                          </ui:Target.WaitForReady>
+                        </ui:Target>
+                      </ui:SendHotkey.Target>
+                      <sap:WorkflowViewStateService.ViewState>
+                        <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                          <x:Boolean x:Key="IsExpanded">False</x:Boolean>
+                          <x:Boolean x:Key="IsPinned">False</x:Boolean>
+                        </scg:Dictionary>
+                      </sap:WorkflowViewStateService.ViewState>
+                    </ui:SendHotkey>
+                  </Sequence>
+                </FlowStep>
+              </FlowStep.Next>
             </FlowStep>
           </FlowDecision.False>
         </FlowDecision>
@@ -510,11 +554,11 @@
       <sap:WorkflowViewStateService.ViewState>
         <scg:Dictionary x:TypeArguments="x:String, x:Object">
           <av:Point x:Key="ShapeLocation">40,314</av:Point>
-          <av:Size x:Key="ShapeSize">200,51</av:Size>
+          <av:Size x:Key="ShapeSize">200,52</av:Size>
           <av:PointCollection x:Key="ConnectorLocation">140,366 140,396</av:PointCollection>
         </scg:Dictionary>
       </sap:WorkflowViewStateService.ViewState>
-      <Flowchart DisplayName="Verifica telas de login" sap:VirtualizedContainerService.HintSize="200,51" sap2010:WorkflowViewState.IdRef="Flowchart_1">
+      <Flowchart DisplayName="Verifica telas de login" sap:VirtualizedContainerService.HintSize="200,52" sap2010:WorkflowViewState.IdRef="Flowchart_1">
         <Flowchart.Variables>
           <Variable x:TypeArguments="x:Int32" Default="0" Name="aux" />
         </Flowchart.Variables>
@@ -538,7 +582,7 @@
               <av:Point x:Key="ShapeLocation">80.5,126.5</av:Point>
               <av:Size x:Key="ShapeSize">79,87</av:Size>
               <av:PointCollection x:Key="FalseConnector">159.5,170 270,170</av:PointCollection>
-              <av:PointCollection x:Key="TrueConnector">80.5,170 50.5,170 50.5,310 110,310</av:PointCollection>
+              <av:PointCollection x:Key="TrueConnector">80.5,170 50.5,170 50.5,312.5 110,312.5</av:PointCollection>
             </scg:Dictionary>
           </sap:WorkflowViewStateService.ViewState>
           <FlowDecision.True>
@@ -546,11 +590,11 @@
               <sap:WorkflowViewStateService.ViewState>
                 <scg:Dictionary x:TypeArguments="x:String, x:Object">
                   <av:Point x:Key="ShapeLocation">110,248.5</av:Point>
-                  <av:Size x:Key="ShapeSize">200,123</av:Size>
+                  <av:Size x:Key="ShapeSize">200,128</av:Size>
                   <av:PointCollection x:Key="ConnectorLocation">290,809 290,856</av:PointCollection>
                 </scg:Dictionary>
               </sap:WorkflowViewStateService.ViewState>
-              <Sequence sap2010:Annotation.AnnotationText="Aqui acessamos o SU01 para trocar a senha de algum usuário" DisplayName="Sequence - Acessa a troca de senha " sap:VirtualizedContainerService.HintSize="200,123" sap2010:WorkflowViewState.IdRef="Sequence_40">
+              <Sequence sap2010:Annotation.AnnotationText="Aqui acessamos o SU01 para trocar a senha de algum usuário" DisplayName="Sequence - Acessa a troca de senha " sap:VirtualizedContainerService.HintSize="200,128" sap2010:WorkflowViewState.IdRef="Sequence_40">
                 <sap:WorkflowViewStateService.ViewState>
                   <scg:Dictionary x:TypeArguments="x:String, x:Object">
                     <x:Boolean x:Key="IsExpanded">True</x:Boolean>
@@ -593,11 +637,11 @@
               <sap:WorkflowViewStateService.ViewState>
                 <scg:Dictionary x:TypeArguments="x:String, x:Object">
                   <av:Point x:Key="ShapeLocation">270,137</av:Point>
-                  <av:Size x:Key="ShapeSize">200,66</av:Size>
-                  <av:PointCollection x:Key="ConnectorLocation">370,203 370,310 310,310</av:PointCollection>
+                  <av:Size x:Key="ShapeSize">200,68</av:Size>
+                  <av:PointCollection x:Key="ConnectorLocation">370,205 370,312.5 310,312.5</av:PointCollection>
                 </scg:Dictionary>
               </sap:WorkflowViewStateService.ViewState>
-              <Sequence DisplayName="Sequence - contas &gt;= 2" sap:VirtualizedContainerService.HintSize="200,66" sap2010:WorkflowViewState.IdRef="Sequence_46">
+              <Sequence DisplayName="Sequence - contas &gt;= 2" sap:VirtualizedContainerService.HintSize="200,68" sap2010:WorkflowViewState.IdRef="Sequence_46">
                 <Sequence.Variables>
                   <Variable x:TypeArguments="x:String" Name="copiaDaTela" />
                 </Sequence.Variables>
@@ -765,11 +809,11 @@
         <x:Reference>__ReferenceID5</x:Reference>
       </FlowStep.Next>
     </FlowStep>
-    <FlowSwitch x:TypeArguments="x:String" x:Name="__ReferenceID8" DisplayName="Switch Inicial" Expression="[statusProcesso]" sap:VirtualizedContainerService.HintSize="75,87" sap2010:WorkflowViewState.IdRef="FlowSwitch`1_1">
+    <FlowSwitch x:TypeArguments="x:String" x:Name="__ReferenceID8" DisplayName="Switch Inicial" Expression="[statusProcesso]" sap:VirtualizedContainerService.HintSize="74,87" sap2010:WorkflowViewState.IdRef="FlowSwitch`1_1">
       <sap:WorkflowViewStateService.ViewState>
         <scg:Dictionary x:TypeArguments="x:String, x:Object">
           <av:Point x:Key="ShapeLocation">363,206.5</av:Point>
-          <av:Size x:Key="ShapeSize">75,87</av:Size>
+          <av:Size x:Key="ShapeSize">74,87</av:Size>
           <av:PointCollection x:Key="confereConnector">363,250 240,250</av:PointCollection>
           <av:PointCollection x:Key="retentativaConnector">381.5,293.5 381.5,430 240,430</av:PointCollection>
           <av:PointCollection x:Key="trocaSenhaConnector">438,250 610,250 610,286</av:PointCollection>
@@ -779,17 +823,17 @@
         <sap:WorkflowViewStateService.ViewState>
           <scg:Dictionary x:TypeArguments="x:String, x:Object">
             <av:Point x:Key="ShapeLocation">40,216</av:Point>
-            <av:Size x:Key="ShapeSize">200,66</av:Size>
-            <av:PointCollection x:Key="ConnectorLocation">140,282 140,314</av:PointCollection>
+            <av:Size x:Key="ShapeSize">200,68</av:Size>
+            <av:PointCollection x:Key="ConnectorLocation">140,284 140,314</av:PointCollection>
           </scg:Dictionary>
         </sap:WorkflowViewStateService.ViewState>
-        <Sequence DisplayName="Seleciona login e acessa conta" sap:VirtualizedContainerService.HintSize="200,66" sap2010:WorkflowViewState.IdRef="Sequence_38">
+        <Sequence DisplayName="Seleciona login e acessa conta" sap:VirtualizedContainerService.HintSize="200,68" sap2010:WorkflowViewState.IdRef="Sequence_38">
           <sap:WorkflowViewStateService.ViewState>
             <scg:Dictionary x:TypeArguments="x:String, x:Object">
               <x:Boolean x:Key="IsExpanded">True</x:Boolean>
             </scg:Dictionary>
           </sap:WorkflowViewStateService.ViewState>
-          <Sequence DisplayName="Sequence - Seleciona login" sap:VirtualizedContainerService.HintSize="304,398" sap2010:WorkflowViewState.IdRef="Sequence_35">
+          <Sequence DisplayName="Sequence - Seleciona login" sap:VirtualizedContainerService.HintSize="476,498" sap2010:WorkflowViewState.IdRef="Sequence_35">
             <Sequence.Variables>
               <Variable x:TypeArguments="sco:Collection(sd:Process)" Name="Apps" />
               <Variable x:TypeArguments="x:Int32" Name="cont" />
@@ -799,6 +843,22 @@
                 <x:Boolean x:Key="IsExpanded">True</x:Boolean>
               </scg:Dictionary>
             </sap:WorkflowViewStateService.ViewState>
+            <Assign sap:VirtualizedContainerService.HintSize="262,60" sap2010:WorkflowViewState.IdRef="Assign_27">
+              <Assign.To>
+                <OutArgument x:TypeArguments="x:String">[statusLogin]</OutArgument>
+              </Assign.To>
+              <Assign.Value>
+                <InArgument x:TypeArguments="x:String">inexistente</InArgument>
+              </Assign.Value>
+            </Assign>
+            <Assign sap:VirtualizedContainerService.HintSize="262,60" sap2010:WorkflowViewState.IdRef="Assign_28">
+              <Assign.To>
+                <OutArgument x:TypeArguments="x:String">[statusEmail]</OutArgument>
+              </Assign.To>
+              <Assign.Value>
+                <InArgument x:TypeArguments="x:String">naoEnviado</InArgument>
+              </Assign.Value>
+            </Assign>
             <ui:GetProcesses ContinueOnError="{x:Null}" DisplayName="Get Processes" sap:VirtualizedContainerService.HintSize="262,22" sap2010:WorkflowViewState.IdRef="GetProcesses_1" Processes="[Apps]" />
             <ui:ForEach x:TypeArguments="sd:Process" CurrentIndex="{x:Null}" DisplayName="For Each" sap:VirtualizedContainerService.HintSize="262,52" sap2010:WorkflowViewState.IdRef="ForEach`1_1" Values="[Apps]">
               <ui:ForEach.Body>
@@ -916,19 +976,11 @@
                 </ui:OpenApplication>
               </If.Then>
             </If>
-            <Assign sap:VirtualizedContainerService.HintSize="262,60" sap2010:WorkflowViewState.IdRef="Assign_13">
-              <Assign.To>
-                <OutArgument x:TypeArguments="x:String">[statusEmail]</OutArgument>
-              </Assign.To>
-              <Assign.Value>
-                <InArgument x:TypeArguments="x:String">1</InArgument>
-              </Assign.Value>
-            </Assign>
           </Sequence>
-          <Sequence DisplayName="Sequence - Acessa conta admin" sap:VirtualizedContainerService.HintSize="304,68" sap2010:WorkflowViewState.IdRef="Sequence_53">
+          <Sequence DisplayName="Sequence - Acessa conta admin" sap:VirtualizedContainerService.HintSize="476,1153" sap2010:WorkflowViewState.IdRef="Sequence_53">
             <sap:WorkflowViewStateService.ViewState>
               <scg:Dictionary x:TypeArguments="x:String, x:Object">
-                <x:Boolean x:Key="IsExpanded">False</x:Boolean>
+                <x:Boolean x:Key="IsExpanded">True</x:Boolean>
                 <x:Boolean x:Key="IsPinned">False</x:Boolean>
               </scg:Dictionary>
             </sap:WorkflowViewStateService.ViewState>
@@ -1019,37 +1071,53 @@
         <sap:WorkflowViewStateService.ViewState>
           <scg:Dictionary x:TypeArguments="x:String, x:Object">
             <av:Point x:Key="ShapeLocation">510,286</av:Point>
-            <av:Size x:Key="ShapeSize">200,66</av:Size>
+            <av:Size x:Key="ShapeSize">200,68</av:Size>
           </scg:Dictionary>
         </sap:WorkflowViewStateService.ViewState>
-        <Sequence DisplayName="Sequence - Envia nova senha" sap:VirtualizedContainerService.HintSize="200,66" sap2010:WorkflowViewState.IdRef="Sequence_81">
+        <Sequence DisplayName="Sequence - Envia nova senha" sap:VirtualizedContainerService.HintSize="242,592" sap2010:WorkflowViewState.IdRef="Sequence_81">
           <Sequence.Variables>
-            <Variable x:TypeArguments="x:String" Default="Hello World" Name="senha" />
+            <Variable x:TypeArguments="x:String" Name="senha" />
           </Sequence.Variables>
           <sap:WorkflowViewStateService.ViewState>
             <scg:Dictionary x:TypeArguments="x:String, x:Object">
               <x:Boolean x:Key="IsExpanded">True</x:Boolean>
             </scg:Dictionary>
           </sap:WorkflowViewStateService.ViewState>
-          <Sequence DisplayName="equence - gerando uma senha" sap:VirtualizedContainerService.HintSize="200,66" sap2010:WorkflowViewState.IdRef="Sequence_71">
+          <Sequence DisplayName="equence - gerando uma senha" sap:VirtualizedContainerService.HintSize="200,68" sap2010:WorkflowViewState.IdRef="Sequence_71">
             <sap:WorkflowViewStateService.ViewState>
               <scg:Dictionary x:TypeArguments="x:String, x:Object">
                 <x:Boolean x:Key="IsExpanded">False</x:Boolean>
                 <x:Boolean x:Key="IsPinned">False</x:Boolean>
               </scg:Dictionary>
             </sap:WorkflowViewStateService.ViewState>
-            <ui:SendHotkey ClickBeforeTyping="{x:Null}" DelayBefore="{x:Null}" DelayBetweenKeys="{x:Null}" DelayMS="{x:Null}" EmptyField="{x:Null}" SendWindowMessages="{x:Null}" Activate="True" DisplayName="Send Hotkey 'saplogon.exe Atualização'" sap:VirtualizedContainerService.HintSize="434,155" sap2010:WorkflowViewState.IdRef="SendHotkey_19" Key="f8" KeyModifiers="Shift" SpecialKey="True">
-              <ui:SendHotkey.Target>
-                <ui:Target ClippingRegion="{x:Null}" Element="{x:Null}" InformativeScreenshot="5d0226b03f59392c614832da9d9d28e4" Selector="&lt;wnd app='saplogon.exe' cls='SAP_FRONTEND_SESSION' title='Atualização de usuário: 1ª tela' /&gt;">
-                  <ui:Target.TimeoutMS>
-                    <InArgument x:TypeArguments="x:Int32" />
-                  </ui:Target.TimeoutMS>
-                  <ui:Target.WaitForReady>
-                    <InArgument x:TypeArguments="ui:WaitForReady" />
-                  </ui:Target.WaitForReady>
-                </ui:Target>
-              </ui:SendHotkey.Target>
-            </ui:SendHotkey>
+            <ui:WindowScope ApplicationWindow="{x:Null}" SearchScope="{x:Null}" TimeoutMS="{x:Null}" Window="{x:Null}" DisplayName="Attach Window 'saplogon.exe Modificação'" sap:VirtualizedContainerService.HintSize="434,393" sap2010:WorkflowViewState.IdRef="WindowScope_46" InformativeScreenshot="3cf6fe8089a51f99fd929cb50a4fdc81" Selector="&lt;wnd app='uipath.studio.exe' cls='HwndWrapper*' title='UiPath Studio - SRVC_ResetECC_2' /&gt;">
+              <ui:WindowScope.Body>
+                <ActivityAction x:TypeArguments="x:Object">
+                  <ActivityAction.Argument>
+                    <DelegateInArgument x:TypeArguments="x:Object" Name="ContextTarget" />
+                  </ActivityAction.Argument>
+                  <Sequence DisplayName="Do" sap:VirtualizedContainerService.HintSize="376,247" sap2010:WorkflowViewState.IdRef="Sequence_108">
+                    <sap:WorkflowViewStateService.ViewState>
+                      <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                        <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                      </scg:Dictionary>
+                    </sap:WorkflowViewStateService.ViewState>
+                    <ui:SendHotkey ClickBeforeTyping="{x:Null}" DelayBefore="{x:Null}" DelayBetweenKeys="{x:Null}" DelayMS="{x:Null}" EmptyField="{x:Null}" SendWindowMessages="{x:Null}" Activate="True" DisplayName="Send Hotkey 'saplogon.exe Atualização'" sap:VirtualizedContainerService.HintSize="334,155" sap2010:WorkflowViewState.IdRef="SendHotkey_19" Key="f8" KeyModifiers="Shift" SpecialKey="True">
+                      <ui:SendHotkey.Target>
+                        <ui:Target ClippingRegion="{x:Null}" Element="{x:Null}" InformativeScreenshot="5d0226b03f59392c614832da9d9d28e4" Selector="&lt;wnd app='saplogon.exe' cls='SAP_FRONTEND_SESSION' title='Atualização de usuário: 1ª tela' /&gt;">
+                          <ui:Target.TimeoutMS>
+                            <InArgument x:TypeArguments="x:Int32" />
+                          </ui:Target.TimeoutMS>
+                          <ui:Target.WaitForReady>
+                            <InArgument x:TypeArguments="ui:WaitForReady" />
+                          </ui:Target.WaitForReady>
+                        </ui:Target>
+                      </ui:SendHotkey.Target>
+                    </ui:SendHotkey>
+                  </Sequence>
+                </ActivityAction>
+              </ui:WindowScope.Body>
+            </ui:WindowScope>
             <ui:WindowScope ApplicationWindow="{x:Null}" SearchScope="{x:Null}" TimeoutMS="{x:Null}" Window="{x:Null}" DisplayName="Attach Window 'saplogon.exe Modificação'" sap:VirtualizedContainerService.HintSize="434,372" sap2010:WorkflowViewState.IdRef="WindowScope_28" InformativeScreenshot="f28b3168a23a2104d524b6fa68306098" Selector="&lt;wnd app='saplogon.exe' cls='#32770' title='Modificação senha' /&gt;">
               <ui:WindowScope.Body>
                 <ActivityAction x:TypeArguments="x:Object">
@@ -1078,27 +1146,19 @@
                 </ActivityAction>
               </ui:WindowScope.Body>
             </ui:WindowScope>
-          </Sequence>
-          <Sequence DisplayName="Sequence - Coletando senha gerada" sap:VirtualizedContainerService.HintSize="200,66" sap2010:WorkflowViewState.IdRef="Sequence_73">
-            <sap:WorkflowViewStateService.ViewState>
-              <scg:Dictionary x:TypeArguments="x:String, x:Object">
-                <x:Boolean x:Key="IsExpanded">False</x:Boolean>
-                <x:Boolean x:Key="IsPinned">False</x:Boolean>
-              </scg:Dictionary>
-            </sap:WorkflowViewStateService.ViewState>
-            <ui:WindowScope ApplicationWindow="{x:Null}" SearchScope="{x:Null}" TimeoutMS="{x:Null}" Window="{x:Null}" DisplayName="Attach Window 'Informa  o Dialog'" sap:VirtualizedContainerService.HintSize="434,344" sap2010:WorkflowViewState.IdRef="WindowScope_29" InformativeScreenshot="94a5f4fd5d2bbee5abc588505a77fb0b" Selector="&lt;wnd app='saplogon.exe' cls='#32770' title='Informação' /&gt;">
+            <ui:WindowScope ApplicationWindow="{x:Null}" SearchScope="{x:Null}" TimeoutMS="{x:Null}" Window="{x:Null}" DisplayName="Attach Window 'saplogon.exe Modificação'" sap:VirtualizedContainerService.HintSize="434,344" sap2010:WorkflowViewState.IdRef="WindowScope_47" InformativeScreenshot="98d9acccde948dedde750062231b9419" Selector="&lt;wnd app='saplogon.exe' cls='#32770' title='Informação' /&gt;">
               <ui:WindowScope.Body>
                 <ActivityAction x:TypeArguments="x:Object">
                   <ActivityAction.Argument>
                     <DelegateInArgument x:TypeArguments="x:Object" Name="ContextTarget" />
                   </ActivityAction.Argument>
-                  <Sequence DisplayName="Do" sap:VirtualizedContainerService.HintSize="376,198" sap2010:WorkflowViewState.IdRef="Sequence_72">
+                  <Sequence DisplayName="Do" sap:VirtualizedContainerService.HintSize="376,198" sap2010:WorkflowViewState.IdRef="Sequence_110">
                     <sap:WorkflowViewStateService.ViewState>
                       <scg:Dictionary x:TypeArguments="x:String, x:Object">
                         <x:Boolean x:Key="IsExpanded">True</x:Boolean>
                       </scg:Dictionary>
                     </sap:WorkflowViewStateService.ViewState>
-                    <ui:GetVisibleText WordsInfo="{x:Null}" DisplayName="Get Visible Text 'Afx:7A800000:b'" FormattedText="False" sap:VirtualizedContainerService.HintSize="334,106" sap2010:WorkflowViewState.IdRef="GetVisibleText_7">
+                    <ui:GetVisibleText WordsInfo="{x:Null}" DisplayName="Get Visible Text 'Afx:7A800000:b'" FormattedText="False" sap:VirtualizedContainerService.HintSize="334,106" sap2010:WorkflowViewState.IdRef="GetVisibleText_15">
                       <ui:GetVisibleText.Target>
                         <ui:Target Element="{x:Null}" InformativeScreenshot="2873052648d8f2bcc3f3d890cb0813b8" Selector="&lt;wnd ctrlid='102' /&gt;" TimeoutMS="2000">
                           <ui:Target.ClippingRegion>
@@ -1118,7 +1178,7 @@
               </ui:WindowScope.Body>
             </ui:WindowScope>
           </Sequence>
-          <Sequence DisplayName="Sequence - Voltando pra tela principal" sap:VirtualizedContainerService.HintSize="200,66" sap2010:WorkflowViewState.IdRef="Sequence_77">
+          <Sequence DisplayName="Sequence - Voltando pra tela principal" sap:VirtualizedContainerService.HintSize="200,68" sap2010:WorkflowViewState.IdRef="Sequence_77">
             <sap:WorkflowViewStateService.ViewState>
               <scg:Dictionary x:TypeArguments="x:String, x:Object">
                 <x:Boolean x:Key="IsExpanded">False</x:Boolean>
@@ -1150,28 +1210,7 @@
               </ui:SendHotkey.Target>
             </ui:SendHotkey>
           </Sequence>
-          <Sequence DisplayName="Sequence - Envia email" sap:VirtualizedContainerService.HintSize="200,66" sap2010:WorkflowViewState.IdRef="Sequence_78">
-            <sap:WorkflowViewStateService.ViewState>
-              <scg:Dictionary x:TypeArguments="x:String, x:Object">
-                <x:Boolean x:Key="IsExpanded">False</x:Boolean>
-                <x:Boolean x:Key="IsPinned">False</x:Boolean>
-              </scg:Dictionary>
-            </sap:WorkflowViewStateService.ViewState>
-            <ui:SendMail Bcc="{x:Null}" Cc="{x:Null}" From="{x:Null}" MailMessage="{x:Null}" Name="{x:Null}" TimeoutMS="{x:Null}" Body="[&quot;Olá,&quot; + login + &quot;!&quot; + Environment.NewLine+ Environment.NewLine+&#xA;&quot;Você solicitou uma alteração de senha do SAP. A nova senha de &quot; + login + &quot; é: &quot; + Environment.NewLine + senha]" DisplayName="Send SMTP Mail Message" Email="maksine.baldin@meta.com.br" EnableSSL="True" sap:VirtualizedContainerService.HintSize="334,145" sap2010:WorkflowViewState.IdRef="SendMail_3" IsBodyHtml="False" Password="975310mak" Port="587" SecureConnection="Auto" Server="smtp.live.com" Subject="SAP S/4 HANA - Alteração de senha" To="[emailInput]">
-              <ui:SendMail.Files>
-                <scg:List x:TypeArguments="InArgument(x:String)" Capacity="0" />
-              </ui:SendMail.Files>
-            </ui:SendMail>
-            <Assign sap:VirtualizedContainerService.HintSize="334,60" sap2010:WorkflowViewState.IdRef="Assign_20">
-              <Assign.To>
-                <OutArgument x:TypeArguments="x:String">[statusEmail]</OutArgument>
-              </Assign.To>
-              <Assign.Value>
-                <InArgument x:TypeArguments="x:String">enviado</InArgument>
-              </Assign.Value>
-            </Assign>
-          </Sequence>
-          <Sequence DisplayName="Fecha SAP" sap:VirtualizedContainerService.HintSize="200,66" sap2010:WorkflowViewState.IdRef="Sequence_98">
+          <Sequence DisplayName="Fecha SAP" sap:VirtualizedContainerService.HintSize="200,68" sap2010:WorkflowViewState.IdRef="Sequence_98">
             <sap:WorkflowViewStateService.ViewState>
               <scg:Dictionary x:TypeArguments="x:String, x:Object">
                 <x:Boolean x:Key="IsExpanded">False</x:Boolean>
@@ -1249,7 +1288,34 @@
               </sap:WorkflowViewStateService.ViewState>
             </ui:SendHotkey>
           </Sequence>
-          <Sequence DisplayName="Sequence - Advertence error" sap:VirtualizedContainerService.HintSize="200,66" sap2010:WorkflowViewState.IdRef="Sequence_93">
+          <Sequence DisplayName="Sequence - Envia email" sap:VirtualizedContainerService.HintSize="376,339" sap2010:WorkflowViewState.IdRef="Sequence_78">
+            <sap:WorkflowViewStateService.ViewState>
+              <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                <x:Boolean x:Key="IsExpanded">False</x:Boolean>
+                <x:Boolean x:Key="IsPinned">False</x:Boolean>
+              </scg:Dictionary>
+            </sap:WorkflowViewStateService.ViewState>
+            <ui:SendMail Bcc="{x:Null}" Cc="{x:Null}" From="{x:Null}" MailMessage="{x:Null}" Name="{x:Null}" TimeoutMS="{x:Null}" Body="[StringHTML1+login.ToString+StringHTML2email+senha.ToString+StringHTML3]" DisplayName="Send SMTP Mail Message" Email="maksine.baldin@meta.com.br" EnableSSL="True" sap:VirtualizedContainerService.HintSize="334,147" sap2010:WorkflowViewState.IdRef="SendMail_4" IsBodyHtml="True" Password="975310mak" Port="587" SecureConnection="Auto" Server="smtp.live.com" Subject="SAP  S/4 HANA - Alteração de Senha" To="[email]">
+              <ui:SendMail.Files>
+                <scg:List x:TypeArguments="InArgument(x:String)" Capacity="0" />
+              </ui:SendMail.Files>
+              <sap:WorkflowViewStateService.ViewState>
+                <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                  <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                  <x:Boolean x:Key="IsPinned">False</x:Boolean>
+                </scg:Dictionary>
+              </sap:WorkflowViewStateService.ViewState>
+            </ui:SendMail>
+            <Assign sap:VirtualizedContainerService.HintSize="334,60" sap2010:WorkflowViewState.IdRef="Assign_20">
+              <Assign.To>
+                <OutArgument x:TypeArguments="x:String">[statusEmail]</OutArgument>
+              </Assign.To>
+              <Assign.Value>
+                <InArgument x:TypeArguments="x:String">enviado</InArgument>
+              </Assign.Value>
+            </Assign>
+          </Sequence>
+          <Sequence DisplayName="Sequence - Advertence error" sap:VirtualizedContainerService.HintSize="200,68" sap2010:WorkflowViewState.IdRef="Sequence_93">
             <Sequence.Variables>
               <Variable x:TypeArguments="x:Boolean" Name="advertenceError" />
             </Sequence.Variables>
@@ -1271,7 +1337,7 @@
                 </ui:Target>
               </ui:ImageFound.Target>
             </ui:ImageFound>
-            <If Condition="[advertenceError]" sap:VirtualizedContainerService.HintSize="621,584" sap2010:WorkflowViewState.IdRef="If_10">
+            <If Condition="[advertenceError]" sap:VirtualizedContainerService.HintSize="621,586" sap2010:WorkflowViewState.IdRef="If_10">
               <If.Then>
                 <Sequence sap:VirtualizedContainerService.HintSize="476,436" sap2010:WorkflowViewState.IdRef="Sequence_92">
                   <sap:WorkflowViewStateService.ViewState>
@@ -1325,15 +1391,15 @@
       </FlowStep>
     </FlowSwitch>
     <x:Reference>__ReferenceID7</x:Reference>
-    <FlowStep x:Name="__ReferenceID11">
+    <FlowStep x:Name="__ReferenceID12">
       <sap:WorkflowViewStateService.ViewState>
         <scg:Dictionary x:TypeArguments="x:String, x:Object">
           <av:Point x:Key="ShapeLocation">300,107.5</av:Point>
-          <av:Size x:Key="ShapeSize">200,66</av:Size>
-          <av:PointCollection x:Key="ConnectorLocation">400,173.5 400,203.5 400.5,203.5 400.5,206.5</av:PointCollection>
+          <av:Size x:Key="ShapeSize">200,68</av:Size>
+          <av:PointCollection x:Key="ConnectorLocation">400,175.5 400,206.5</av:PointCollection>
         </scg:Dictionary>
       </sap:WorkflowViewStateService.ViewState>
-      <Sequence DisplayName="Teste de aba aberta" sap:VirtualizedContainerService.HintSize="200,66" sap2010:WorkflowViewState.IdRef="Sequence_1">
+      <Sequence DisplayName="Teste de aba aberta" sap:VirtualizedContainerService.HintSize="200,68" sap2010:WorkflowViewState.IdRef="Sequence_1">
         <Sequence.Variables>
           <Variable x:TypeArguments="x:Boolean" Name="sapLogon" />
         </Sequence.Variables>
@@ -1391,5 +1457,6 @@
     </FlowStep>
     <x:Reference>__ReferenceID9</x:Reference>
     <x:Reference>__ReferenceID10</x:Reference>
+    <x:Reference>__ReferenceID11</x:Reference>
   </Flowchart>
 </Activity>
