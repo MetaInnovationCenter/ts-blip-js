@@ -64,10 +64,10 @@ module.exports = {
             case "Inicia botResetSAP":
                 console.log('Switch on case: Inicia botResetSAP')
                 if (message.content.toLowerCase().includes('ecc')) {
-                    botResetSAP.start(message, "ecc")
+                    botCheckSAP.start(message, "ecc")
                     users[current].status = "Reset sap ecc"
                 } else if (message.content.toLowerCase().includes('hana')) {
-                    botResetSAP.start(message, "hana")
+                    botCheckSAP.start(message, "hana")
                     users[current].status = "Reset sap hana"
                 } else {
                     emfB.SendOptions(message.from, "Desculpe, não entendi. Posso trocar sua senha nos sistemas SAP S/4 HANA e SAP ECC, qual deles você utiliza?", ['SAP ECC', 'S/4 HANA'], 2000)
@@ -132,7 +132,7 @@ module.exports = {
                 } else if (message.content.toLowerCase().includes('nao') || message.content.toLowerCase().includes('não')) {
                     emfB.SendMessage(message.from, "Dessa forma irei trocar a senha pra você de forma automatica")
                     users[current].status = "Reset sap ecc"
-                    botResetSAP.start(message, 'ecc')
+                    botCheckSAP.start(message, 'ecc')
                 } else {
                     emfB.SendOptions(message.from, "Desculpe, não entendi, pois sou um bot em treinamento, no momento preciso saber se você consegiu trocar a sua senha", ['Sim', 'Não'], 1000)
                     users[current].status = "Senha trocada ecc"
@@ -146,7 +146,7 @@ module.exports = {
                 else if (message.content.toLowerCase().includes('nao') || message.content.toLowerCase().includes('não')) {
                     emfB.SendMessage(message.from, "Dessa forma irei trocar a senha pra você de forma automatica")
                     users[current].status = "Reset sap hana"
-                    botResetSAP.start(message, 'hana')
+                    botCheckSAP.start(message, 'hana')
                 }
                 else {
                     emfB.SendOptions(message.from, "Desculpe, não entendi, pois sou um bot em treinamento, no momento preciso saber se você consegiu trocar a sua senha", ['Sim', 'Não'], 1000)
@@ -155,12 +155,12 @@ module.exports = {
                 break;
             // --------------------------------------- case versões SAP --------------------------------------------- //
             case "Reset sap hana":
-                botResetSAP.start(message, 'hana')
+                botCheckSAP.start(message, 'hana')
                 console.log('Entrou HANA 1')
                 break;
             case "Reset sap ecc":
                 console.log('Entrou ECC 1')
-                botResetSAP.start(message, 'ecc')
+                botCheckSAP.start(message, 'ecc')
                 break;
         }
     }
