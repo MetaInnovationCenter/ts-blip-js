@@ -5,11 +5,14 @@ const indexModule = require('../index.js')
 const maestro = require('../local_modules/maestro.js')
 
 //Variáveis para controle de multiplos usuários
+
 let newUserFlag
 let users = []
+let current
+let outputArguments
 
 module.exports = {
-    start: async (client, message, sapVersion) => {
+    start: async (message, sapVersion) => {
         newUserFlag = true
         //Confere se a mensagem atual é de um usuário novo ou um que já está na lista
         users.forEach(user => {
@@ -63,6 +66,8 @@ module.exports = {
     
         switch(users[current].status) {
             case "Adquirindo Login":
+              //  emfB.SetClient(client) //Seta o cliente para o emf ter acesso
+              console.log("aaaaaaaaaaaaaaaaaaaa", users[current])
                 emfB.SendMessage(users[current].id, "Para isso, preciso que você me diga qual o seu login no sistema.", 2000)
                 users[current].status = "Conferindo Login"
                 break;
